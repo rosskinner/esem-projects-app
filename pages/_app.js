@@ -13,7 +13,10 @@ const EsemApp = ({ Component, pageProps }) => {
   return (
     <>
       <Head>
-        <link rel="shortcut icon" href={getStrapiMedia(global.Favicon)} />
+        {global &&
+          <link rel="shortcut icon" href={getStrapiMedia(global.Favicon)} />
+        }
+        
       </Head>
       <GlobalContext.Provider value={global}>
         <Component {...pageProps} />
