@@ -35,7 +35,7 @@ const Seo = ({ seo }) => {
           <meta name='twitter:description' content={fullSeo.metaDescription} />
         </>
       )}
-      {fullSeo.shareImage && (
+      {shareImage && (
         <>
           <meta property='og:image' content={shareImage} />
           <meta name='twitter:image' content={shareImage} />
