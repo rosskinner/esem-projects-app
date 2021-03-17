@@ -1,29 +1,33 @@
-import App from "next/app";
-import Head from "next/head";
-import '../styles/globals.css';
-import { createContext } from "react";
-import { getStrapiMedia, fetchAPI } from "../lib/api";
+import App from 'next/app'
+import Head from 'next/head'
+import { createContext } from 'react'
+import { getStrapiMedia, fetchAPI } from '../lib/api'
+import Nav from '../components/nav'
+import 'tachyons'
+import '../styles/globals.css'
 
 // Store Strapi Global object in context
-export const GlobalContext = createContext({});
+export const GlobalContext = createContext({})
 
 const EsemApp = ({ Component, pageProps }) => {
-  const { global } = pageProps;
+  const { global } = pageProps
 
   return (
     <>
       <Head>
-        {global.Favicon &&
-          <link rel="shortcut icon" href={getStrapiMedia(global.Favicon)} />
-        }
-        
+        {global.favicon &&
+          <link rel='shortcut icon' href={getStrapiMedia(global.favicon)} />}
       </Head>
-      <GlobalContext.Provider value={global}>
-        <Component {...pageProps} />
-      </GlobalContext.Provider>
+      <div className='white'>
+        <Nav {...pageProps} />
+        <GlobalContext.Provider value={global}>
+
+          <Component {...pageProps} />
+        </GlobalContext.Provider>
+      </div>
     </>
-  );
-};
+  )
+}
 
 // getInitialProps disables automatic static optimization for pages that don't
 // have getStaticProps. So article, category and home pages still get SSG.
@@ -31,11 +35,11 @@ const EsemApp = ({ Component, pageProps }) => {
 // https://github.com/vercel/next.js/discussions/10949
 EsemApp.getInitialProps = async (ctx) => {
   // Calls page's `getInitialProps` and fills `appProps.pageProps`
-  const appProps = await App.getInitialProps(ctx);
+  const appProps = await App.getInitialProps(ctx)
   // Fetch global site settings from Strapi
-  const global = await fetchAPI('/global');
+  const global = await fetchAPI('/global')
   // Pass the data to our page via props
-  return { ...appProps, pageProps: { global } };
-};
+  return { ...appProps, pageProps: { global } }
+}
 
-export default EsemApp;
+export default EsemApp
