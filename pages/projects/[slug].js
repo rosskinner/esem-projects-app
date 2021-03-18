@@ -5,7 +5,7 @@ import { fetchAPI } from '../../lib/api'
 import Project from '../../components/projects'
 import Tag from '../../components/tag'
 
-const Projects = ({ projects, categories, projectpage }) => {
+const Projects = ({ projects, category, categories, projectpage }) => {
   console.log(projectpage)
   const seo = {
     metaTitle: projectpage.heading,
@@ -15,23 +15,38 @@ const Projects = ({ projects, categories, projectpage }) => {
     <>
       <Tag categories={categories}>
         <Seo seo={seo} />
-        <Project projects={projects} />
+        <Project category={category} projects={category.projects} />
       </Tag>
 
     </>
   )
 }
 
-export async function getStaticProps ({ params }) {
+export async function getStaticPaths() {
+  const categories = await fetchAPI('/categories')
+
+  const paths = {
+    paths: categories.map((category) => ({
+      params: {
+        slug: category.slug,
+      }
+    })),
+    fallback: false,
+  }
+  return paths
+}
+
+export async function getStaticProps ({params}) {
   // Run API calls in parallel
   const [projects, categories, projectpage] = await Promise.all([
     fetchAPI('/projects'),
     fetchAPI('/categories'),
     fetchAPI('/project-page')
   ])
+  const category = (await fetchAPI(`/categories?slug=${params.slug}`))[0]
 
   return {
-    props: { projects, categories, projectpage },
+    props: { projects, categories, category,  projectpage },
     revalidate: 1
   }
 }

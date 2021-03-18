@@ -4,6 +4,7 @@ import Tag from "../../components/tag";
 import Seo from "../../components/seo";
 
 const Category = ({ category, categories }) => {
+  console.log(categories)
   const seo = {
     metaTitle: category.name,
     metaDescription: `All ${category.name} projects`,
@@ -12,8 +13,7 @@ const Category = ({ category, categories }) => {
   return (
     <Tag categories={categories}>
       <Seo seo={seo} />
-          <h1>{category.name}</h1>
-          <Projects width='w-25' projects={category.projects} />
+        <Projects projects={category.projects} />
     </Tag>
   );
 };

@@ -14,8 +14,28 @@ a {
   text-decoration: none;
 }
 
+.details p {
+  line-height: 2rem;
+  font-weight: 300;
+}
+
+strong {
+  font-weight: 600;
+}
+
 * {
   box-sizing: border-box;
+}
+
+.nav {
+  z-index: 1000;
+  mix-blend-mode: difference;
+}
+
+.container {
+  padding-top: 120px;
+  z-index: auto;
+  position: relative;
 }
 
 .logo {
@@ -38,5 +58,31 @@ a {
 
 .fancy {
   font-family: 'Baskervville', serif;
+  /* font-family: 'Karla', sans-serif; */
 }
 
+.button {
+  width: 20px;
+}
+
+.active {
+  background: white;
+  color: black;
+  border-color: white;
+}
+
+.large-w-25 {
+  opacity: 0.3
+}
+
+.small-w-third {
+  opacity: 0.3
+}
+
+.project-title {
+  font-size: 7rem;
+}
+
+.project-description {
+  font-size: 3rem;
+}

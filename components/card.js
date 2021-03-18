@@ -1,30 +1,35 @@
 import React from 'react'
 import Link from 'next/link'
-import Image from 'next/image'
 import { getStrapiMedia } from '../lib/api'
 
-const Card = ({ project, width }) => {
-  console.log(project)
+const Card = ({ project, width, category }) => {
   const thumbnail = getStrapiMedia(project.heroImage.formats.medium)
-
+  let cat = [category]
   let ratio = 'aspect-ratio--4x3'
+  let margin = 'mt3'
+  let padding = 'ph3 pb5'
   if (width === 'w-third') {
     ratio = 'aspect-ratio--3x4'
+    margin = 'mt3'
+    padding = 'ph4 pb3'
   }
+  if (project.categories) cat = project.categories
+
   return (
     <Link as={`/project/${project.slug}`} href='/project/[id]'>
-      <a className={`project-card ph3 pb6 white ${width}`}>
+      <a className={`project-card ${padding} white ${width}`}>
         <div className='db'>
           <div className={`aspect-ratio ${ratio}`}>
             <div style={{ backgroundImage: `url(${thumbnail})` }} className='bg-center contain aspect-ratio--object' />
           </div>
         </div>
-        <div className='mt2 db'>
-          <span className='f5 db mt4 mb2'>
+        <div className='db'>
+          <span className={`f5 db ${margin} mb1`}>
             {project.title}
           </span>
-          <span className='f6 db fancy'>
-            {project.categories.map((category, i) => {
+
+          <span className='f6 db'>
+            {cat.map((category, i) => {
               let comma = ''
               if (i > 0) comma = ' ,'
               return (
@@ -32,6 +37,7 @@ const Card = ({ project, width }) => {
               )
             })}
           </span>
+
         </div>
       </a>
     </Link>

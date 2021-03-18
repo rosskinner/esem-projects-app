@@ -20,10 +20,11 @@ const EsemApp = ({ Component, pageProps }) => {
       </Head>
       <div className='white'>
         <Nav {...pageProps} />
-        <GlobalContext.Provider value={global}>
-
-          <Component {...pageProps} />
-        </GlobalContext.Provider>
+        <div className='container'>
+          <GlobalContext.Provider value={global}>
+            <Component {...pageProps} />
+          </GlobalContext.Provider>
+        </div>
       </div>
     </>
   )
@@ -38,6 +39,7 @@ EsemApp.getInitialProps = async (ctx) => {
   const appProps = await App.getInitialProps(ctx)
   // Fetch global site settings from Strapi
   const global = await fetchAPI('/global')
+
   // Pass the data to our page via props
   return { ...appProps, pageProps: { global } }
 }

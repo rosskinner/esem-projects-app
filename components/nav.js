@@ -8,7 +8,7 @@ const Nav = ({ global }) => {
   const { logo } = global
   const image = logo === null ? <img className='logo pt2' src={defaultLogo} /> : <Image className='logo pt2' src={getStrapiMedia(logo)} />
   return (
-    <div className='flex w-100 pv4 ph5 ttc f6'>
+    <div className='flex w-100 pv4 ph5 ttc f6 fixed nav top-0'>
       <div className='db dtc w-50 v-mid'>
         <Link href='/'>
           {image}
