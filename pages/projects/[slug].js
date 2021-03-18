@@ -13,10 +13,13 @@ const Projects = ({ projects, category, categories, projectpage }) => {
   }
   return (
     <>
+    <div className='container'>
       <Tag categories={categories}>
         <Seo seo={seo} />
         <Project category={category} projects={category.projects} />
       </Tag>
+    </div>
+      
 
     </>
   )

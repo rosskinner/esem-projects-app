@@ -20,11 +20,9 @@ const EsemApp = ({ Component, pageProps }) => {
       </Head>
       <div className='white'>
         <Nav {...pageProps} />
-        <div className='container'>
-          <GlobalContext.Provider value={global}>
-            <Component {...pageProps} />
-          </GlobalContext.Provider>
-        </div>
+        <GlobalContext.Provider value={global}>
+          <Component {...pageProps} />
+        </GlobalContext.Provider>
       </div>
     </>
   )

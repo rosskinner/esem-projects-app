@@ -1,30 +1,39 @@
 import React from 'react'
-import { getStrapiMedia } from '../lib/api'
 import ReactMarkdown from 'react-markdown'
 import Moment from 'react-moment'
-import SoundCloud from './sound-cloud'
-import Images from './images'
+// import SoundCloud from './sound-cloud'
+// import Images from './images'
+import Carousel from './carousel'
 
 const Project = ({ project }) => {
-  const imageUrl = getStrapiMedia(project.heroImage)
+  // const imageUrl = getStrapiMedia(project.heroImage)
   console.log(project)
   // const mediaTypes = {
   // 'sound-cloud': <SoundCloud />
+  let allMedia = [project.heroImage]
+
+  for (let i = 0; i < project.media.length; i++) {
+    const media = project.media[i]
+    media.type = media.__component
+
+    if (media.type.includes('video-images')) {
+      allMedia = [...allMedia, ...media.media]
+    } else {
+      allMedia.push(media)
+    }
+  }
   // }
   return (
-    <>
-      <div id='banner' className='w-100 flex flex-row justify-center items-center'>
-        <div className='w-70'>
-          <div className='aspect-ratio aspect-ratio--4x3'>
-            <div style={{ backgroundImage: `url(${imageUrl})` }} className='hero-image bg-center contain aspect-ratio--object' />
-          </div>
-        </div>
+    <div className='project-container relative'>
+      <div className='w-100 ph5 pv4'>
+        <p className='mb3 f4'>{project.title}</p>
       </div>
-      <div className='project-content ph5 mt6 f3'>
-        <div className='w-100'>
-          <p className='mb3 project-title'>{project.title}</p>
-          <p className='fancy project-description mt0'>{project.description}</p>
-        </div>
+      <Carousel media={allMedia} />
+      <div className='w-100 ph5 pv4'>
+        <span className='fancy mt0 project-description'>{project.description} </span> <span className='f1'>READ MORE...</span>
+      </div>
+      <div className='project-content ph5 mt6 f3 absolute'>
+
         <div className='details w-100 flex mt6'>
           <div className='w-50 pr4'>
             <p>
@@ -44,26 +53,10 @@ const Project = ({ project }) => {
             <ReactMarkdown source={project.body} escapeHtml={false} />
           </div>
 
-          {/* <SoundCloud id={project.}/> */}
         </div>
       </div>
-      {project.media.map((media, i) => {
-        const item = media.__component
-        if (item.includes('sound-cloud')) {
-          return (
-            <SoundCloud key={i} embed={media.embed} />
-          )
-        } else if (item.includes('video-images')) {
-          return (
-            <Images key={i} media={media.media} />
-          )
-        } else if (item.includes('video-link')) {
-          return (<div key={i} />)
-        } else {
-          return (<></>)
-        }
-      })}
-    </>
+
+    </div>
   )
 }
 

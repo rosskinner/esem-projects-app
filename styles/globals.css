@@ -1,6 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Karla:wght@300;400;500;600;700;800&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Baskervville&display=swap');
 
+::root {
+  --mouse-x: 0;
+  --mouse-y: 0;
+}
+
 html,
 body {
   padding: 0;
@@ -40,6 +45,11 @@ strong {
 
 .logo {
   height: 50px;
+}
+
+.project-container {
+  z-index: 9999;
+  background-color:#0E0E13;
 }
 
 .project-card .image {
@@ -85,4 +95,56 @@ strong {
 
 .project-description {
   font-size: 3rem;
+  margin-bottom: 0px;
 }
+#banner {
+  cursor: none;
+}
+.media {
+  opacity: 0;
+  visibility: hidden;
+}
+.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.carousel-indicator {
+  mix-blend-mode: difference;
+  position: fixed;
+  z-index: 200;
+  top: 0;
+  left: 0;
+  -webkit-transform: translate3d(var(--mouse-x), var(--mouse-y), 0);
+  transform: translate3d(var(--mouse-x), var(--mouse-y), 0);
+  will-change: transform;
+  visibility: var(--showIndicator);
+}
+
+.carousel-container {
+  height: calc(100vh - 15rem);
+}
+
+.hero-image {
+  position: absolute;
+  width: calc(100% - 8rem);
+  height: 100%;
+  
+}
+
+.hero-image img {
+  object-fit: contain;
+  background-color:#0E0E13;
+  margin: 0 auto;
+}
+
+.project-content {
+  top: 0;
+  left: 0;
+  visibility: hidden;
+  opacity: 0;
+}
+
+/* .carousel-indicator:var(--showIndicator) {
+
+} */
