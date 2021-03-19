@@ -2,8 +2,9 @@ import React from 'react'
 import Link from 'next/link'
 import { getStrapiMedia } from '../lib/api'
 
-const Card = ({ project, width, category }) => {
-  const thumbnail = getStrapiMedia(project.heroImage.formats.medium)
+const Card = ({ project, width, category, path }) => {
+  const thumbnail = getStrapiMedia(project.collectionImage.formats.medium)
+
   let cat = [category]
   let ratio = 'aspect-ratio--4x3'
   let margin = 'mt3'
@@ -16,7 +17,7 @@ const Card = ({ project, width, category }) => {
   if (project.categories) cat = project.categories
 
   return (
-    <Link as={`/project/${project.slug}`} href='/project/[id]'>
+    <Link as={`${path}/${project.slug}`} href={`${path}/[id]`}>
       <a className={`project-card ${padding} white ${width}`}>
         <div className='db'>
           <div className={`aspect-ratio ${ratio}`}>
@@ -25,7 +26,7 @@ const Card = ({ project, width, category }) => {
         </div>
         <div className='db'>
           <span className={`f5 db ${margin} mb1`}>
-            {project.title}
+            {project.title || project.name}
           </span>
 
           <span className='f6 db'>

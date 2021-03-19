@@ -41,15 +41,15 @@ export async function getStaticPaths() {
 
 export async function getStaticProps ({params}) {
   // Run API calls in parallel
-  const [projects, categories, projectpage] = await Promise.all([
-    fetchAPI('/projects'),
+  const [ categories, projectpage] = await Promise.all([
+    // fetchAPI('/projects'),
     fetchAPI('/categories'),
     fetchAPI('/project-page')
   ])
   const category = (await fetchAPI(`/categories?slug=${params.slug}`))[0]
 
   return {
-    props: { projects, categories, category,  projectpage },
+    props: { categories, category,  projectpage },
     revalidate: 1
   }
 }

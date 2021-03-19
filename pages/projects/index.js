@@ -11,6 +11,7 @@ const Projects = ({ projects, categories, projectpage }) => {
     metaTitle: projectpage.heading,
     metaDescription: projectpage.description
   }
+
   return (
     <>
       <div className='container'>
@@ -19,21 +20,20 @@ const Projects = ({ projects, categories, projectpage }) => {
           <Project projects={projects} />
         </Tag>
       </div>
-
     </>
   )
 }
 
 export async function getStaticProps ({ params }) {
   // Run API calls in parallel
-  const [projects, categories, projectpage] = await Promise.all([
-    fetchAPI('/projects'),
+  const [categories, projectpage] = await Promise.all([
+    // fetchAPI('/projects'),
     fetchAPI('/categories'),
     fetchAPI('/project-page')
   ])
 
   return {
-    props: { projects, categories, projectpage },
+    props: { categories, projectpage },
     revalidate: 1
   }
 }

@@ -2,13 +2,12 @@ import { useState } from 'react'
 import { getStrapiMedia } from '../lib/api'
 
 const Carousel = ({ media }) => {
-  console.log(media)
   const [active, setActive] = useState(0)
   const [direction, setDirection] = useState(0)
 
   const showMedia = (e) => {
     let newActive = active === media.length - 1 ? 0 : active + 1
-    if (direction === 'prev') {
+    if (direction === 'Prev') {
       newActive = active === 0 ? media.length - 1 : active - 1
     }
 
@@ -17,15 +16,15 @@ const Carousel = ({ media }) => {
 
   const mouseMove = (e) => {
     const half = window.innerWidth / 2
-    let dir = 'next'
+    let dir = 'Next'
     if (e.screenX < half) {
-      dir = 'prev'
+      dir = 'Prev'
     }
     if (direction !== dir)setDirection(dir)
 
     const root = document.documentElement
     root.style.setProperty('--mouse-x', `${e.screenX}px`)
-    root.style.setProperty('--mouse-y', `${e.screenY - 100}px`)
+    root.style.setProperty('--mouse-y', `${e.screenY - 150}px`)
     root.style.setProperty('--showIndicator', 'visible')
   }
   const mouseOut = () => {
@@ -36,28 +35,27 @@ const Carousel = ({ media }) => {
   return (
     <>
       <div id='banner' className='w-100 flex flex-row justify-center items-center' onClick={showMedia} onMouseMove={mouseMove} onMouseLeave={mouseOut}>
-        <div className='carousel-indicator'>
+        <div className='carousel-indicator f2 fancy'>
           <div>
-            {direction === 'prev' &&
-              <span className='mr3'>{direction}</span>}
+            {direction === 'Prev' &&
+              <span className='mr3 ttc'>{direction}</span>}
 
-            {active + 1} of {media.length}
-            {direction === 'next' &&
-              <span className='ml3'>{direction}</span>}
+            <span>{active + 1} of {media.length}</span>
+            {direction === 'Next' &&
+              <span className='ml3 ttc'>{direction}</span>}
           </div>
           <div />
         </div>
 
-        <div className='w-100 carousel-container relative ph5 flex'>
+        <div className='w-100 carousel-container relative ph5 flex flex-column'>
           {media.map((m, key) => {
-            console.log(m)
             if (m.mime) {
               if (m.mime.includes('image')) {
                 const mediaUrl = getStrapiMedia(m)
                 const show = active === key ? 'active' : ''
                 return (
-                  <div className='hero-image flex'>
-                    <img src={mediaUrl} className={`relative w-100 justify-center contain media ${show}`} />
+                  <div className='hero-image center justify-center flex' key={key}>
+                    <img src={mediaUrl} className={`relative w-100 justify-center center contain media ${show}`} />
                   </div>
                 )
                 // return <div key={key} style={{ backgroundImage: `url(${mediaUrl})` }} className={`hero-image bg-center contain aspect-ratio--object media ${show}`} />
