@@ -33,7 +33,7 @@
   "standard": {
     "env": {
       "es6": true
-    }
+    },
     "parser": "babel-eslint",
     "globals": [
       "document",
