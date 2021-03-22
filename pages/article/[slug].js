@@ -24,8 +24,8 @@ const Article = ({ article }) => {
 
 export async function getStaticPaths() {
   const articles = await fetchAPI('/articles')
-  console.log('articles', articles)
-  if (articles !==undefined) {
+  // console.log('articles', articles)
+  if (typeof articles !== 'array') {
     return {
       paths: articles.map((article) => ({
         params: {
