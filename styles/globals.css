@@ -58,7 +58,7 @@ strong {
   background-color:#0E0E13;
 }
 
-.project-card .image {
+/* .project-card .image {
   position: absolute;
   top: 50%;
   left: 0;
@@ -70,7 +70,7 @@ strong {
   transition: transform .5s ease,opacity .5s ease;
   left: 50%;
   transform: translate3d(-50%,-50%,0);
-}
+} */
 
 .fancy {
   font-family: 'Baskervville', serif;
@@ -184,6 +184,18 @@ strong {
   visibility: visible;
 }
 
+.contact p {
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+.thumbnail {
+  height: calc(20vw);
+}
+.thumbnail img {
+  object-fit: contain;
+}
+
 @media screen and (min-width: 30rem) {
   #banner {
     cursor: none;
@@ -216,6 +228,7 @@ strong {
     visibility: var(--showClose);
   }
 }
+
 
 @media (--breakpoint-medium) {
   

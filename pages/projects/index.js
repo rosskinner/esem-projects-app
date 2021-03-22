@@ -15,9 +15,10 @@ const Projects = ({ projects, categories, projectpage }) => {
   return (
     <>
       <div className='container'>
+        <p className='f2 pt6 ph5'>{projectpage.heading}</p>
         <Tag categories={categories}>
           <Seo seo={seo} />
-          <Project projects={projects} />
+          <Project projects={projects} page={projectpage} />
         </Tag>
       </div>
     </>

@@ -9,7 +9,7 @@ const Tag = ({ children, categories, seo }) => {
   console.log(active)
   return (
     <div className='mh5 flex flex-row flex-wrap'>
-      <div className='pt6 w-100 w-50-ns'>
+      <div className='w-100 w-50-ns'>
         <li className='dib mv3'>
           <Link href='/projects'>
             <a className={`ba bw1 b--white br-pill pv2 ph3 f6 mr3 mb3 ${active === undefined ? 'active' : ''}`}>All</a>
