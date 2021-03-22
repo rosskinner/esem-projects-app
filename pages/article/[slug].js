@@ -24,15 +24,19 @@ const Article = ({ article }) => {
 
 export async function getStaticPaths() {
   const articles = await fetchAPI('/articles')
-
-  return {
-    paths: articles.map((article) => ({
-      params: {
-        slug: article.slug,
-      }
-    })),
-    fallback: false,
+  console.log('articles', articles)
+  if (articles !==undefined) {
+    return {
+      paths: articles.map((article) => ({
+        params: {
+          slug: article.slug,
+        }
+      })),
+      fallback: false,
+    }
   }
+  return {}
+  
 }
 
 export async function getStaticProps({ params }) {
