@@ -8,7 +8,7 @@ const Contact = ({ contactpage }) => {
   console.log(contactpage)
   const seo = {
     metaTitle: contactpage.heading,
-    metaDescription: contactpage.aboutcontent
+    metaDescription: 'contact'
   }
 
   return (

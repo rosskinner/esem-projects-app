@@ -14,16 +14,16 @@ const Article = ({ article }) => {
           </div>
         </div>
       </div>
-      <div className='article-content mt6 f3 w-70 center'>
-        <div className='w-100'>
-          <p className='mb3 project-title'>{article.title}</p>
-          <p className='fancy project-description mt0'>{article.description}</p>
-          <div className='mv4'>
+      <div className='article-content details f4 mt6 w-100 ph5 flex flex-row'>
+        <div className='w-third mt4'>
+          <p className='mb3'>{article.title}</p>
+          <p className='fancy mt0'>{article.description}</p>
+          <div className='mv4 f6'>
             <p className='mv0'>by {article.team_member.name}</p>
             <Moment format='D MMM YYYY'>{article.published_at}</Moment>
           </div>
         </div>
-        <div className='details w-100 flex flex-column mt4'>
+        <div className='details f4 w-two-thirds flex flex-column mt4'>
           <ReactMarkdown source={article.content} transformImageUri={(uri) => `${getStrapiURL()}${uri}`} linkTarget='_blank' escapeHtml={false} />
         </div>
       </div>

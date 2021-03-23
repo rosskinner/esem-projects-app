@@ -19,7 +19,7 @@ const Articles = ({ articles, tags }) => {
   return (
 
     <>
-      <div className='w-100 w-50-ns pt6 tr'>
+      <div className='w-100 w-50-ns tr'>
         <img className={`pointer button ma2 small-${width}`} src={smallButton} data-value='w-25' onClick={toggleView} />
         <img className={`pointer button ma2 large-${width}`} src={largeButton} data-value='w-third' onClick={toggleView} />
       </div>

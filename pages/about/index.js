@@ -10,42 +10,26 @@ const Projects = ({ aboutpage, contactpage, teamMembers, clients, awards }) => {
   console.log(contactpage)
   const seo = {
     metaTitle: aboutpage.heading,
-    metaDescription: aboutpage.aboutcontent
+    metaDescription: aboutpage.content
   }
 
   return (
     <>
       <div className='container'>
         <Seo seo={seo} />
-        <div className='mh5 pt6 flex flex-wrap'>
-          <div className='w-70 f2 mb7 pr5'>
-            <span className=''>
+        <div className='mh5 pt6 flex flex-wrap f4'>
+
+          <div className='w-70 mb7 pr5'>
+            <p className='f2'>About</p>
+            <span className='details'>
               <ReactMarkdown source={aboutpage.content} escapeHtml={false} />
             </span>
 
           </div>
-          <div className='w-30 contact'>
-            <div className='w-100 f2 mb5 mt4'>
-              <p>{contactpage.heading}</p>
-            </div>
-
-            <div className='w-100 f4 mb7 details'>
-              {contactpage.Contact.map((contact, i) => {
-                return (
-                  <div key={i} className=' mb3'>
-                    <p>{contact.heading}</p>
-                    <p>{contact.name}</p>
-                    <a href={`mailto: ${contact.email}`}>{contact.email}</a>
-                  </div>
-                )
-              })}
-              <ReactMarkdown className='mv4' source={contactpage.address} />
-            </div>
-          </div>
-          <div className='details w-100'>
-            <div className='w-100 f3 mb7'>
+          <div className='w-100'>
+            <div className='w-100 mb7'>
               <p className='f2'>{aboutpage.heading}</p>
-              <span className='details f4'>
+              <span className='details f6'>
                 <ReactMarkdown source={aboutpage.teamContent} escapeHtml={false} />
               </span>
               <div className='projects w-100 flex flex-row flex-wrap mv5'>
@@ -63,7 +47,7 @@ const Projects = ({ aboutpage, contactpage, teamMembers, clients, awards }) => {
                 {aboutpage.services.map((service, i) => {
                   return (
                     <div className='w-third pr5 mb3' key={i}>
-                      <p className='f3'>{service.title}</p>
+                      <p className='f6'>{service.title}</p>
                       <ReactMarkdown source={service.content} escapeHtml={false} />
                     </div>
 
@@ -74,8 +58,8 @@ const Projects = ({ aboutpage, contactpage, teamMembers, clients, awards }) => {
 
             <div className='w-100 f4 mb7'>
               <p className='f2'>Awards</p>
-              <p className='w-70'>{aboutpage.awardsContent}</p>
-              <div className='projects flex flex-row flex-wrap mv5 f4'>
+              <p className='w-70 details f6'>{aboutpage.awardsContent}</p>
+              <div className='projects flex flex-row flex-wrap mv5 details f4'>
                 {awards.map((award, i) => {
                   return (
                     <div key={i} className='w-third pr5 mb3'>
@@ -86,10 +70,10 @@ const Projects = ({ aboutpage, contactpage, teamMembers, clients, awards }) => {
               </div>
             </div>
 
-            <div className='w-100 f4 mb7'>
+            <div className='w-100 f4 mb7 '>
               <p className='f2'>Clients</p>
-              <p className='w-70'>{aboutpage.clientContent}</p>
-              <div className='mv5 w-70 flex flex-wrap'>
+              <p className='w-70 details f6'>{aboutpage.clientContent}</p>
+              <div className='mv5 w-70 flex flex-wrap details'>
                 {clients.map((client, i) => {
                   return (
                     <Thumbnail className='w-third pr6' key={i} index={i} item={client} />

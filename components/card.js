@@ -18,12 +18,12 @@ const Card = ({ project, width, category, path, link = true, image = false }) =>
     <>
       {link &&
         <Link as={`${path}/${project.slug}`} href={`${path}/[id]`}>
-          <a className={`project-card ${padding} white ${width}`}>
+          <a className={`project-card details ${padding} white ${width}`}>
             <Content project={project} thumbnail={thumbnail} margin={margin} ratio={ratio} category={category} image={image} />
           </a>
         </Link>}
       {!link &&
-        <span className={`project-card ${padding} white ${width}`}>
+        <span className={`project-card details ${padding} white ${width}`}>
           <Content project={project} thumbnail={thumbnail} margin={margin} ratio={ratio} category={category} image={image} />
         </span>}
     </>
@@ -48,7 +48,7 @@ const Content = ({ project, thumbnail, margin, ratio, category, image }) => {
       <div className='db'>
         {!image &&
           <>
-            <span className={`f5 db ${margin} mb1`}>
+            <span className={`f6 db ${margin}`}>
               {project.title || project.name}
             </span>
 

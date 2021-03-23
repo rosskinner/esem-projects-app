@@ -25,9 +25,13 @@ a {
   text-decoration: none;
 }
 
-.details p, .details span  {
+.details, .details p, .details span, .details a  {
   line-height: 2rem;
   font-weight: 300;
+}
+
+.heading {
+  font-weight: 400;
 }
 
 strong {
@@ -194,6 +198,10 @@ strong {
 }
 .thumbnail img {
   object-fit: contain;
+}
+
+.nav-contact p {
+  margin: 0px;
 }
 
 @media screen and (min-width: 30rem) {

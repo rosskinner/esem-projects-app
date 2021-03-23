@@ -18,7 +18,7 @@ const ProjectContent = ({ project, showContent, setShowContent }) => {
       <div className='closeButton f2 fancy '>Close</div>
       <div className='w-50 project-panel vh-100 ph5'>
         <div className='w-100 pv4'>
-          <p className='mb3 f4'>{project.title}</p>
+          <p className='mb3 f4 heading'>{project.title}</p>
           <p className='f6'>
             <strong>
               <Moment format='YYYY'>{project.year}</Moment>

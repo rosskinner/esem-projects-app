@@ -21,7 +21,6 @@ const Home = ({ projects, categories, global }) => {
 export async function getStaticProps () {
   // Run API calls in parallel
   const [projects, categories] = await Promise.all([
-    fetchAPI('/projects'),
     fetchAPI('/categories')
   ])
 
