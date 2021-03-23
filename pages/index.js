@@ -20,12 +20,12 @@ const Home = ({ projects, categories, global }) => {
 
 export async function getStaticProps () {
   // Run API calls in parallel
-  const [projects, categories] = await Promise.all([
+  const [categories] = await Promise.all([
     fetchAPI('/categories')
   ])
 
   return {
-    props: { projects, categories },
+    props: { categories },
     revalidate: 1
   }
 }
