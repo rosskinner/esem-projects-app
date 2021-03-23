@@ -8,17 +8,18 @@ import ReactMarkdown from 'react-markdown'
 const Nav = ({ global, heading, showLogo = true, contactpage }) => {
   let logo
   let image
+  console.log(global)
   if (global) {
     logo = global.logo
-    image = logo === null ? <img className='logo pt2' src={defaultLogo} /> : <Image className='logo pt2' src={getStrapiMedia(logo)} />
+    image = logo === null ? <img className='logo pt2' src={defaultLogo} /> : <Image className='logo pt2' width={logo.width} height={logo.height} src={getStrapiMedia(logo)} />
   }
 
   return (
     <div className='flex flex-column w-100 ttc f6 nav top-0'>
       <div className='flex w-100 ph5 pv4'>
-        <div className='db dtc w-50 v-mid'>
+        <div className='db dtc w-50 v-mid relative'>
           {showLogo &&
-            <Link href='/'>
+            <Link className='relative' href='/'>
               {image}
             </Link>}
           {!showLogo &&
