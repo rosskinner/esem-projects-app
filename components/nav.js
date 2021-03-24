@@ -1,17 +1,17 @@
 import React from 'react'
 import Link from 'next/link'
-import Image from 'next/image'
 import defaultLogo from '../assets/logo.png'
 import { getStrapiMedia } from '../lib/api'
 import ReactMarkdown from 'react-markdown'
 
-const Nav = ({ global, heading, showLogo = true, contactpage }) => {
+const Nav = ({ global, heading, description, showLogo = true, contactpage }) => {
   let logo
   let image
   console.log(global)
   if (global) {
     logo = global.logo
-    image = logo === null ? <img className='logo pt2' src={defaultLogo} /> : <Image className='logo pt2' width={logo.width} height={logo.height} src={getStrapiMedia(logo)} />
+    console.log(logo)
+    image = logo === null ? <img className=' logo pt2' src={defaultLogo} /> : <img className='logo pt2' alt={logo.alternativeText} src={getStrapiMedia(logo)} />
   }
 
   return (
@@ -23,7 +23,10 @@ const Nav = ({ global, heading, showLogo = true, contactpage }) => {
               {image}
             </Link>}
           {!showLogo &&
-            <p className='mb3 f4 heading'>{heading}</p>}
+            <div className=''>
+              <h1 className='mb3 f4 heading'>{heading}</h1>
+              <span className='mt0'>{description}</span>
+            </div>}
         </div>
         <div className='db dtc w-100 tr v-mid pv3 details'>
           <Link href='/projects'>

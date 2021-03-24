@@ -47,6 +47,7 @@ const Seo = ({ seo }) => {
 
       {fullSeo.project && <meta property='og:type' content='project' />}
       <meta name='twitter:card' content='summary_large_image' />
+      <link rel='canonical' href='http://esemprojects.com/' />
     </Head>
   )
 }

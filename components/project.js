@@ -20,24 +20,19 @@ const Project = ({ project, contactpage, prev, next }) => {
       allMedia.push(media)
     }
   }
-  // }
+
+  const toggleContent = () => {
+    setShowContent(!showContent)
+  }
   return (
     <>
       <div className='project-container absolute top-0 w-100'>
 
         <div className={`${showContent ? 'project-overlay' : ''}`}>
           <div className='w-100'>
-            <Nav showLogo={false} heading={project.title} contactpage={contactpage} />
+            <Nav showLogo={false} heading={project.title} description={project.description} contactpage={contactpage} />
           </div>
-          <Carousel media={allMedia} />
-          <div className='w-100 ph5 pv4 flex details'>
-            <div className=' w-70 dib v-mid'>
-              <span className='mt0'>{project.description}</span>
-            </div>
-            <div className='w-30 tr dib v-mid'>
-              <span className='mt0 bb bw1 b--white pointer' onClick={() => setShowContent(!showContent)}>Read more...</span>
-            </div>
-          </div>
+          <Carousel media={allMedia} setShowContent={toggleContent} />
         </div>
         <ProjectContent project={project} showContent={showContent} setShowContent={setShowContent} />
       </div>

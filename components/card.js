@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { getStrapiMedia } from '../lib/api'
 
 const Card = ({ project, width, category, path, link = true, image = false }) => {
+  const imageObject = project.collectionImage
   const thumbnail = getStrapiMedia(project.collectionImage.formats.medium || project.collectionImage.formats.thumbnail)
   console.log(thumbnail)
 
@@ -19,48 +20,49 @@ const Card = ({ project, width, category, path, link = true, image = false }) =>
       {link &&
         <Link as={`${path}/${project.slug}`} href={`${path}/[id]`}>
           <a className={`project-card details ${padding} white ${width}`}>
-            <Content project={project} thumbnail={thumbnail} margin={margin} ratio={ratio} category={category} image={image} />
+            <Content project={project} thumbnail={thumbnail} margin={margin} ratio={ratio} category={category} image={image} imageObject={imageObject} />
           </a>
         </Link>}
       {!link &&
         <span className={`project-card details ${padding} white ${width}`}>
-          <Content project={project} thumbnail={thumbnail} margin={margin} ratio={ratio} category={category} image={image} />
+          <Content project={project} thumbnail={thumbnail} margin={margin} ratio={ratio} category={category} image={image} imageObject={imageObject} />
         </span>}
     </>
 
   )
 }
 
-const Content = ({ project, thumbnail, margin, ratio, category, image }) => {
+const Content = ({ project, thumbnail, margin, ratio, category, image, imageObject }) => {
   let cat = [category]
 
   if ((typeof category === 'string')) cat = [{ name: category }]
 
   if (project.categories) cat = project.categories
-  console.log(cat)
+  console.log(imageObject)
   return (
     <>
       <div className='db'>
         <div className={`aspect-ratio ${ratio}`}>
-          <div style={{ backgroundImage: `url(${thumbnail})` }} className='bg-center contain aspect-ratio--object' />
+          {/* <div style={{ backgroundImage: `url(${thumbnail})` }} className='bg-center contain aspect-ratio--object' /> */}
+          <img src={thumbnail} alt={imageObject.alternativeText} className='card-img contain aspect-ratio--object' />
         </div>
       </div>
       <div className='db'>
         {!image &&
           <>
-            <span className={`f6 db ${margin}`}>
+            <h2 className={`f6 db ${margin}`}>
               {project.title || project.name}
-            </span>
+            </h2>
 
-            <span className='f6 db'>
-              {cat.map((c, i) => {
-                let comma = ''
-                if (i > 0) comma = ' ,'
-                return (
-                  <span className='ttc' key={i}>{c.name}{comma}</span>
-                )
-              })}
-            </span>
+            {/* <span className='f6 db'> */}
+            {cat.map((c, i) => {
+              let comma = ''
+              if (i > 0) comma = ' ,'
+              return (
+                <h3 className='f6 ttc' key={i}>{c.name}{comma}</h3>
+              )
+            })}
+            {/* </span> */}
           </>}
 
       </div>

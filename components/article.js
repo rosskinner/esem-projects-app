@@ -9,21 +9,22 @@ const Article = ({ article }) => {
     <>
       <div id='' className='w-100 flex flex-row justify-center items-center'>
         <div className='w-70'>
+
           <div className='aspect-ratio aspect-ratio--4x3'>
-            <div style={{ backgroundImage: `url(${imageUrl})` }} className='hero-image bg-center contain aspect-ratio--object' />
+            <img src={imageUrl} alt={imageUrl.alternativeText} className='card-img contain aspect-ratio--object' />
           </div>
         </div>
       </div>
-      <div className='article-content details f4 mt6 w-100 ph5 flex flex-row'>
+      <div className='article-content f4 mt6 w-100 ph5 flex flex-row'>
         <div className='w-third mt4'>
-          <p className='mb3'>{article.title}</p>
-          <p className='fancy mt0'>{article.description}</p>
+          <h1 className='mb3'>{article.title}</h1>
+          <h2 className='fancy mt0'>{article.description}</h2>
           <div className='mv4 f6'>
-            <p className='mv0'>by {article.team_member.name}</p>
+            <p className='mv0 details'>by {article.team_member.name}</p>
             <Moment format='D MMM YYYY'>{article.published_at}</Moment>
           </div>
         </div>
-        <div className='details f4 w-two-thirds flex flex-column mt4'>
+        <div className='details f4 w-two-thirds flex flex-column mt4 details'>
           <ReactMarkdown source={article.content} transformImageUri={(uri) => `${getStrapiURL()}${uri}`} linkTarget='_blank' escapeHtml={false} />
         </div>
       </div>

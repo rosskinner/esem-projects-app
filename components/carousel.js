@@ -1,7 +1,11 @@
 import { useState } from 'react'
 import { getStrapiMedia } from '../lib/api'
+import ReactMarkdown from 'react-markdown'
+import CarouselItem from './carousel-item'
+import YouTube from 'react-youtube'
+import Vimeo from '@u-wave/react-vimeo'
 
-const Carousel = ({ media }) => {
+const Carousel = ({ media, setShowContent }) => {
   const [active, setActive] = useState(0)
   const [direction, setDirection] = useState(0)
 
@@ -34,7 +38,7 @@ const Carousel = ({ media }) => {
 
   return (
     <>
-      <div id='banner' className='w-100 flex flex-row justify-center items-center' onClick={showMedia} onMouseMove={mouseMove} onMouseLeave={mouseOut}>
+      <div id='banner' className='w-100 flex flex-row justify-center items-center'>
         <div className='carousel-indicator f2 fancy'>
           <div>
             {direction === 'Prev' &&
@@ -49,21 +53,75 @@ const Carousel = ({ media }) => {
 
         <div className='w-100 carousel-container relative ph5 flex flex-column'>
           {media.map((m, key) => {
+            const show = active === key ? 'active' : ''
             if (m.mime) {
               if (m.mime.includes('image')) {
                 const mediaUrl = getStrapiMedia(m)
-                const show = active === key ? 'active' : ''
+
                 return (
-                  <div className='hero-image center justify-center flex' key={key}>
-                    <img src={mediaUrl} className={`relative w-100 justify-center center contain media ${show}`} />
-                  </div>
+                  <CarouselItem key={key} mouseMove={mouseMove} mouseOut={mouseOut} showMedia={showMedia} setShowContent={setShowContent} caption={m.caption} show={show}>
+                    <img src={mediaUrl} alt={m.alternativeText} className='relative w-100 justify-center center contain' />
+                  </CarouselItem>
                 )
-                // return <div key={key} style={{ backgroundImage: `url(${mediaUrl})` }} className={`hero-image bg-center contain aspect-ratio--object media ${show}`} />
               } else {
-                return <div key={key} />
+                // console.log('not image', m)
+                return (
+                  <CarouselItem key={key} mouseMove={mouseMove} mouseOut={mouseOut} showMedia={showMedia} setShowContent={setShowContent} caption={m.caption} show={show} />
+                )
               }
             } else {
-              return <div key={key} />
+              // console.log('not image', m)
+              if (m.__component.includes('sound-cloud')) {
+                return (
+                  <CarouselItem key={key} mouseMove={mouseMove} mouseOut={mouseOut} showMedia={showMedia} setShowContent={setShowContent} caption={m.caption} show={show}>
+                    <ReactMarkdown source={m.embed} escapeHtml={false} />
+                  </CarouselItem>
+                )
+              } else if (m.__component.includes('vimeo')) {
+                // console.log(m)
+
+                const id = m.link.split('/')
+                if (m.link.includes('you')) {
+                  const [target, setTarget] = useState('')
+                  const onReady = (e) => {
+                    setTarget(e.target)
+                  }
+                  return (
+                    <CarouselItem key={key} mouseMove={mouseMove} mouseOut={mouseOut} showMedia={showMedia} setShowContent={setShowContent} caption={m.caption} show={show} type='video' target={target}>
+
+                      <YouTube
+                        containerClassName='w-100'
+                        videoId={id[id.length - 1]}
+                        opts={{ width: '100%', height: '100%', playerVars: { showinfo: 0, modestbranding: 1, controls: 0 } }}
+                        onReady={onReady}
+                      />
+                      <div className='absolute w-100 h-100' />
+                    </CarouselItem>
+                  )
+                } else if (m.link.includes('vimeo')) {
+                  const [target, setTarget] = useState('')
+                  const onReady = (e) => {
+                    setTarget(e)
+                  }
+                  return (
+                    <CarouselItem key={key} mouseMove={mouseMove} mouseOut={mouseOut} showMedia={showMedia} setShowContent={setShowContent} caption={m.caption} show={show} type='video-vimeo' target={target}>
+                      <Vimeo
+                        video={id[id.length - 1]}
+                        width='100%'
+                        height='100%'
+                        responsive
+                        className='w-100 h-100 overflow-hidden'
+                        frameBorder='0'
+                        allow='autoplay; fullscreen; picture-in-picture'
+                        allowFullScreen
+                        controls={false}
+                        onReady={onReady}
+                      />
+                      <div className='absolute w-100 h-100' />
+                    </CarouselItem>
+                  )
+                }
+              }
             }
           })}
         </div>
