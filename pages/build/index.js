@@ -4,7 +4,7 @@ const Build = () => {
   useEffect(() => {
     fetch('https://api.heroku.com/apps/esem-projects-app/builds', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json', Accept: 'application/vnd.heroku+json; version=3', Authorization: 'Bearer 71fcfb31-00b7-4387-9007-48082e047027' },
+      headers: { 'Content-Type': 'application/json', Accept: 'application/vnd.heroku+json; version=3', Authorization: `Bearer ${process.env.API_KEY_BUILD}` },
       body: JSON.stringify({
         buildpacks: [{
           url: 'https://github.com/heroku/heroku-buildpack-nodejs',
