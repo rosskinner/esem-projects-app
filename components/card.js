@@ -4,8 +4,10 @@ import { getStrapiMedia } from '../lib/api'
 
 const Card = ({ project, width, category, path, link = true, image = false }) => {
   const imageObject = project.collectionImage
-  const thumbnail = getStrapiMedia(project.collectionImage.formats.medium || project.collectionImage.formats.thumbnail)
-  console.log(thumbnail)
+  const url = project.collectionImage.formats === null ? project.collectionImage : project.collectionImage.formats.medium
+  const thumbnail = getStrapiMedia(url)
+  //
+  // console.log(thumbnail)
 
   let ratio = 'aspect-ratio--4x3'
   let margin = 'mt3'
@@ -38,7 +40,7 @@ const Content = ({ project, thumbnail, margin, ratio, category, image, imageObje
   if ((typeof category === 'string')) cat = [{ name: category }]
 
   if (project.categories) cat = project.categories
-  console.log(imageObject)
+
   return (
     <>
       <div className='db'>
