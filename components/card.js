@@ -59,9 +59,9 @@ const Content = ({ project, thumbnail, margin, ratio, category, image, imageObje
             {/* <span className='f6 db'> */}
             {cat.map((c, i) => {
               let comma = ''
-              if (i > 0) comma = ' ,'
+              if (i !== cat.length - 1) comma = ' , '
               return (
-                <h3 className='f6 ttc' key={i}>{c.name}{comma}</h3>
+                <h3 className='f6 ttc dib pr2' key={i}>{c.name} {comma} </h3>
               )
             })}
             {/* </span> */}
