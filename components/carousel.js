@@ -4,6 +4,7 @@ import ReactMarkdown from 'react-markdown'
 import CarouselItem from './carousel-item'
 import YouTube from 'react-youtube'
 import Vimeo from '@u-wave/react-vimeo'
+import MediaOverlay from './media-overlay'
 
 const Carousel = ({ media, setShowContent }) => {
   const [active, setActive] = useState(0)
@@ -78,8 +79,6 @@ const Carousel = ({ media, setShowContent }) => {
                   </CarouselItem>
                 )
               } else if (m.__component.includes('vimeo')) {
-                // console.log(m)
-
                 const id = m.link.split('/')
                 if (m.link.includes('you')) {
                   const [target, setTarget] = useState('')
@@ -88,14 +87,15 @@ const Carousel = ({ media, setShowContent }) => {
                   }
                   return (
                     <CarouselItem key={key} mouseMove={mouseMove} mouseOut={mouseOut} showMedia={showMedia} setShowContent={setShowContent} caption={m.caption} show={show} type='video' target={target}>
-
+                      <MediaOverlay show={show} />
                       <YouTube
-                        containerClassName='w-100'
+                        containerClassName='w-100 h-100 justify-center center contain'
                         videoId={id[id.length - 1]}
-                        opts={{ width: '100%', height: '100%', playerVars: { showinfo: 0, modestbranding: 1, controls: 0 } }}
+                        opts={{ width: '100%', height: '100%', playerVars: { modestbranding: 1, controls: 0, loop: 1, enablejsapi: 1 } }}
                         onReady={onReady}
                       />
                       <div className='absolute w-100 h-100' />
+
                     </CarouselItem>
                   )
                 } else if (m.link.includes('vimeo')) {
@@ -105,15 +105,17 @@ const Carousel = ({ media, setShowContent }) => {
                   }
                   return (
                     <CarouselItem key={key} mouseMove={mouseMove} mouseOut={mouseOut} showMedia={showMedia} setShowContent={setShowContent} caption={m.caption} show={show} type='video-vimeo' target={target}>
+                      <MediaOverlay show={show} />
                       <Vimeo
                         video={id[id.length - 1]}
                         width='100%'
                         height='100%'
                         responsive
-                        className='w-100 h-100 overflow-hidden'
+                        className='w-100 h-100 justify-center center contain'
                         frameBorder='0'
-                        allow='autoplay; fullscreen; picture-in-picture'
+                        allow='autoplay; fullscreen;'
                         allowFullScreen
+                        loop
                         controls={false}
                         onReady={onReady}
                       />

@@ -32,7 +32,7 @@ const ProjectContent = ({ project, showContent, setShowContent }) => {
             <ReactMarkdown source={project.body} escapeHtml={false} />
           </div>
           <div className='w-100 f6 flex flex-wrap flex-row'>
-            <div className='w-50'>
+            <div className='w-50 pr3'>
 
               <ReactMarkdown source={project.details} escapeHtml={false} />
             </div>
@@ -42,7 +42,7 @@ const ProjectContent = ({ project, showContent, setShowContent }) => {
               </div>}
 
           </div>
-          {project.articles &&
+          {project.articles.length > 0 &&
             <div className='mt5'>
               <p className='f4 details'>Want to read even more?</p>
               <div className='flex flex-row'>

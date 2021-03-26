@@ -18,10 +18,10 @@ const CarouselItem = ({ children, show, mouseMove, mouseOut, showMedia, setShowC
         target.pause()
       }
     }
-  }, [show])
+  }, [show, target])
   return (
-    <div className={`hero-image-container w-100 h-100 flex flex-column media ${show}`}>
-      <div className='hero-image justify-center center flex' onMouseMove={mouseMove} onMouseLeave={mouseOut} onClick={showMedia}>
+    <div className={`hero-image-container w-100 h-100 flex flex-wrap media ${show}`}>
+      <div className='hero-image w-100 justify-center center flex' onMouseMove={mouseMove} onMouseLeave={mouseOut} onClick={showMedia}>
         {children}
       </div>
       <div className='w-100 ph5 pv4 flex details'>

@@ -2,7 +2,7 @@ import React from 'react'
 import Link from 'next/link'
 import { getStrapiMedia } from '../lib/api'
 
-const Card = ({ project, width, category, path, link = true, image = false }) => {
+const Card = ({ project, width, category, path, link = true, image = false, description = false }) => {
   const imageObject = project.collectionImage
   const url = project.collectionImage.formats === null ? project.collectionImage : project.collectionImage.formats.medium
   const thumbnail = getStrapiMedia(url)
@@ -22,19 +22,19 @@ const Card = ({ project, width, category, path, link = true, image = false }) =>
       {link &&
         <Link as={`${path}/${project.slug}`} href={`${path}/[id]`}>
           <a className={`project-card details ${padding} white ${width}`}>
-            <Content project={project} thumbnail={thumbnail} margin={margin} ratio={ratio} category={category} image={image} imageObject={imageObject} />
+            <Content project={project} thumbnail={thumbnail} margin={margin} ratio={ratio} category={category} image={image} imageObject={imageObject} description={description} />
           </a>
         </Link>}
       {!link &&
         <span className={`project-card details ${padding} white ${width}`}>
-          <Content project={project} thumbnail={thumbnail} margin={margin} ratio={ratio} category={category} image={image} imageObject={imageObject} />
+          <Content project={project} thumbnail={thumbnail} margin={margin} ratio={ratio} category={category} image={image} imageObject={imageObject} description={description} />
         </span>}
     </>
 
   )
 }
 
-const Content = ({ project, thumbnail, margin, ratio, category, image, imageObject }) => {
+const Content = ({ project, thumbnail, margin, ratio, category, image, imageObject, description }) => {
   let cat = [category]
 
   if ((typeof category === 'string')) cat = [{ name: category }]
@@ -45,7 +45,6 @@ const Content = ({ project, thumbnail, margin, ratio, category, image, imageObje
     <>
       <div className='db'>
         <div className={`aspect-ratio ${ratio}`}>
-          {/* <div style={{ backgroundImage: `url(${thumbnail})` }} className='bg-center contain aspect-ratio--object' /> */}
           <img src={thumbnail} alt={imageObject.alternativeText} className='card-img contain aspect-ratio--object' />
         </div>
       </div>
@@ -64,7 +63,15 @@ const Content = ({ project, thumbnail, margin, ratio, category, image, imageObje
                 <h3 className='f6 ttc dib pr2' key={i}>{c.name} {comma} </h3>
               )
             })}
-            {/* </span> */}
+            {description &&
+              <p className='f6 details'>{project.description}</p>}
+
+            {project.linkedin &&
+            // <Link className='f6 details underline' as={project.linkedin} href='/'>
+              <a className='f6 details underline' href={project.linkedin} rel='noreferrer' target='_blank'>LinkedIn</a>
+              // </Link>
+            }
+
           </>}
 
       </div>

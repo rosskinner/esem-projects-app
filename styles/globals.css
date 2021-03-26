@@ -212,6 +212,7 @@ strong {
   object-fit: contain;
 }
 
+
 @media screen and (min-width: 30rem) {
   .hero-image-container {
     position: absolute;
@@ -236,6 +237,20 @@ strong {
     opacity: 1;
     visibility: visible;
   }
+
+  .image-overlay {
+    z-index: 1;
+    opacity: 1;
+    visibility: visible;
+    transition: all 3s ease-in;
+    background-color: #0E0E13;
+  }
+  
+  .image-overlay.active {
+    opacity: 0;
+    visibility: hidden;
+  }
+  
 
   .carousel-indicator {
     visibility: var(--showIndicator);

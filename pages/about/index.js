@@ -21,9 +21,8 @@ const Projects = ({ aboutpage, contactpage, teamMembers, clients, awards }) => {
 
           <div className='w-70 mb7 pr5'>
             <p className='f2'>About</p>
-            <span className='details'>
-              <ReactMarkdown source={aboutpage.content} escapeHtml={false} />
-            </span>
+
+            <ReactMarkdown className='details f4' source={aboutpage.content} escapeHtml={false} />
 
           </div>
           <div className='w-100'>
@@ -35,7 +34,7 @@ const Projects = ({ aboutpage, contactpage, teamMembers, clients, awards }) => {
               <div className='projects w-100 flex flex-row flex-wrap mv5'>
                 {teamMembers.map((person, i) => {
                   return (
-                    <Card width='w-third' key={i} index={i} project={person} category={person.role} link={false} />
+                    <Card width='w-third' key={i} index={i} project={person} category={person.role} link={false} description />
                   )
                 })}
               </div>
