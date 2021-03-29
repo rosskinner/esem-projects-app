@@ -9,7 +9,7 @@ const Card = ({ project, width, category, path, link = true, image = false, desc
   //
   // console.log(thumbnail)
 
-  let ratio = 'aspect-ratio--4x3'
+  let ratio = 'aspect-ratio--8x5'
   let margin = 'mt3'
   let padding = 'ph2-ns ph3-l pb3 pb5-l'
   if (width === 'w-third') {
@@ -41,11 +41,20 @@ const Content = ({ project, thumbnail, margin, ratio, category, image, imageObje
 
   if (project.categories) cat = project.categories
 
+  const ratiolarge = (((imageObject.width / imageObject.height) > 8/5) || ((imageObject.height / imageObject.width) > 3/4)) && ratio.includes('8x5')
+
+
   return (
     <>
       <div className='db'>
         <div className={`aspect-ratio ${ratio}`}>
-          <img src={thumbnail} alt={imageObject.alternativeText} className='card-img contain aspect-ratio--object' />
+          {ratiolarge &&
+            <div className='big-ratio' style={{ backgroundImage: `url(${thumbnail})` }} />
+          }
+          {!ratiolarge &&
+            <img src={thumbnail} alt={imageObject.alternativeText} className='card-img cover aspect-ratio--object' />
+          }
+          
         </div>
       </div>
       <div className='db'>
