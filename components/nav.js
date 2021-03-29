@@ -12,15 +12,15 @@ const Nav = ({ global, heading, description, showLogo = true, contactpage }) => 
   if (global) {
     logo = global.logo
     console.log(logo)
-    image = logo === null ? <img className=' logo pt2' src={defaultLogo} /> : <img className='logo pt2' alt={logo.alternativeText} src={getStrapiMedia(logo)} />
+    image = logo === null ? <img className='pointer logo pt2' src={defaultLogo} /> : <img className='logo pt2 pointer' alt={logo.alternativeText} src={getStrapiMedia(logo)} />
   }
 
   const active = useRouter().pathname
-  console.log('active', active)
+  console.log('active', image)
 
   return (
     <div className='flex flex-column w-100 ttc f6 nav top-0'>
-      <div className='flex w-100 ph5 pv4'>
+      <div className='flex w-100 ph4 ph5-ns pv4'>
         <div className='db dtc w-50 v-mid relative'>
           {showLogo &&
             <Link className='relative' href='/'>
@@ -28,19 +28,19 @@ const Nav = ({ global, heading, description, showLogo = true, contactpage }) => 
             </Link>}
           {!showLogo &&
             <div className=''>
-              <h1 className='mb3 f4 heading'>{heading}</h1>
-              <span className='mt0'>{description}</span>
+              <h1 className='dn db-l mb2 pt3 f4 heading'>{heading}</h1>
+              <span className='dn db-l mt0'>{description}</span>
             </div>}
         </div>
         <div className='db dtc w-100 tr v-mid pv3 details'>
           <Link href='/projects'>
-            <a className={`mh4 dib v-mid ${active.includes('projects') ? 'nav-active' : ''}`}>Projects</a>
+            <a className={`mh3 mh4-ns dib v-mid ${active.includes('projects') ? 'nav-active' : ''}`}>Projects</a>
           </Link>
           <Link href='/articles'>
-            <a className={`mh4 dib v-mid ${active.includes('articles') ? 'nav-active' : ''}`}>News</a>
+            <a className={`mh3 mh4-ns dib v-mid ${active.includes('articles') ? 'nav-active' : ''}`}>News</a>
           </Link>
           <Link href='/about'>
-            <a className={`mh4 dib v-mid ${active.includes('about') ? 'nav-active' : ''}`}>About</a>
+            <a className={`mh3 mh4-ns dib v-mid ${active.includes('about') ? 'nav-active' : ''}`}>About</a>
           </Link>
           {/* <Link href='/contact'>
             <a className='ml4 dib v-mid'>Contact</a>

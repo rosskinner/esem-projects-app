@@ -5,7 +5,7 @@ import ProjectContent from './project-content'
 
 const Project = ({ project, contactpage, prev, next }) => {
   const [showContent, setShowContent] = useState(false)
-  console.log(contactpage)
+  console.log(project)
   // const mediaTypes = {
   // 'sound-cloud': <SoundCloud />
   let allMedia = [project.collectionImage]
@@ -26,11 +26,17 @@ const Project = ({ project, contactpage, prev, next }) => {
   }
   return (
     <>
-      <div className='project-container absolute top-0 w-100'>
-
-        <div className={`${showContent ? 'project-overlay' : ''}`}>
-          <div className='w-100'>
+      <div className='project-container absolute-l top-0 w-100'>
+        <div className={`mt6 mt0-l ${showContent ? 'project-overlay' : ''}`}>
+          <div className='dn db-l w-100'>
             <Nav showLogo={false} heading={project.title} description={project.description} contactpage={contactpage} />
+          </div>
+          <div className='db dn-l w-100 ph4 ph5-l pt4 mb6'>
+            <h1 className='mb3 f2 heading'>{project.title}</h1>
+            <span className='mt0'>{project.description}</span>
+            <div className='w-100 pt4 dib dn-l v-mid'>
+              <span className='mt0 underline pointer secondary-color' onClick={toggleContent}>Read more...</span>
+            </div>
           </div>
           <Carousel media={allMedia} setShowContent={toggleContent} />
         </div>

@@ -11,22 +11,22 @@ const Card = ({ project, width, category, path, link = true, image = false, desc
 
   let ratio = 'aspect-ratio--4x3'
   let margin = 'mt3'
-  let padding = 'ph3 pb5'
+  let padding = 'ph2-ns ph3-l pb3 pb5-l'
   if (width === 'w-third') {
     ratio = 'aspect-ratio--3x4'
     margin = 'mt3'
-    padding = 'ph4 pb3'
+    padding = 'ph2-ns ph4-l pb4 pb3-l'
   }
   return (
     <>
       {link &&
         <Link as={`${path}/${project.slug}`} href={`${path}/[id]`}>
-          <a className={`project-card details ${padding} white ${width}`}>
+          <a className={`project-card details ${padding} white w-100 ${width}-ns`}>
             <Content project={project} thumbnail={thumbnail} margin={margin} ratio={ratio} category={category} image={image} imageObject={imageObject} description={description} />
           </a>
         </Link>}
       {!link &&
-        <span className={`project-card details ${padding} white ${width}`}>
+        <span className={`project-card details ${padding} white w-100 ${width}-ns`}>
           <Content project={project} thumbnail={thumbnail} margin={margin} ratio={ratio} category={category} image={image} imageObject={imageObject} description={description} />
         </span>}
     </>

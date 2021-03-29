@@ -17,24 +17,24 @@ const Projects = ({ aboutpage, contactpage, teamMembers, clients, awards }) => {
     <>
       <div className='container'>
         <Seo seo={seo} />
-        <div className='pt6 flex flex-wrap f4'>
+        <div className='pt6-l flex flex-wrap f4'>
 
-          <div className='ph5 w-70 mb7 pr5'>
+          <div className=' ph4 ph5-l w-100 w-70-l mb4 mb7-l pr5'>
             <p className='f2 '>About</p>
 
             <ReactMarkdown className='details f4' source={aboutpage.content} escapeHtml={false} />
 
           </div>
           <div className='w-100'>
-            <div className='w-100 mb7 ph5 flex flex-row'>
-              <div className='w-25'>
+            <div className='w-100 mb4 mb7-l  ph4 ph5-l flex flex-column flex-row-l'>
+              <div className='w-100 w-25-l'>
                 <p className='f2'>{aboutpage.heading}</p>
                 <span className='details f6'>
                   <ReactMarkdown source={aboutpage.teamContent} escapeHtml={false} />
                 </span>
               </div>
 
-              <div className='projects flex flex-row flex-wrap mv5 pt4 w-75'>
+              <div className='projects flex flex-column w-100 flex-row-ns flex-wrap mv3 mv5-l pt4 w-75'>
                 {teamMembers.map((person, i) => {
                   return (
                     <Card width='w-third' key={i} index={i} project={person} category={person.role} link={false} description />
@@ -43,21 +43,21 @@ const Projects = ({ aboutpage, contactpage, teamMembers, clients, awards }) => {
               </div>
             </div>
 
-            <div className='w-100 f4 ph5 mb7 flex flex-column'>
-              <div className='w-25'>
+            <div className='w-100 f4 ph4 ph5-l mb4 mb7-l flex flex-column'>
+              <div className='w-100 w-25-l'>
                 <p className='f2'>Our Services</p>
 
               </div>
 
-              <span className='details flex flex-row flex-wrap w-100'>
+              <span className='details flex flex-column flex-row-l flex-wrap w-100'>
                 {aboutpage.services.map((service, i) => {
                   return (
-                    <div className='w-100 flex flex-row ph4 mv3 pt4 f4 service' key={i}>
-                      <div className='w-25'>
-                        <p className='w-25 pl3 secondary-color'>0{i + 1}.</p>
+                    <div className='w-100 flex flex-column flex-row-l ph4-l mv3 pt4 f4 service' key={i}>
+                      <div className='w-100 w-25-l'>
+                        <p className='pl3-l secondary-color'>0{i + 1}.</p>
                       </div>
-                      <p className='w-25 ph3'>{service.title}</p>
-                      <ReactMarkdown className='w-50 pl4' source={service.content} escapeHtml={false} />
+                      <p className='w-100 w-25-l ph3-l'>{service.title}</p>
+                      <ReactMarkdown className='w-100 w-50-l pl4-l' source={service.content} escapeHtml={false} />
                     </div>
 
                   )
@@ -65,18 +65,18 @@ const Projects = ({ aboutpage, contactpage, teamMembers, clients, awards }) => {
               </span>
             </div>
 
-            <div className='w-100  pv4 f4 mb7 ph5 color-block'>
+            <div className='w-100  pt4 pb5 f4 mb4 mb7-l ph4 ph5-l color-block'>
               <div className='w-100'>
                 <p className='f2'>Awards</p>
 
               </div>
-              <div className='projects w-100 flex flex-row flex-wrap mv5 pt3 details f4 w-75'>
-                <div className='w-25 mb3'>
+              <div className='projects w-100 flex flex-column flex-row-l flex-wrap mv5-l pt3-l details f4 w-75'>
+                <div className='w-100 w-25-l mb3'>
                   <span className='details f6'>{aboutpage.awardsContent}</span>
                 </div>
                 {awards.map((award, i) => {
                   return (
-                    <div key={i} className='w-25 ph4 mb3'>
+                    <div key={i} className='w-100 w-25-l ph4-l mb3'>
                       <a className='f4 details' href={award.link} rel='noreferrer' target='_blank'>{award.title}</a>
                     </div>
                   )
@@ -84,15 +84,15 @@ const Projects = ({ aboutpage, contactpage, teamMembers, clients, awards }) => {
               </div>
             </div>
 
-            <div className='w-100 f4 ph5 mb7 flex flex-row'>
-              <div className='w-25'>
+            <div className='w-100 f4  ph4 ph5-ns mb7 flex flex-column flex-row-l'>
+              <div className='w-100 w-25-l'>
                 <p className='f2'>Clients</p>
-                <p className='w-70 details f6'>{aboutpage.clientContent}</p>
+                <p className='w-100 w-70-l details f6'>{aboutpage.clientContent}</p>
               </div>
-              <div className='mv3 w-75 flex flex-wrap details mv5'>
+              <div className='mv3 w-100 w-75-l flex flex-row flex-wrap details mv5'>
                 {clients.map((client, i) => {
                   return (
-                    <Thumbnail className='w-sixth ph4' key={i} index={i} item={client} />
+                    <Thumbnail className='w-sixth mv3 mv0-l ph2-ns ph4-l center' key={i} index={i} item={client} />
                   )
                 })}
               </div>

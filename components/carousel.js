@@ -60,34 +60,45 @@ const Carousel = ({ media, setShowContent }) => {
                 const mediaUrl = getStrapiMedia(m)
 
                 return (
-                  <CarouselItem key={key} mouseMove={mouseMove} mouseOut={mouseOut} showMedia={showMedia} setShowContent={setShowContent} caption={m.caption} show={show}>
+                  <CarouselItem index={key} key={key} mouseMove={mouseMove} mouseOut={mouseOut} showMedia={showMedia} setShowContent={setShowContent} caption={m.caption} show={show}>
                     <img src={mediaUrl} alt={m.alternativeText} className='relative w-100 justify-center center contain' />
                   </CarouselItem>
                 )
               } else {
                 // console.log('not image', m)
                 return (
-                  <CarouselItem key={key} mouseMove={mouseMove} mouseOut={mouseOut} showMedia={showMedia} setShowContent={setShowContent} caption={m.caption} show={show} />
+                  <CarouselItem index={key} key={key} mouseMove={mouseMove} mouseOut={mouseOut} showMedia={showMedia} setShowContent={setShowContent} caption={m.caption} show={show} />
                 )
               }
             } else {
               // console.log('not image', m)
               if (m.__component.includes('sound-cloud')) {
                 return (
-                  <CarouselItem key={key} mouseMove={mouseMove} mouseOut={mouseOut} showMedia={showMedia} setShowContent={setShowContent} caption={m.caption} show={show}>
+                  <CarouselItem index={key} key={key} mouseMove={mouseMove} mouseOut={mouseOut} showMedia={showMedia} setShowContent={setShowContent} caption={m.caption} show={show}>
                     <ReactMarkdown source={m.embed} escapeHtml={false} />
                   </CarouselItem>
                 )
-              } else if (m.__component.includes('vimeo')) {
+              } else {
                 const id = m.link.split('/')
                 if (m.link.includes('you')) {
                   const [target, setTarget] = useState('')
+                  const [play, setPlay] = useState(false)
                   const onReady = (e) => {
                     setTarget(e.target)
+                    // console.log('playVID')
+                  }
+                  const playVid = (e) => {
+                    const width = window.innerWidth / parseFloat(
+                      getComputedStyle(
+                        document.querySelector('body')
+                      )['font-size']
+                    )
+
+                    if (width < 30) setPlay(!play)
                   }
                   return (
-                    <CarouselItem key={key} mouseMove={mouseMove} mouseOut={mouseOut} showMedia={showMedia} setShowContent={setShowContent} caption={m.caption} show={show} type='video' target={target}>
-                      <MediaOverlay show={show} />
+                    <CarouselItem index={key} key={key} play={play} mouseMove={mouseMove} mouseOut={mouseOut} showMedia={showMedia} setShowContent={setShowContent} caption={m.caption} show={show} type='video' target={target}>
+
                       <YouTube
                         containerClassName='video w-100 justify-center center contain'
                         videoId={id[id.length - 1]}
@@ -95,17 +106,31 @@ const Carousel = ({ media, setShowContent }) => {
                         onReady={onReady}
                       />
                       <div className='absolute w-100 h-100' />
+                      <MediaOverlay key={key} show={show} onClick={playVid} play={play} />
 
                     </CarouselItem>
                   )
-                } else if (m.link.includes('vimeo')) {
+                } else {
                   const [target, setTarget] = useState('')
+                  const [play, setPlay] = useState(false)
                   const onReady = (e) => {
                     setTarget(e)
                   }
+                  const playVid = (e) => {
+                    // console.log('playVID')
+                    console.log(document.innerWidth)
+                    const width = window.innerWidth / parseFloat(
+                      getComputedStyle(
+                        document.querySelector('body')
+                      )['font-size']
+                    )
+
+                    if (width < 30) setPlay(!play)
+                  }
+
                   return (
-                    <CarouselItem key={key} mouseMove={mouseMove} mouseOut={mouseOut} showMedia={showMedia} setShowContent={setShowContent} caption={m.caption} show={show} type='video-vimeo' target={target}>
-                      <MediaOverlay show={show} />
+                    <CarouselItem index={key} play={play} key={key} mouseMove={mouseMove} mouseOut={mouseOut} showMedia={showMedia} setShowContent={setShowContent} caption={m.caption} show={show} type='video-vimeo' target={target}>
+
                       <Vimeo
                         video={id[id.length - 1]}
                         width='100%'
@@ -119,6 +144,7 @@ const Carousel = ({ media, setShowContent }) => {
                         onReady={onReady}
                       />
                       <div className='absolute w-100 h-100' />
+                      <MediaOverlay key={key} show={show} onClick={playVid} play={play} />
                     </CarouselItem>
                   )
                 }

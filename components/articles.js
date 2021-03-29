@@ -19,9 +19,9 @@ const Articles = ({ articles, tags }) => {
   return (
 
     <>
-      <div className='w-100 w-50-ns tr'>
-        <img className={`pointer button ma2 small-${width}`} src={smallButton} data-value='w-25' onClick={toggleView} />
-        <img className={`pointer button ma2 large-${width}`} src={largeButton} data-value='w-third' onClick={toggleView} />
+      <div className='w-100  w-20-ns w-50-l tr'>
+        <img className={`dn dib-ns pointer button ma2 small-${width}`} src={smallButton} data-value='w-25' onClick={toggleView} />
+        <img className={`dn dib-ns pointer button ma2 large-${width}`} src={largeButton} data-value='w-third' onClick={toggleView} />
       </div>
       <div className='articles w-100 flex flex-row flex-wrap mt6'>
         {articles.map((article, i) => (
