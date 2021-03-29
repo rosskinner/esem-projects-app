@@ -58,20 +58,16 @@ const Content = ({ project, thumbnail, margin, ratio, category, image, imageObje
             {/* <span className='f6 db'> */}
             {cat.map((c, i) => {
               let comma = ''
-              if (i !== cat.length - 1) comma = ' , '
+              if (i !== cat.length - 1) comma = ','
               return (
-                <h3 className='f6 ttc dib pr2' key={i}>{c.name} {comma} </h3>
+                <h3 className={`f6 ttc dib pr2 ${description ? 'secondary-color' : ''}`} key={i}>{c.name} {comma} </h3>
               )
             })}
             {description &&
-              <p className='f6 details'>{project.description}</p>}
+              <p className='f4 details'>{project.description}</p>}
 
             {project.linkedin &&
-            // <Link className='f6 details underline' as={project.linkedin} href='/'>
-              <a className='f6 details underline' href={project.linkedin} rel='noreferrer' target='_blank'>LinkedIn</a>
-              // </Link>
-            }
-
+              <a className='f6 details underline' href={project.linkedin} rel='noreferrer' target='_blank'>LinkedIn</a>}
           </>}
 
       </div>

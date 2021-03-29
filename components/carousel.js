@@ -89,7 +89,7 @@ const Carousel = ({ media, setShowContent }) => {
                     <CarouselItem key={key} mouseMove={mouseMove} mouseOut={mouseOut} showMedia={showMedia} setShowContent={setShowContent} caption={m.caption} show={show} type='video' target={target}>
                       <MediaOverlay show={show} />
                       <YouTube
-                        containerClassName='w-100 h-100 justify-center center contain'
+                        containerClassName='video w-100 justify-center center contain'
                         videoId={id[id.length - 1]}
                         opts={{ width: '100%', height: '100%', playerVars: { modestbranding: 1, controls: 0, loop: 1, enablejsapi: 1 } }}
                         onReady={onReady}
@@ -110,8 +110,7 @@ const Carousel = ({ media, setShowContent }) => {
                         video={id[id.length - 1]}
                         width='100%'
                         height='100%'
-                        responsive
-                        className='w-100 h-100 justify-center center contain'
+                        className='video w-100 justify-center center contain'
                         frameBorder='0'
                         allow='autoplay; fullscreen;'
                         allowFullScreen

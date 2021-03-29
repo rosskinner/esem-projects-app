@@ -29,7 +29,7 @@ const CarouselItem = ({ children, show, mouseMove, mouseOut, showMedia, setShowC
           <span className='detail f6 i'>{caption}</span>
         </div>
         <div className='w-30 tr dib v-mid'>
-          <span className='mt0 bb bw1 b--white pointer' onClick={setShowContent}>Read more...</span>
+          <span className='mt0 underline pointer secondary-color' onClick={setShowContent}>Read more...</span>
         </div>
       </div>
     </div>

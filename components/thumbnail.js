@@ -7,7 +7,13 @@ const Thumbnail = ({ item, className }) => {
 
   return (
     <div className={`thumbnail justify-center flex ${className}`}>
-      <img src={thumbnail} className='relative w-100 justify-center center contain' />
+      {item.link &&
+        <a className='relative w-100 justify-center flex' href={item.link} rel='noreferrer' target='_blank'>
+          <img src={thumbnail} className='relative w-100 justify-center center contain' />
+        </a>}
+      {!item.link &&
+        <img src={thumbnail} className='relative w-100 justify-center center contain' />}
+
     </div>
   // <div className='aspect-ratio---object' />
   )

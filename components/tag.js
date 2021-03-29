@@ -12,11 +12,11 @@ const Tag = ({ children, categories, seo }) => {
       <div className='w-100 w-50-ns'>
         <li className='dib mv3'>
           <Link href='/projects'>
-            <a className={`ba bw1 b--white br-pill pv2 ph3 f6 mr3 mb3 ${active === undefined ? 'active' : ''}`}>All</a>
+            <a className={`ba bw1 b--white br-pill pv2 ph3 f6 mr3 mb3 ${active === undefined ? 'tag-active' : ''}`}>All</a>
           </Link>
         </li>
         {categories.map((category) => {
-          const activeButton = active === category.slug ? 'active' : ''
+          const activeButton = active === category.slug ? 'tag-active' : ''
           return (
             <li className='dib mv3' key={category.id}>
               <Link as={`/projects/${category.slug}`} href='/projects/[id]'>

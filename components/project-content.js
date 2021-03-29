@@ -32,26 +32,26 @@ const ProjectContent = ({ project, showContent, setShowContent }) => {
             <ReactMarkdown source={project.body} escapeHtml={false} />
           </div>
           <div className='w-100 f6 flex flex-wrap flex-row'>
-            <div className='w-50 pr3'>
+            <div className='w-100 project-det flex flex-wrap'>
 
               <ReactMarkdown source={project.details} escapeHtml={false} />
             </div>
             {project.team &&
-              <div className='w-50'>
+              <div className='w-100 project-team mt6 flex flex-wrap'>
                 <ReactMarkdown source={project.team} escapeHtml={false} />
               </div>}
 
           </div>
           {project.articles.length > 0 &&
             <div className='mt5'>
-              <p className='f4 details'>Want to read even more?</p>
+              <p className='f4 details secondary-color'>Want to read even more?</p>
               <div className='flex flex-row'>
                 {project.articles.map((article, key) => {
                   console.log(article)
                   return (
                     <div className='f6' key={key}>
                       <Link as={`/article/${article.slug}`} href='/article/[id]'>
-                        <a>{article.title}</a>
+                        <a className='underline'>{article.title}</a>
                       </Link>
                     </div>
                   )

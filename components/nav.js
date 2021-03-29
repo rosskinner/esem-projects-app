@@ -3,16 +3,20 @@ import Link from 'next/link'
 import defaultLogo from '../assets/logo.png'
 import { getStrapiMedia } from '../lib/api'
 import ReactMarkdown from 'react-markdown'
+import { useRouter } from 'next/router'
 
 const Nav = ({ global, heading, description, showLogo = true, contactpage }) => {
   let logo
   let image
-  console.log(global)
+  // console.log(global)
   if (global) {
     logo = global.logo
     console.log(logo)
     image = logo === null ? <img className=' logo pt2' src={defaultLogo} /> : <img className='logo pt2' alt={logo.alternativeText} src={getStrapiMedia(logo)} />
   }
+
+  const active = useRouter().pathname
+  console.log('active', active)
 
   return (
     <div className='flex flex-column w-100 ttc f6 nav top-0'>
@@ -30,13 +34,13 @@ const Nav = ({ global, heading, description, showLogo = true, contactpage }) => 
         </div>
         <div className='db dtc w-100 tr v-mid pv3 details'>
           <Link href='/projects'>
-            <a className='mh4 dib v-mid'>Projects</a>
+            <a className={`mh4 dib v-mid ${active.includes('projects') ? 'nav-active' : ''}`}>Projects</a>
           </Link>
           <Link href='/articles'>
-            <a className='mh4 dib v-mid'>News</a>
+            <a className={`mh4 dib v-mid ${active.includes('articles') ? 'nav-active' : ''}`}>News</a>
           </Link>
           <Link href='/about'>
-            <a className='mh4 dib v-mid'>About</a>
+            <a className={`mh4 dib v-mid ${active.includes('about') ? 'nav-active' : ''}`}>About</a>
           </Link>
           {/* <Link href='/contact'>
             <a className='ml4 dib v-mid'>Contact</a>
