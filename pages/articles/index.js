@@ -26,12 +26,16 @@ const Articles = ({ articles, tags }) => {
 
 export async function getStaticProps ({ params }) {
   // Run API calls in parallel
-  const [articles, tags] = await Promise.all([
+  const [art, tags] = await Promise.all([
     fetchAPI('/articles'),
     fetchAPI('/tags')
 
   ])
 
+  const articles = art.sort((a, b) => {
+    return new Date(a.published_at).getTime() -
+        new Date(b.published_at).getTime()
+  }).reverse()
   return {
     props: { articles, tags },
     revalidate: 1
