@@ -1,6 +1,6 @@
 import App from 'next/app'
 import Head from 'next/head'
-import { createContext } from 'react'
+import { createContext, useEffect } from 'react'
 import { getStrapiMedia, fetchAPI } from '../lib/api'
 import Nav from '../components/nav'
 import 'tachyons'
@@ -12,6 +12,11 @@ export const GlobalContext = createContext({})
 
 const EsemApp = ({ Component, pageProps }) => {
   const { global } = pageProps
+
+  useEffect(() => {
+    const root = document.documentElement
+    root.style.setProperty('--secondary-color', global.secondaryColor)
+  })
 
   return (
     <>
