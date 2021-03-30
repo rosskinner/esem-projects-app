@@ -309,9 +309,6 @@ strong {
   }
   
 
-  .closeButton {
-    visibility: var(--showClose);
-  }
   .project-det > p, .project-team > p {
     width: 50%;
   }
@@ -337,7 +334,7 @@ strong {
   }
 
   .carousel-container, .video {
-    height: calc(100vh - 15rem);
+    height: calc(100vh - 18rem);
   }
 
   .hero-image-container {
@@ -369,7 +366,10 @@ strong {
     -webkit-transform: translate3d(var(--mouse-x), var(--mouse-y), 0);
     transform: translate3d(var(--mouse-x), var(--mouse-y), 0);
     will-change: transform;
-    visibility: hidden;
+    color: #fff;
+  }
+  .closeButton {
+    visibility: var(--showClose);
   }
 }
 
