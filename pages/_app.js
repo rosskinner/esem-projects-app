@@ -44,11 +44,16 @@ EsemApp.getInitialProps = async (ctx) => {
   // Calls page's `getInitialProps` and fills `appProps.pageProps`
   const appProps = await App.getInitialProps(ctx)
   // Fetch global site settings from Strapi
-  const [global, projects, contactpage] = await Promise.all([
+  const [global, proj, contactpage] = await Promise.all([
     fetchAPI('/global'),
     fetchAPI('/projects'),
     fetchAPI('/contact-page')
   ])
+
+  const projects = proj.sort((a, b) => {
+    return new Date(a.year).getTime() -
+        new Date(b.year).getTime()
+  }).reverse()
   // Pass the data to our page via props
   return { ...appProps, pageProps: { global, projects, contactpage } }
 }
