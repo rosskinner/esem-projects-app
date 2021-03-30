@@ -1,19 +1,26 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import ReactMarkdown from 'react-markdown'
 import Moment from 'react-moment'
 import Link from 'next/link'
 
 const ProjectContent = ({ project, showContent, setShowContent }) => {
   const mouseMove = (e) => {
-    const root = document.documentElement
-    root.style.setProperty('--mouse-x', `${e.screenX - 50}px`)
-    root.style.setProperty('--mouse-y', `${e.screenY - 130}px`)
-    root.style.setProperty('--showClose', 'visible')
+    if (showContent) {
+      const root = document.documentElement
+      root.style.setProperty('--mouse-x', `${e.screenX - 50}px`)
+      root.style.setProperty('--mouse-y', `${e.screenY - 130}px`)
+      root.style.setProperty('--showClose', 'visible')
+    }
   }
   const mouseOut = () => {
     const root = document.documentElement
     root.style.setProperty('--showClose', 'hidden')
   }
+
+  useEffect(() => {
+    const root = document.documentElement
+    root.style.setProperty('--showClose', 'hidden')
+  })
   return (
     <div className={`project-content fixed ${showContent ? 'active' : 'inactive'}`} onMouseMove={mouseMove} onMouseOut={mouseOut} onClick={() => setShowContent(!showContent)}>
 
@@ -27,7 +34,7 @@ const ProjectContent = ({ project, showContent, setShowContent }) => {
               </strong>
             </p>
           </div>
-          <div className='w-10 closeButton f4 f2-l fancy '>Close</div>
+          <div className='w-10 closeButton f4 fancy '>Close</div>
         </div>
         <div className='project-details w-100 h-100 flex flex-column relative pb6'>
 

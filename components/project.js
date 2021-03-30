@@ -8,7 +8,7 @@ const Project = ({ project, global, contactpage, prev, next }) => {
   console.log(project)
   // const mediaTypes = {
   // 'sound-cloud': <SoundCloud />
-  let allMedia = [project.collectionImage]
+  let allMedia = []
 
   for (let i = 0; i < project.media.length; i++) {
     const media = project.media[i]

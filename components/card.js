@@ -9,14 +9,16 @@ const Card = ({ project, width, category, path, link = true, image = false, desc
   //
   // console.log(thumbnail)
 
-  let ratio = 'aspect-ratio--3x4 aspect-ratio--8x5-l'
+  let ratio = 'aspect-ratio--8x5 aspect-ratio--8x5-l '
   let margin = 'mt3'
   let padding = 'ph2-ns ph3-l pb3 pb5-l'
   if (width === 'w-third') {
-    ratio = 'aspect-ratio--3x4'
+    // ratio = 'aspect-ratio--3x4'
     margin = 'mt3'
-    padding = 'ph2-ns ph4-l pb4 pb3-l'
+    padding = 'ph2-ns ph4-l pb4 pb5-l'
   }
+  if (description) ratio = 'aspect-ratio--3x4 aspect-ratio--3x4-l'
+    
   return (
     <>
       {link &&
@@ -41,29 +43,30 @@ const Content = ({ width, project, thumbnail, margin, ratio, category, image, im
 
   if (project.categories) cat = project.categories
 
-  const ratiolarge = (((imageObject.width / imageObject.height) > 8/5) || ((imageObject.height / imageObject.width) > 3/4)) && ratio.includes('8x5')
+  // const ratiolarge = (((imageObject.width / imageObject.height) > 8/5) || ((imageObject.height / imageObject.width) > 3/4)) && ratio.includes('8x5')
 
   return (
     <>
       <div className='db'>
         <div className={`aspect-ratio ${ratio}`}>
-          {ratiolarge &&
-            <div className='dn big-ratio' style={{ backgroundImage: `url(${thumbnail})` }} />
-          }
-          {!ratiolarge &&
+          {/* {ratiolarge &&
+            
+          } */}
+          <div className='project-thumb aspect-ratio--object cover' alt={imageObject.alternativeText} style={{ backgroundImage: `url(${thumbnail})` }} />
+          {/* {!ratiolarge &&
             <img src={thumbnail} alt={imageObject.alternativeText} className='card-img cover aspect-ratio--object' />
           }
 
           {ratiolarge &&
-            <img src={thumbnail} alt={imageObject.alternativeText} className='card-img card-img-ns over aspect-ratio--object' />
-          }
+            <img src={thumbnail} alt={imageObject.alternativeText} className='card-img card-img-ns cover aspect-ratio--object' />
+          } */}
           
         </div>
       </div>
       <div className='db'>
         {!image &&
           <>
-            <h2 className={`f6 db ${margin}`}>
+            <h2 className={`f6 db b ${margin}`}>
               {project.title || project.name}
             </h2>
 

@@ -34,7 +34,7 @@ const Nav = ({ global, heading, description, showLogo = true, contactpage }) => 
               <span className='dn db-l mt0'>{description}</span>
             </div>}
         </div>
-        <div className='db dtc w-100 tr v-mid pv3 details'>
+        <div className='db dtc w-100 w-50-l tr v-mid pv3 details'>
           <Link href='/projects'>
             <a className={`mh3 mh4-l dib v-mid ${active.includes('projects') ? 'nav-active' : ''}`}>Projects</a>
           </Link>

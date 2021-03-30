@@ -12,7 +12,7 @@ const Tag = ({ children, categories, seo }) => {
       <div className='w-100 w-80-ns w-50-l'>
         <li className='dib mv3'>
           <Link href='/projects'>
-            <a className={`ba bw1 b--white br-pill pv2 ph3 f6 mr3 mb3 ${active === undefined ? 'tag-active' : ''}`}>All</a>
+            <a className={`ba tag b--white br-pill pv2 ph3 f6 mr3 mb3 ${active === undefined ? 'tag-active' : ''}`}>All</a>
           </Link>
         </li>
         {categories.map((category) => {
@@ -20,7 +20,7 @@ const Tag = ({ children, categories, seo }) => {
           return (
             <li className='dib mv3' key={category.id}>
               <Link as={`/projects/${category.slug}`} href='/projects/[id]'>
-                <a className={`ttc ba bw1 b--white br-pill pv2 ph3 f6 mr3 mb3 ${activeButton}`}>{category.name}</a>
+                <a className={`ttc ba tag b--white br-pill pv2 ph3 f6 mr3 mb3 ${activeButton}`}>{category.name}</a>
               </Link>
             </li>
           )

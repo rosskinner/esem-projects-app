@@ -5,6 +5,8 @@
 ::root {
   --mouse-x: 0;
   --mouse-y: 0;
+  --showClose: hidden;
+  --showIndicator: hidden;
 }
 
 ::-webkit-scrollbar {
@@ -146,14 +148,18 @@ strong {
 }
 
 .active {
+  left:0;
   opacity: 1;
   visibility: visible;
+  transition: left 500ms ease-in-out;
 }
 
 
 .inactive {
-  visibility: hidden;
-  opacity: 0;
+  left: -100%;
+  /* visibility: hidden; */
+  /* opacity: 0; */
+  transition: left 500ms ease-in-out;
 }
 
 .carousel-indicator {
@@ -175,7 +181,6 @@ strong {
 }
 
 .project-content {
-  left: 0;
   top: 0;
   width: 100%;
   height: 100vh;
@@ -183,7 +188,7 @@ strong {
 
 
 .project-overlay {
-  filter: blur(10px);
+  /* filter: blur(10px); */
   left: 0;
   top: 0;
   width: 100%;
@@ -235,9 +240,13 @@ strong {
   margin: 0px;
 }
 
-.card-img {
-  object-fit: contain;
+.project-thumb {
+  background-position: center;
 }
+
+/* .card-img {
+  object-fit: contain;
+} */
 
 .big-ratio {
   height: 100%;
@@ -300,6 +309,12 @@ strong {
   color: var(--secondary-color);
 }
 
+.tag {
+  border-width: 1px;
+}
+.project-details a {
+  color: var(--secondary-color);
+}
 
 @media screen and (min-width: 30rem) {
 
@@ -366,8 +381,12 @@ strong {
   }
 
   .carousel-indicator {
-    visibility: var(--showIndicator);
+    /* visibility: var(--showIndicator); */
+    visibility: visible;
+    opacity: var(--indicatorOpacity);
+    transition: opacity 300ms ease-in-out;
   }
+
   .closeButton {
     position: fixed;
     z-index: 200;
@@ -378,17 +397,20 @@ strong {
     will-change: transform;
     color: #fff;
   }
+
   .closeButton {
     visibility: var(--showClose);
   }
 
-  .big-ratio {
-    display: block;
-  }
+  
 
-  .card-img-ns {
+  /* .big-ratio {
+    display: block;
+  } */
+
+  /* .card-img-ns {
     display: none;
-  }
+  } */
 }
 
 @media screen and (min-width: 70rem) {

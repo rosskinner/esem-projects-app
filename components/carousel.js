@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { getStrapiMedia } from '../lib/api'
 import ReactMarkdown from 'react-markdown'
 import CarouselItem from './carousel-item'
@@ -9,14 +9,24 @@ import MediaOverlay from './media-overlay'
 const Carousel = ({ media, setShowContent }) => {
   const [active, setActive] = useState(0)
   const [direction, setDirection] = useState(0)
-
+  let fadeOut
   const showMedia = (e) => {
+    clearInterval(fadeOut)
+    hoverTimer()
     let newActive = active === media.length - 1 ? 0 : active + 1
     if (direction === 'Prev') {
       newActive = active === 0 ? media.length - 1 : active - 1
     }
 
     setActive(newActive)
+  }
+  const hoverTimer = () => {
+    fadeOut = setInterval(() => {
+      const root = document.documentElement
+
+      root.style.setProperty('--indicatorOpacity', 0)
+      clearInterval(fadeOut)
+    }, 1500)
   }
 
   const mouseMove = (e) => {
@@ -28,19 +38,21 @@ const Carousel = ({ media, setShowContent }) => {
     if (direction !== dir)setDirection(dir)
 
     const root = document.documentElement
+    clearInterval(fadeOut)
+    hoverTimer()
     root.style.setProperty('--mouse-x', `${e.screenX}px`)
     root.style.setProperty('--mouse-y', `${e.screenY - 150}px`)
-    root.style.setProperty('--showIndicator', 'visible')
+    root.style.setProperty('--indicatorOpacity', 1)
   }
   const mouseOut = () => {
     const root = document.documentElement
-    root.style.setProperty('--showIndicator', 'hidden')
+    root.style.setProperty('--indicatorOpacity', 0)
   }
 
   return (
     <>
       <div id='banner' className='w-100 flex flex-row justify-center items-center'>
-        <div className='carousel-indicator f2 fancy'>
+        <div className='carousel-indicator f4 fancy'>
           <div>
             {direction === 'Prev' &&
               <span className='mr3 ttc'>{direction}</span>}
