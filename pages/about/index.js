@@ -65,7 +65,7 @@ const Projects = ({ aboutpage, contactpage, teamMembers, clients, awards }) => {
               </span>
             </div>
 
-            <div className='w-100  pt4 pb5 f4 mb4 mb7-l ph4 ph5-l color-block'>
+            <div className='w-100 pt4 pt5-l pb5 f4 mb4 mb7-l ph4 ph5-l color-block'>
               <div className='w-100'>
                 <p className='f2'>Awards</p>
 
@@ -84,15 +84,15 @@ const Projects = ({ aboutpage, contactpage, teamMembers, clients, awards }) => {
               </div>
             </div>
 
-            <div className='w-100 f4  ph4 ph5-ns mb7 flex flex-column flex-row-l'>
-              <div className='w-100 w-25-l'>
+            <div className='w-100 f4 ph4 ph5-l mb7 flex flex-column flex-row-xl'>
+              <div className='w-100 w-25-xl'>
                 <p className='f2'>Clients</p>
                 <p className='w-100 w-70-l details f6'>{aboutpage.clientContent}</p>
               </div>
-              <div className='mv3 w-100 w-75-l flex flex-row flex-wrap details mv5'>
+              <div className='mv3 w-100 w-75-xl flex flex-row flex-wrap details mv5'>
                 {clients.map((client, i) => {
                   return (
-                    <Thumbnail className='w-sixth mv3 mv0-l ph2-ns ph4-l center' key={i} index={i} item={client} />
+                    <Thumbnail className='w-sixth w-sixth-m mv3 mv0-l ph2-ns ph4-l center' key={i} index={i} item={client} />
                   )
                 })}
               </div>

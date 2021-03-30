@@ -301,28 +301,38 @@ strong {
 }
 
 
-
 @media screen and (min-width: 30rem) {
 
-  .w-sixth {
-    width: calc(100% / 6);
-  }
+
   
 
   .project-det > p, .project-team > p {
     width: 50%;
   }
 
+  .card-img-ns {
+    display: block;
+  }
+
 }
 
 
-@media (--breakpoint-medium) {
+@media screen  and (max-width: 60rem) and (min-width: 30rem) {
   
-  
+  .w-sixth-m {
+    width: calc(100% / 6);
+  }
 }
+
+/* @media screen  and (min-width: 45rem){
+  
+  .m-
+} */
 
 @media screen and (min-width: 60rem) {
-
+  .w-sixth {
+    width: calc(100% / 6);
+  }
   .hero-image-container {
     position: absolute;
   }
@@ -370,6 +380,28 @@ strong {
   }
   .closeButton {
     visibility: var(--showClose);
+  }
+
+  .big-ratio {
+    display: block;
+  }
+
+  .card-img-ns {
+    display: none;
+  }
+}
+
+@media screen and (min-width: 70rem) {
+  .flex-row-xl {
+    flex-direction: row;
+  }
+
+  .w-25-xl {
+    width: 25%;
+  }
+
+  .w-75-xl {
+    width: 75%;
   }
 }
 
