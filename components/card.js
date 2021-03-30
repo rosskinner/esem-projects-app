@@ -9,24 +9,24 @@ const Card = ({ project, width, category, path, link = true, image = false, desc
   //
   // console.log(thumbnail)
 
-  let ratio = 'aspect-ratio--4x3'
+  let ratio = 'aspect-ratio--8x5'
   let margin = 'mt3'
-  let padding = 'ph3 pb5'
+  let padding = 'ph2-ns ph3-l pb3 pb5-l'
   if (width === 'w-third') {
     ratio = 'aspect-ratio--3x4'
     margin = 'mt3'
-    padding = 'ph4 pb3'
+    padding = 'ph2-ns ph4-l pb4 pb3-l'
   }
   return (
     <>
       {link &&
         <Link as={`${path}/${project.slug}`} href={`${path}/[id]`}>
-          <a className={`project-card details ${padding} white ${width}`}>
+          <a className={`project-card details ${padding} white w-100 ${width}-ns`}>
             <Content project={project} thumbnail={thumbnail} margin={margin} ratio={ratio} category={category} image={image} imageObject={imageObject} description={description} />
           </a>
         </Link>}
       {!link &&
-        <span className={`project-card details ${padding} white ${width}`}>
+        <span className={`project-card details ${padding} white w-100 ${width}-ns`}>
           <Content project={project} thumbnail={thumbnail} margin={margin} ratio={ratio} category={category} image={image} imageObject={imageObject} description={description} />
         </span>}
     </>
@@ -41,11 +41,20 @@ const Content = ({ project, thumbnail, margin, ratio, category, image, imageObje
 
   if (project.categories) cat = project.categories
 
+  const ratiolarge = (((imageObject.width / imageObject.height) > 8/5) || ((imageObject.height / imageObject.width) > 3/4)) && ratio.includes('8x5')
+
+
   return (
     <>
       <div className='db'>
         <div className={`aspect-ratio ${ratio}`}>
-          <img src={thumbnail} alt={imageObject.alternativeText} className='card-img contain aspect-ratio--object' />
+          {ratiolarge &&
+            <div className='big-ratio' style={{ backgroundImage: `url(${thumbnail})` }} />
+          }
+          {!ratiolarge &&
+            <img src={thumbnail} alt={imageObject.alternativeText} className='card-img cover aspect-ratio--object' />
+          }
+          
         </div>
       </div>
       <div className='db'>

@@ -3,7 +3,7 @@ import Carousel from './carousel'
 import Nav from './nav'
 import ProjectContent from './project-content'
 
-const Project = ({ project, contactpage, prev, next }) => {
+const Project = ({ project, global, contactpage, prev, next }) => {
   const [showContent, setShowContent] = useState(false)
   console.log(contactpage)
   // const mediaTypes = {
@@ -30,7 +30,7 @@ const Project = ({ project, contactpage, prev, next }) => {
 
         <div className={`${showContent ? 'project-overlay' : ''}`}>
           <div className='w-100'>
-            <Nav showLogo={false} heading={project.title} description={project.description} contactpage={contactpage} />
+            <Nav showLogo={false} heading={project.title} description={project.description} contactpage={contactpage} global={global} />
           </div>
           <Carousel media={allMedia} setShowContent={toggleContent} />
         </div>

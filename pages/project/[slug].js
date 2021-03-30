@@ -3,7 +3,7 @@ import Seo from '../../components/seo'
 import ProjectCard from '../../components/project'
 
 
-const Project = ({ projects, project, contactpage }) => {
+const Project = ({ global, projects, project, contactpage }) => {
 // console.log('projects', projects)
 let nav = []
 
@@ -27,7 +27,7 @@ for (let i = 0; i < projects.length; i++) {
   return (
     <>
       <Seo seo={seo} />
-      <ProjectCard prev={nav[0]} next={nav[1]} project={project} contactpage={contactpage}/>
+      <ProjectCard prev={nav[0]} next={nav[1]} project={project} contactpage={contactpage} global={global}/>
     </>
   );
 };

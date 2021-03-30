@@ -11,9 +11,11 @@ const Nav = ({ global, heading, description, showLogo = true, contactpage }) => 
   // console.log(global)
   if (global) {
     logo = global.logo
-    console.log(logo)
-    image = logo === null ? <img className=' logo pt2' src={defaultLogo} /> : <img className='logo pt2' alt={logo.alternativeText} src={getStrapiMedia(logo)} />
+    // console.log(logo)
+    image = logo === null ? <img className=' logo pt2 pointer' src={defaultLogo} /> : <img className='logo pt2 pointer' alt={logo.alternativeText} src={getStrapiMedia(logo)} />
   }
+
+  console.log('global', global, image)
 
   const active = useRouter().pathname
   console.log('active', active)
@@ -22,10 +24,10 @@ const Nav = ({ global, heading, description, showLogo = true, contactpage }) => 
     <div className='flex flex-column w-100 ttc f6 nav top-0'>
       <div className='flex w-100 ph5 pv4'>
         <div className='db dtc w-50 v-mid relative'>
-          {showLogo &&
-            <Link className='relative' href='/'>
-              {image}
-            </Link>}
+          <Link className='relative' href='/'>
+            {image}
+          </Link>
+
           {!showLogo &&
             <div className=''>
               <h1 className='mb3 f4 heading'>{heading}</h1>
