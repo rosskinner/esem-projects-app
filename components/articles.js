@@ -20,8 +20,8 @@ const Articles = ({ articles, tags }) => {
 
     <>
       <div className='w-100  w-20-ns w-50-l tr'>
-        <img className={`dn dib-ns pointer button ma2 small-${width}`} src={smallButton} data-value='w-25' onClick={toggleView} />
-        <img className={`dn dib-ns pointer button ma2 large-${width}`} src={largeButton} data-value='w-third' onClick={toggleView} />
+        <img className={`dn dib-ns pointer button ma2 small-${width}`} src={smallButton} alt='small-view' data-value='w-25' onClick={toggleView} />
+        <img className={`dn dib-ns pointer button ma2 large-${width}`} src={largeButton} alt='large-view' data-value='w-third' onClick={toggleView} />
       </div>
       <div className='articles w-100 flex flex-row flex-wrap mt6'>
         {articles.map((article, i) => (

@@ -25,7 +25,7 @@ const Carousel = ({ media, setShowContent }) => {
       const root = document.documentElement
 
       root.style.setProperty('--indicatorOpacity', 0)
-      clearInterval(fadeOut)
+      // clearInterval(fadeOut)
     }, 1500)
   }
 
@@ -70,6 +70,7 @@ const Carousel = ({ media, setShowContent }) => {
             if (m.mime) {
               if (m.mime.includes('image')) {
                 const mediaUrl = getStrapiMedia(m)
+                console.log(m)
 
                 return (
                   <CarouselItem index={key} key={key} mouseMove={mouseMove} mouseOut={mouseOut} showMedia={showMedia} setShowContent={setShowContent} caption={m.caption} show={show}>

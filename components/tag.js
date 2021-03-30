@@ -9,7 +9,7 @@ const Tag = ({ children, categories, seo }) => {
   console.log(active)
   return (
     <div className='mh4 mh5-l flex flex-row flex-wrap'>
-      <div className='w-100 w-80-ns w-50-l'>
+      <ul className='w-100 w-80-ns w-50-l'>
         <li className='dib mv3'>
           <Link href='/projects'>
             <a className={`ba tag b--white br-pill pv2 ph3 f6 mr3 mb3 ${active === undefined ? 'tag-active' : ''}`}>All</a>
@@ -25,7 +25,7 @@ const Tag = ({ children, categories, seo }) => {
             </li>
           )
         })}
-      </div>
+      </ul>
       {children}
     </div>
   )
