@@ -6,7 +6,6 @@ import Nav from '../components/nav'
 import 'tachyons'
 import '../styles/globals.css'
 import Footer from '../components/footer'
-
 // Store Strapi Global object in context
 export const GlobalContext = createContext({})
 
@@ -32,6 +31,7 @@ const EsemApp = ({ Component, pageProps }) => {
       </div>
 
       <Footer global={global} pageProps={pageProps} />
+
     </>
   )
 }

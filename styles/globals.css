@@ -34,6 +34,7 @@ h1,h2,h3,h4,h5,h6 {
     margin-inline-end: inherit;
 }
 
+
 .secondary-color {
   color: var(--secondary-color);
   border-color: var(--secondary-color);
