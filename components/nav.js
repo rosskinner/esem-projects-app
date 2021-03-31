@@ -15,10 +15,7 @@ const Nav = ({ global, heading, description, showLogo = true, contactpage }) => 
     image = logo === null ? <img className=' logo pt2 pointer' src={defaultLogo} /> : <img className='logo pt2 pointer' alt={logo.alternativeText} src={getStrapiMedia(logo)} />
   }
 
-  console.log('global', global, image)
-
   const active = useRouter().pathname
-  console.log('active', image)
 
   return (
     <div className='flex flex-column w-100 ttc f6 nav top-0'>

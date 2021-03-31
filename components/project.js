@@ -5,7 +5,7 @@ import ProjectContent from './project-content'
 
 const Project = ({ project, global, contactpage, prev, next }) => {
   const [showContent, setShowContent] = useState(false)
-  console.log(project)
+  // console.log(project)
   // const mediaTypes = {
   // 'sound-cloud': <SoundCloud />
   let allMedia = []

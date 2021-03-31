@@ -4,6 +4,10 @@ import { getStrapiMedia } from '../lib/api'
 
 const Card = ({ project, width, category, path, link = true, image = false, description = false }) => {
   const imageObject = project.collectionImage
+  // console.log(project.title, imageObject)
+  // if (imageObject === null) {
+  //   console.log(project.title)
+  // }
   const url = project.collectionImage.formats === null ? project.collectionImage : project.collectionImage.formats.medium
   const thumbnail = getStrapiMedia(url)
   //
