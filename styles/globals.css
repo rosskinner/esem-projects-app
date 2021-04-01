@@ -34,6 +34,9 @@ h1,h2,h3,h4,h5,h6 {
     margin-inline-end: inherit;
 }
 
+.container {
+  
+}
 
 .secondary-color {
   color: var(--secondary-color);
@@ -109,6 +112,10 @@ strong {
 .fancy {
   /* font-family: 'Baskervville', serif; */
   font-family: 'Karla', sans-serif;
+}
+
+.baskerville {
+  font-family: 'Baskervville', serif;
 }
 
 .button {
@@ -316,11 +323,23 @@ strong {
   color: var(--secondary-color);
 }
 
+.home-container {
+  height: calc(100vh - 24rem);
+  overflow: hidden;
+}
+
+.home-container .title {
+  font-size: 7.3rem;
+  position: absolute;
+  width: 116%;
+  height: 100vh;
+  left: 50%;
+  transform: translate(-50%);
+  top: 0px;
+  overflow: hidden;
+}
+
 @media screen and (min-width: 30rem) {
-
-
-  
-
   .project-det > p, .project-team > p {
     width: 50%;
   }

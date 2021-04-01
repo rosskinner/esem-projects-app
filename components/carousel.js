@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { getStrapiMedia } from '../lib/api'
 import ReactMarkdown from 'react-markdown'
 import CarouselItem from './carousel-item'
@@ -11,8 +11,8 @@ const Carousel = ({ media, setShowContent }) => {
   const [direction, setDirection] = useState(0)
   let fadeOut
   const showMedia = (e) => {
-    clearInterval(fadeOut)
-    hoverTimer()
+    // clearInterval(fadeOut)
+    // hoverTimer()
     let newActive = active === media.length - 1 ? 0 : active + 1
     if (direction === 'Prev') {
       newActive = active === 0 ? media.length - 1 : active - 1
@@ -20,14 +20,14 @@ const Carousel = ({ media, setShowContent }) => {
 
     setActive(newActive)
   }
-  const hoverTimer = () => {
-    fadeOut = setInterval(() => {
-      const root = document.documentElement
+  // const hoverTimer = () => {
+  //   fadeOut = setInterval(() => {
+  //     const root = document.documentElement
 
-      root.style.setProperty('--indicatorOpacity', 0)
-      clearInterval(fadeOut)
-    }, 2000)
-  }
+  //     root.style.setProperty('--indicatorOpacity', 0)
+  //     clearInterval(fadeOut)
+  //   }, 2000)
+  // }
 
   const mouseMove = (e) => {
     const half = window.innerWidth / 2
@@ -38,8 +38,8 @@ const Carousel = ({ media, setShowContent }) => {
     if (direction !== dir)setDirection(dir)
 
     const root = document.documentElement
-    clearInterval(fadeOut)
-    hoverTimer()
+    // clearInterval(fadeOut)
+    // hoverTimer()
     root.style.setProperty('--mouse-x', `${e.screenX}px`)
     root.style.setProperty('--mouse-y', `${e.screenY - 150}px`)
     root.style.setProperty('--indicatorOpacity', 1)
