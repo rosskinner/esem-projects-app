@@ -8,7 +8,8 @@ const Card = ({ project, width, category, path, link = true, image = false, desc
   // if (imageObject === null) {
   //   console.log(project.title)
   // }
-  const url = project.collectionImage.formats === null ? project.collectionImage : project.collectionImage.formats.medium
+  console.log(project)
+  const url = (project.collectionImage.formats === null || Object.keys(project.collectionImage.formats).length === 0) ? project.collectionImage : project.collectionImage.formats.medium
   const thumbnail = getStrapiMedia(url)
   //
   // console.log(thumbnail)
