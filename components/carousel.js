@@ -51,7 +51,7 @@ const Carousel = ({ media, setShowContent }) => {
 
   return (
     <>
-      <div id='banner' className='w-100 flex flex-row justify-center items-center absolute '>
+      <div id='banner' className='w-100 flex flex-row justify-center items-center '>
         <div className='carousel-indicator f4 fancy'>
           <div>
             {direction === 'Prev' &&
