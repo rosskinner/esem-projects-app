@@ -28,7 +28,7 @@ const EsemApp = ({ Component, pageProps }) => {
         <GlobalContext.Provider value={global}>
           <Component {...pageProps} />
         </GlobalContext.Provider>
-        <Footer global={global} pageProps={pageProps} />
+        <Footer {...pageProps} />
       </div>
 
     </>
