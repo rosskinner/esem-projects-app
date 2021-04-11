@@ -18,51 +18,35 @@ const Nav = ({ global, heading, description, showLogo = true, contactpage }) => 
   const active = useRouter().pathname
 
   return (
-    <div className='flex flex-column w-100 ttc f6 nav top-0'>
+    <div className='flex flex-column w-100 ttc f6 nav top-0 fixed'>
       <div className='flex w-100 ph4 ph5-l pv4'>
         <div className='db dtc w-50 v-mid relative'>
-          <Link className='relative' href='/'>
-            {image}
-          </Link>
+          {showLogo &&
+            <Link className='relative' href='/'>
+              {image}
+            </Link>}
+        </div>
 
-          {!showLogo &&
-            <div className=''>
-              <h1 className='dn db-l mb2 pt3 f4 heading'>{heading}</h1>
-              <span className='dn db-l mt0'>{description}</span>
-            </div>}
-        </div>
-        <div className='db dtc w-100 w-50-l tr v-mid pv3 details'>
-          <Link href='/projects'>
-            <a className={`mh3 mh4-l dib v-mid ${active.includes('projects') ? 'nav-active' : ''}`}>Projects</a>
-          </Link>
-          <Link href='/articles'>
-            <a className={`mh3 mh4-l dib v-mid ${active.includes('articles') ? 'nav-active' : ''}`}>News</a>
-          </Link>
-          <Link href='/about'>
-            <a className={`mh3 mh4-l dib v-mid ${active.includes('about') ? 'nav-active' : ''}`}>About</a>
-          </Link>
-          {/* <Link href='/contact'>
-            <a className='ml4 dib v-mid'>Contact</a>
-          </Link> */}
-        </div>
-      </div>
-      {showLogo &&
-        <div className='flex flex-row justify-end nav-contact details'>
-          {contactpage.Contact.map((contact, i) => {
-            return (
-              <div key={i} className='pb3 pt3 ph4'>
-                <p className='pb2'>{contact.heading}</p>
-                <p>{contact.name}</p>
-                <a className=' ttl' href={`mailto: ${contact.email}`}>{contact.email}</a>
-              </div>
-            )
-          })}
-          <div className='pb3 pt3 ph4'>
-            <ReactMarkdown source={contactpage.address} />
+        <div className='db dtc w-100 w-50-l tr v-mid pv3 details '>
+          <div>
+            <Link href='/projects'>
+              <a className={`mh3 mh4-l dib v-mid ${active.includes('projects') ? 'nav-active' : ''}`}>Projects</a>
+            </Link>
+            <Link href='/articles'>
+              <a className={`mh3 mh4-l dib v-mid ${active.includes('articles') ? 'nav-active' : ''}`}>News</a>
+            </Link>
+            <Link href='/about'>
+              <a className={`ml3 ml4-l dib v-mid ${active.includes('about') ? 'nav-active' : ''}`}>About</a>
+            </Link>
+
           </div>
 
-        </div>}
+        </div>
+
+      </div>
+
     </div>
+
   )
 }
 

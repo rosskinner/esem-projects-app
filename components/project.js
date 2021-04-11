@@ -1,49 +1,86 @@
-import React, { useState } from 'react'
-import Carousel from './carousel'
-import Nav from './nav'
+import React from 'react'
+import { getStrapiMedia } from '../lib/api'
+import ReactMarkdown from 'react-markdown'
+import Link from 'next/link'
+import Image from './image'
+// import Nav from './nav'
 import ProjectContent from './project-content'
+import Text from './text'
+import Video from './video'
 
 const Project = ({ project, global, contactpage, prev, next }) => {
-  const [showContent, setShowContent] = useState(false)
   // console.log(project)
   // const mediaTypes = {
   // 'sound-cloud': <SoundCloud />
-  let allMedia = []
-
+  // const allMedia = []
+  let bannerImage = ''
   for (let i = 0; i < project.media.length; i++) {
     const media = project.media[i]
     media.type = media.__component
 
-    if (media.type.includes('video-images')) {
-      allMedia = [...allMedia, ...media.media]
-    } else {
-      allMedia.push(media)
+    if (media.type.includes('video-images') && bannerImage.length === 0) {
+      bannerImage = media.media[0]
+      console.log('bannerImage', bannerImage)
+      //     allMedia = [...allMedia, ...media.media]
+      //   } else {
+      //     allMedia.push(media)
     }
   }
 
-  const toggleContent = () => {
-    setShowContent(!showContent)
-  }
-  return (
-    <>
-      <div className='project-container absolute top-0 w-100'>
+  console.log(project.media)
 
-        <div className={`${showContent ? 'project-overlay' : ''}`}>
-          <div className='w-100'>
-            <Nav showLogo={false} heading={project.title} description={project.description} contactpage={contactpage} global={global} />
+  return (
+    <div className='flex flex-column'>
+
+      <ProjectContent className='w-100 w-25-l mt6 mt7-l fixed-l' project={project} />
+      <div className='project-details w-100 w-75-l self-end-l'>
+        <div className='project-container top-0 w-100'>
+          <div className='banner-container w-100 flex center'>
+            <img src={getStrapiMedia(bannerImage)} alt={bannerImage.alternativeText} className='relative w-100 justify-center center cover' />
           </div>
-          <div className='db dn-l w-100 ph4 ph5-l pt4 mb6'>
-            <h1 className='mb3 f2 heading'>{project.title}</h1>
-            <span className='mt0'>{project.description}</span>
-            <div className='w-100 pt4 dib dn-l v-mid'>
-              <span className='mt0 underline pointer secondary-color' onClick={toggleContent}>Read more...</span>
-            </div>
-          </div>
-          <Carousel media={allMedia} setShowContent={toggleContent} />
         </div>
-        <ProjectContent project={project} showContent={showContent} setShowContent={setShowContent} />
+
+        <div className='w-100 flex flex-column'>
+          <div className='project-details w-100 flex flex-column relative mt4 pb4'>
+
+            <div className='w-100 w-two-thirds-l ph4 ph0-l f6 flex flex-wrap flex-column flex-row-l '>
+              <div className='w-100 w-50-l project-det flex flex-column flex-wrap pr5-l'>
+                <p className='b'>Project Details</p>
+                <ReactMarkdown source={project.details} escapeHtml={false} />
+              </div>
+              {project.team &&
+                <div className='w-50-l pt5 pt0-l project-det flex flex-column flex-wrap pr5-l'>
+                  <p className='b'>Team</p>
+                  <ReactMarkdown source={project.team} escapeHtml={false} />
+                </div>}
+            </div>
+
+          </div>
+        </div>
+        <div className='w-100 mw8 pv4 pl4 pr4 pl0-l pr5-l details f4'>
+          <ReactMarkdown source={project.body} escapeHtml={false} />
+        </div>
+        {project.media.map((media, key) => {
+          if (media.__component.includes('video-images')) {
+            return (
+              <Image key={key} media={media.media} />
+            )
+          } else if (media.__component.includes('text')) {
+            return (
+              <Text key={key} text={media.text} />
+            )
+          } else if (media.__component.includes('vimeo')) {
+            return (
+              <Video key={key} video={media} />
+            )
+          } else if (media.__component.includes('sound-cloud')) {
+            return (
+              <Audio key={key} audio={media} caption={media.caption} />
+            )
+          }
+        })}
       </div>
-    </>
+    </div>
   )
 }
 

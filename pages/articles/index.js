@@ -13,7 +13,7 @@ const Articles = ({ articles, tags }) => {
 
   return (
     <>
-      <div className='container'>
+      <div className='container mt7'>
         <p className='f2 pt6-l ph4 ph5-l'>News</p>
         <Tag categories={tags}>
           <Seo seo={seo} />

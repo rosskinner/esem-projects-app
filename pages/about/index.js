@@ -15,7 +15,7 @@ const Projects = ({ aboutpage, contactpage, teamMembers, clients, awards }) => {
 
   return (
     <>
-      <div className='container'>
+      <div className='container mt7'>
         <Seo seo={seo} />
         <div className='pt6-l flex flex-wrap f4'>
 
@@ -34,7 +34,7 @@ const Projects = ({ aboutpage, contactpage, teamMembers, clients, awards }) => {
                 </span>
               </div>
 
-              <div className='projects flex flex-column w-100 flex-row-ns flex-wrap mv3 mv5-l pt4 w-75'>
+              <div className='projects flex flex-column w-75 flex-row-ns flex-wrap mv3 mv5-l pt4'>
                 {teamMembers.map((person, i) => {
                   return (
                     <Card width='w-third' key={i} index={i} project={person} category={person.role} link={false} description />

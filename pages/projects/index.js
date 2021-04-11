@@ -14,7 +14,7 @@ const Projects = ({ projects, categories, projectpage }) => {
 
   return (
     <>
-      <div className='container'>
+      <div className='container mt7'>
         <p className='f2 pt6-l ph4 ph5-l'>{projectpage.heading}</p>
         <Tag categories={categories}>
           <Seo seo={seo} />
