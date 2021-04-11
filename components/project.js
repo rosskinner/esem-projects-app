@@ -1,18 +1,14 @@
 import React from 'react'
 import { getStrapiMedia } from '../lib/api'
 import ReactMarkdown from 'react-markdown'
-import Link from 'next/link'
+
 import Image from './image'
-// import Nav from './nav'
 import ProjectContent from './project-content'
 import Text from './text'
 import Video from './video'
+import Audio from './audio'
 
 const Project = ({ project, global, contactpage, prev, next }) => {
-  // console.log(project)
-  // const mediaTypes = {
-  // 'sound-cloud': <SoundCloud />
-  // const allMedia = []
   let bannerImage = ''
   for (let i = 0; i < project.media.length; i++) {
     const media = project.media[i]
@@ -20,10 +16,6 @@ const Project = ({ project, global, contactpage, prev, next }) => {
 
     if (media.type.includes('video-images') && bannerImage.length === 0) {
       bannerImage = media.media[0]
-      console.log('bannerImage', bannerImage)
-      //     allMedia = [...allMedia, ...media.media]
-      //   } else {
-      //     allMedia.push(media)
     }
   }
 
@@ -77,6 +69,8 @@ const Project = ({ project, global, contactpage, prev, next }) => {
             return (
               <Audio key={key} audio={media} caption={media.caption} />
             )
+          } else {
+            return <></>
           }
         })}
       </div>

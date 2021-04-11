@@ -2,7 +2,6 @@ import React from 'react'
 import Link from 'next/link'
 import defaultLogo from '../assets/logo.png'
 import { getStrapiMedia } from '../lib/api'
-import ReactMarkdown from 'react-markdown'
 import { useRouter } from 'next/router'
 
 const Nav = ({ global, heading, description, showLogo = true, contactpage }) => {

@@ -34,7 +34,7 @@ const Image = ({ media }) => {
           
         }
         
-        const width = (window.innerWidth / cols) - ((2*16)*3)
+        const width = ((window.innerWidth * 0.75) / cols) - ((2*16)*3)
         m.newHeight = width*ratio + (2*16)*2
         tHeight += m.newHeight 
       })
@@ -52,7 +52,7 @@ const Image = ({ media }) => {
             found = true
             remainder = checkHeight - halfHeight
           }
-          if(remainder >= m.newHeight/2) {
+          if(remainder > m.newHeight/2) {
             setHeight = halfHeight + m.newHeight/2
           } else {
             setHeight = checkHeight
@@ -75,11 +75,12 @@ const Image = ({ media }) => {
   useEffect(() => {
     window.addEventListener('resize', handleResize)
     handleResize()
-    return () => window.removeEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize)
     
   })
 
   const style = totalHeight === 0 ? {height:'auto'} : {maxHeight :`${totalHeight}px`}
+
   return (
     <div className={`flex flex-column`} >
       
