@@ -377,6 +377,15 @@ blockquote {
   padding-bottom: 1rem;
 }
 
+.f8 {
+  font-size: 0.75rem;
+}
+
+.home-image {
+  cursor: move;
+}
+
+
 @media screen and (min-width: 30rem) {
 
   .card-img-ns {
@@ -384,9 +393,12 @@ blockquote {
   }
   
   .caption {
-    min-height: 2rem;
+    min-height: 3rem;
     display: block;
   }
+ 
+
+  
 
 }
 
@@ -396,6 +408,10 @@ blockquote {
   .w-sixth-m {
     width: calc(100% / 6);
   }
+
+  /* .f8 {
+    font-size: 0.75rem;
+  } */
 }
 
 @media screen and (min-width: 60rem) {
@@ -430,9 +446,14 @@ blockquote {
   }
 
   .image-padding {
-    padding-bottom: 1.83rem; 
+    padding-bottom: 0.83rem; 
     padding-right: 3.66rem;
   }
+
+  .f8 {
+    font-size: 0.6rem;
+  }
+  
 
 }
 
@@ -453,5 +474,8 @@ blockquote {
 
   .w-75-xl {
     width: 75%;
+  }
+  .f8 {
+    font-size: 0.75rem;
   }
 }

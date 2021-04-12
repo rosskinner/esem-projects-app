@@ -4,7 +4,7 @@ import ReactMarkdown from 'react-markdown'
 const Text = ({ text }) => {
   return (
     <>
-      <div className='w-100  mw8 pv4 pl4 pr4 pl0-l pr5-l details f4'>
+      <div className='w-100 mw8 pv4 pl4 pr4 pl0-l pr5-l details f4'>
         <ReactMarkdown source={text} escapeHtml={false} />
       </div>
 

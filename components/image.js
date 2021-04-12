@@ -59,8 +59,7 @@ const Image = ({ media }) => {
           }
         }
       })
-      if (media.length ===1) {
-        console.log(media)
+      if (media.length === 1) {
         setHeight = media[0].newHeight
       }
   
@@ -96,7 +95,7 @@ const Image = ({ media }) => {
               <div className={`aspect-ratio aspect-ratio--${ratio}`}>
                 <div style={{ backgroundImage: `url(${mediaUrl})` }} className='background-image cover center aspect-ratio--object' />
               </div>
-              <div className='f7 caption pt2 pl2 pl0-l'>{m.caption}</div>
+              <div className='f8 caption pt2 pl2 pl0-l'>{m.caption}</div>
             </div>
           )
         })}

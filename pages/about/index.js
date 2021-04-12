@@ -15,7 +15,7 @@ const Projects = ({ aboutpage, contactpage, teamMembers, clients, awards }) => {
 
   return (
     <>
-      <div className='container mt7'>
+      <div className='container 6'>
         <Seo seo={seo} />
         <div className='pt6-l flex flex-wrap f4'>
 

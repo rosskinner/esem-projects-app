@@ -24,7 +24,7 @@ const Project = ({ project, global, contactpage, prev, next }) => {
   return (
     <div className='flex flex-column'>
 
-      <ProjectContent className='w-100 w-25-l mt6 mt7-l fixed-l' project={project} />
+      <ProjectContent className='w-100 w-25-l mt6 fixed-l' project={project} />
       <div className='project-details w-100 w-75-l self-end-l'>
         <div className='project-container top-0 w-100'>
           <div className='banner-container w-100 flex center'>
