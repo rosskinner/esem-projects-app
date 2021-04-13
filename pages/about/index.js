@@ -15,12 +15,12 @@ const Projects = ({ aboutpage, contactpage, teamMembers, clients, awards }) => {
 
   return (
     <>
-      <div className='container 6'>
+      <div className='container pt6'>
         <Seo seo={seo} />
-        <div className='pt6-l flex flex-wrap f4'>
+        <div className='flex flex-wrap f4'>
 
-          <div className=' ph4 ph5-l w-100 w-70-l mb4 mb7-l pr5'>
-            <p className='f2 '>About</p>
+          <div className='ph4 ph5-l w-100 w-70-l mb4 mb7-l pr5'>
+            <p className='pt6-l f2'>About</p>
 
             <ReactMarkdown className='details f4' source={aboutpage.content} escapeHtml={false} />
 

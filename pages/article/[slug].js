@@ -15,7 +15,7 @@ const Article = ({ article }) => {
   return (
     <>
       <Seo seo={seo} />
-      <div className='container mt6'>
+      <div className='container pt6'>
         <ArticleCard article={article}/>
       </div>
     </>

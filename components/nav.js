@@ -29,13 +29,13 @@ const Nav = ({ global, heading, description, showLogo = true, contactpage }) => 
         <div className='db dtc w-100 w-50-l tr v-mid pv3 details '>
           <div>
             <Link href='/projects'>
-              <a className={`mh3 mh4-l dib v-mid ${active.includes('projects') ? 'nav-active' : ''}`}>Projects</a>
+              <a className={`mh3 mh4-l dib v-mid nav-item ${active.includes('projects') ? 'nav-active' : ''}`}>Projects</a>
             </Link>
             <Link href='/articles'>
-              <a className={`mh3 mh4-l dib v-mid ${active.includes('articles') ? 'nav-active' : ''}`}>News</a>
+              <a className={`mh3 mh4-l dib v-mid nav-item ${active.includes('articles') ? 'nav-active' : ''}`}>News</a>
             </Link>
             <Link href='/about'>
-              <a className={`ml3 ml4-l dib v-mid ${active.includes('about') ? 'nav-active' : ''}`}>About</a>
+              <a className={`ml3 ml4-l dib v-mid nav-item ${active.includes('about') ? 'nav-active' : ''}`}>About</a>
             </Link>
 
           </div>

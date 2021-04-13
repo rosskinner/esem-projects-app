@@ -6,23 +6,20 @@ import Project from '../../components/projects'
 import Tag from '../../components/tag'
 
 const Projects = ({ projects, category, categories, projectpage }) => {
-  console.log(projectpage)
+  
   const seo = {
     metaTitle: projectpage.heading,
     metaDescription: projectpage.description
   }
   return (
-    <>
-    <div className='container mt6'>
+
+    <div className='container pt6'>
       <p className='f2 pt6-l ph4 ph5-l'>{projectpage.heading}</p>
-      <Tag categories={categories}>
+      <Tag categories={categories} path='projects'>
         <Seo seo={seo} />
-        <Project category={category} projects={category.projects} page={projectpage} />
+        <Project category={category} projects={projects} page={projectpage} />
       </Tag>
     </div>
-      
-
-    </>
   )
 }
 

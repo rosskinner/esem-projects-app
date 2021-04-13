@@ -19,25 +19,32 @@ const _boxArrayLength = _boxRows * _boxCols
 const _boxSize = 100
 const _boxSpacing = 10
 let text
+let words
+let selectedWord
 //* ** INIT ***
 
 const requestAnimFrame = function () {
   return (
     window.requestAnimationFrame ||
-  window.webkitRequestAnimationFrame ||
-  window.mozRequestAnimationFrame ||
-  window.oRequestAnimationFrame ||
-  window.msRequestAnimationFrame ||
-  function (callback) {
-    window.setTimeout(callback, 1000 / 60)
-  }
+    window.webkitRequestAnimationFrame ||
+    window.mozRequestAnimationFrame ||
+    window.oRequestAnimationFrame ||
+    window.msRequestAnimationFrame ||
+    function (callback) {
+      window.setTimeout(callback, 1000 / 60)
+    }
   )
 }
 
-const Canvas = () => {
-  const stage = document.getElementById('stage')
-  _stageWidth = stage.width = window.innerWidth
-  _stageHeight = stage.height = window.innerHeight
+class Canvas {
+  constructor(projectLinks) {
+
+  this.init = () => {
+    this.stage = document.getElementById('stage')
+  _stageWidth = this.stage.width = window.innerWidth
+  _stageHeight = this.stage.height = window.innerHeight
+  this.stage.style.width = window.innerWidth
+  this.stage.style.height = window.innerHeight
   // _halfStageWidth = _stageWidth / 2
   // _halfStageHeight = _stageHeight / 2
   _stageContext = stage.getContext('2d')
@@ -46,21 +53,39 @@ const Canvas = () => {
   _stageContext.font = `${_boxSize}px Baskervville`
   _stageContext.textBaseline = 'middle'
   text = document.getElementById('home-text').innerHTML.split('')
-  // console.log(text)
-  createBoxes()
-  onEnterFrame()
-  // text.addEventListener('load', (e) => {
-  //   console.log('text', text)
-  // })
+  words = document.getElementById('home-text').innerHTML.split(' ')
+  this.textItems = new Map()
+  let count = 0
+  words.map((word, i) => {
+    word.split('').map((letter, j) => {
+      this.textItems.set(count, { letter: letter, word: word, index: i })
+      count++
+    })
+    this.textItems.set(count, { letter: ' ', word: word, index: i })
+    count++
+    //
+    // textItems[i].word = word
+    // const letters = word.split('')
+  })
 
-  window.addEventListener(
-    'mousemove',
-    function (e) {
-      _mouseX = e.clientX
-      _mouseY = e.clientY
-    },
-    false
-  )
+  projectLinks.map((obj) =>{
+    this.textItems.forEach((item, index) => {
+      if (item.word === obj.text) {
+        this.textItems.set(index, {...item, projectId: obj.projectId})
+      }
+    })
+  })
+  console.log(this.textItems)
+  // console.log(text)
+  this.createBoxes()
+  this.onEnterFrame()
+  }
+  
+
+  this.move = (e) => {
+    _mouseX = e.clientX -80
+    _mouseY = e.clientY -80
+  }
   // console.log(window)
 
   //* ** METHODS ***
@@ -68,7 +93,7 @@ const Canvas = () => {
     _stageContext.clearRect(0, 0, _stageWidth, _stageHeight)
   }
 
-  function createBoxes () {
+  this.createBoxes = () => {
     let curBox, xSpacing, ySpacing
     // const startingX = _halfStageWidth - (_boxCols / 2) * _boxSpacing
     // const startingY = _halfStageHeight - (_boxRows / 2) * _boxSpacing
@@ -90,8 +115,9 @@ const Canvas = () => {
           size: _boxSize,
           x: xSpacing,
           y: ySpacing,
-          text: text[count < text.length - 1 ? count : count % text.length]
+          text: this.textItems.get(count < this.textItems.size - 1 ? count : count % this.textItems.size)
         })
+
         _boxArray.push(curBox)
         count++
       }
@@ -101,9 +127,7 @@ const Canvas = () => {
   function drawStage () {
     let i = 0
     let curBox
-    // _boxArray.sort(function (a, b) {
-    //   return a.size - b.size
-    // })
+
     for (i = 0; i < _boxArrayLength; i++) {
       curBox = _boxArray[i]
       curBox.move()
@@ -111,14 +135,15 @@ const Canvas = () => {
     }
   }
 
-  function onEnterFrame () {
+  this.onEnterFrame =() => {
     clearStage()
     drawStage()
     // console.log(window)
-    window.requestAnimationFrame(onEnterFrame)
+    window.requestAnimationFrame(this.onEnterFrame)
   }
 
-  //* ** CLASSES ***
+}
+
 }
 
 const Box = function (options) {
@@ -127,43 +152,31 @@ const Box = function (options) {
   this.x = this.startX = options.x
   this.y = this.startY = options.y
   this.text = options.text
-  this.width = _stageContext.measureText(options.text).width
+  this.width = _stageContext.measureText(options.text.letter).width
 // console.log(options.x, options.y)
 }
 
 Box.prototype.draw = function () {
-// _stageContext.beginPath();
-// _stageContext.moveTo(this.startX, this.startY);
-// _stageContext.lineTo(this.x, this.y);
-// _stageContext.stroke();
+  let color = '#ffffff'
+  
+  if ('projectId' in this.text) {
+    color = '#23a864'
+  }
 
-  // _stageContext.drawImage(
-  //   image,
-  //   this.x - this.size / 2,
-  //   this.y - this.size / 2,
-  //   this.size,
-  //   this.size
-  // )
+  _stageContext.fillStyle = color
 
-  // _stageContext.beginPath()
-  // _stageContext.moveTo(this.startX, this.startY)
-  // _stageContext.lineTo(this.x, this.y)
-  // _stageContext.fillStyle = 'rgb(255,255,255)'
-  // _stageContext.stroke()
-  // _stageContext.fillRect(this.x - this.size / 2, this.y - this.size / 2, this.size, this.size)
-  // const char = i < text.length - 1 ? i : i % text.length
   _stageContext.fillText(
-    this.text,
+    this.text.letter,
     this.x,
     this.y,
     this.size,
     this.size
   )
+  // console.log(this.text.projectId)
   // console.log(i)
+  
   _stageContext.font = `${this.size}px Baskervville`
   // console.log(this.size)
-
-// _stageContext.fillRect(this.x - this.size/2,this.y - this.size/2,this.size,this.size);
 }
 
 Box.prototype.move = function () {
@@ -172,9 +185,16 @@ Box.prototype.move = function () {
   const sqrtNum = Math.sqrt(dx * dx + dy * dy)
   let lensDisp
   // are we within range
+
   if (sqrtNum < _mouseRadiusNum) {
-    lensDisp = Math.sin(Math.PI * Math.abs(sqrtNum / _mouseRadiusNum))
-    this.size = this.startSize + this.startSize * (1 * ((_mouseRadiusNum - sqrtNum) / _mouseRadiusNum))
+      lensDisp = Math.sin(Math.PI * Math.abs(sqrtNum / _mouseRadiusNum))
+    this.size = this.startSize + this.startSize * (0.3 * ((_mouseRadiusNum - sqrtNum) / _mouseRadiusNum))
+    if (_mouseX <= (this.startX + this.width) && _mouseX >= this.startX && _mouseY <= (this.startY + this.width) && _mouseY >= this.startY && selectedWord !== this.text.projectId) {
+      selectedWord = this.text.projectId
+      Canvas.prototype.selectedWord = this.text.projectId
+    }
+    
+    
   } else {
     this.x = this.startX
     this.y = this.startY

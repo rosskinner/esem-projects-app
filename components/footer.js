@@ -3,7 +3,6 @@ import React from 'react'
 import ReactMarkdown from 'react-markdown'
 
 const Footer = ({ global, contactpage }) => {
-  console.log('contactpage', contactpage)
   return (
     <footer className='white flex flex-column w-100 pa4 pa5-l'>
       <div className='flex flex-row w-100 nav-contact details f6 justify-between'>

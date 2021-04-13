@@ -17,7 +17,7 @@ const Article = ({ article }) => {
           </div>
         </div>
       </div>
-      <div className='article-content f4 mt6 w-100 ph5 flex flex-row'>
+      <div className='article-content f4 pt6 w-100 ph5 flex flex-row'>
         <div className='w-third mt4'>
           <h1 className='mb3'>{article.title}</h1>
           <h2 className='mt0 f6'>{article.description}</h2>

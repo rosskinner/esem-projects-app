@@ -1,12 +1,12 @@
 import React from 'react'
 import { getStrapiMedia } from '../lib/api'
 import ReactMarkdown from 'react-markdown'
-
 import Image from './image'
 import ProjectContent from './project-content'
 import Text from './text'
 import Video from './video'
 import Audio from './audio'
+import { motion } from 'framer-motion'
 
 const Project = ({ project, global, contactpage, prev, next }) => {
   let bannerImage = ''
@@ -19,12 +19,17 @@ const Project = ({ project, global, contactpage, prev, next }) => {
     }
   }
 
-  console.log(project.media)
-
   return (
-    <div className='flex flex-column'>
 
-      <ProjectContent className='w-100 w-25-l mt6 fixed-l' project={project} />
+    <motion.div
+      className='flex flex-column'
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ delay: 0.2, duration: 1 }}
+    >
+
+      <ProjectContent className='w-100 w-25-l pt6 fixed-l' project={project} />
       <div className='project-details w-100 w-75-l self-end-l'>
         <div className='project-container top-0 w-100'>
           <div className='banner-container w-100 flex center'>
@@ -74,7 +79,7 @@ const Project = ({ project, global, contactpage, prev, next }) => {
           }
         })}
       </div>
-    </div>
+    </motion.div>
   )
 }
 

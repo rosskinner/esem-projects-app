@@ -3,7 +3,7 @@ import Card from './card'
 import smallButton from '../assets/small-button.png'
 import largeButton from '../assets/large-button.png'
 
-const Articles = ({ articles, tags }) => {
+const Articles = ({ articles, tags, tag }) => {
   const [width, setWidth] = useState('w-25')
   const toggleView = (e) => {
     setWidth(e.target.dataset.value)
@@ -23,9 +23,9 @@ const Articles = ({ articles, tags }) => {
         <img className={`dn dib-ns pointer button ma2 small-${width}`} src={smallButton} alt='small-view' data-value='w-25' onClick={toggleView} />
         <img className={`dn dib-ns pointer button ma2 large-${width}`} src={largeButton} alt='large-view' data-value='w-third' onClick={toggleView} />
       </div>
-      <div className='articles w-100 flex flex-row flex-wrap mt6'>
+      <div className='articles w-100 flex flex-row flex-wrap pt6'>
         {articles.map((article, i) => (
-          <Card width={width} key={i} index={i} project={article} category={tags} path='/article' />
+          <Card width={width} key={i} index={i} project={article} category={tag} path='/article' />
         ))}
       </div>
     </>

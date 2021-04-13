@@ -13,7 +13,7 @@ const Contact = ({ contactpage }) => {
 
   return (
     <>
-      <div className='container contact mt6'>
+      <div className='container contact pt6'>
         <Seo seo={seo} />
         <div className='mh5 pt6 flex flex-wrap'>
           <div className='w-100 f2 mb7'>
