@@ -159,11 +159,11 @@ const Box = function (options) {
 Box.prototype.draw = function () {
   let color = '#ffffff'
   
-  if ('projectId' in this.text) {
-    color = '#23a864'
-  }
+  // if ('projectId' in this.text) {
+  //   color = '#23a864'
+  // }
 
-  _stageContext.fillStyle = color
+  // _stageContext.fillStyle = color
 
   _stageContext.fillText(
     this.text.letter,

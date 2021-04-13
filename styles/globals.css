@@ -362,6 +362,12 @@ blockquote {
   -webkit-transform: translate3d(var(--mouse-x), var(--mouse-y), 0);
   transform: translate3d(var(--mouse-x), var(--mouse-y), 0);
   will-change: transform;
+  transition: opacity 300ms ease-in-out;
+  opacity: 1;
+}
+
+.home-image:hover {
+  opacity: 0.5;
 }
 
 /* .project-card {
