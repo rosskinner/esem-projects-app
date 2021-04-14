@@ -19,7 +19,7 @@ const Home = ({ category, global }) => {
   const letters = new Canvas(projectLinks)
 
   useEffect(() => {
-    const height = document.getElementsByClassName('image-container')[0].clientHeight
+    const height = window.innerHeight
     const width = document.getElementsByClassName('image-container')[0].clientWidth
     // console.log('height', h)
     // setHeight(h)
@@ -28,17 +28,17 @@ const Home = ({ category, global }) => {
     category.projects.map((project, i) => {
       const url = (project.collectionImage.formats === null || Object.keys(project.collectionImage.formats).length === 0) ? project.collectionImage : project.collectionImage.formats.medium
       
-      const imgHeight = ((url.height / url.width) * 300)
+      const imgHeight = ((url.height / url.width) * 500)
       const maxHeight = height - imgHeight
       const minHeight = 0
-      const maxWidth = ((width / category.projects.length) * (i + 1)) - 300
+      const maxWidth = ((width / category.projects.length) * (i + 1)) - 200
       const minWidth = ((width / category.projects.length) * i)
       const posY = Math.floor(Math.random() * (maxHeight - minHeight) + minHeight)
       const posX = Math.floor(Math.random() * (maxWidth - minWidth) + minWidth)
       project.pos = {}
       project.pos.height = imgHeight
-      // project.pos.x = posX
-      // project.pos.y = posY
+      project.pos.x = posX
+      project.pos.y = posY
       setLastPos({x: project.pos.x, y: project.pos.y})
       if(i === category.projects.length - 1) setLoaded(true)
     })
@@ -69,9 +69,9 @@ const Home = ({ category, global }) => {
   const onMouseMoveCanvas = (e) => {
     // console.log(letters)
     letters.move(e)
-    const root = document.documentElement
-    root.style.setProperty('--mouse-x', `${e.screenX}px`)
-    root.style.setProperty('--mouse-y', `${e.screenY - 150}px`)
+    // const root = document.documentElement
+    // root.style.setProperty('--mouse-x', `${e.screenX}px`)
+    // root.style.setProperty('--mouse-y', `${e.screenY - 150}px`)
 
     if (selectedProject !== letters.selectedWord) setSelectedProject(letters.selectedWord)
     // console.log(letters.selectedWord)
@@ -121,12 +121,12 @@ const Home = ({ category, global }) => {
               const imgSrc = getStrapiMedia(url)
 
               return (
-                  <div key ={i} data-as={`project/${project.slug}`} data-href='project/[id]' className={`absolute cover home-image ${selectedProject === i ? 'db': 'dn'}`} width='300px' height={`${project.pos.height}px`} style={{width: '300px', height: `${project.pos.height}px`, backgroundImage: `url(${imgSrc})`}}  
-                  // onMouseMove={onMouseMove} 
-                  // onMouseDown={onMouseDown} 
-                  // onMouseUp={onMouseUp}
-                  // onMouseLeave={onMouseLeave}
-                  // onMouseOut={onMouseLeave} 
+                  <div key ={i} data-as={`project/${project.slug}`} data-href='project/[id]' className={`absolute cover home-image `} width='500px' height={`${project.pos.height}px`} style={{width: '500px', left: `${project.pos.x}px`, top: `${project.pos.y}px`, height: `${project.pos.height}px`, backgroundImage: `url(${imgSrc})`}}  
+                  onMouseMove={onMouseMove} 
+                  onMouseDown={onMouseDown} 
+                  onMouseUp={onMouseUp}
+                  onMouseLeave={onMouseLeave}
+                  onMouseOut={onMouseLeave} 
                   >
                   </div>
               )
