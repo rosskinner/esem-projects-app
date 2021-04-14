@@ -72,8 +72,6 @@ const Img = ({ media }) => {
       if (media.length === 1) {
         setHeight = media[0].newHeight
       }
-  
-  
         setTotalHeight(setHeight)
     }
     
@@ -82,10 +80,9 @@ const Img = ({ media }) => {
     
   }
   useEffect(() => {
-    window.addEventListener('resize', handleResize)
+    window.addEventListener('resize', handleResize, false)
     handleResize()
-    return () => window.removeEventListener("resize", handleResize)
-    
+    return () => window.removeEventListener('resize', handleResize)
   })
 
   const style = totalHeight === 0 ? {height:'auto'} : {maxHeight :`${totalHeight}px`}

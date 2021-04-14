@@ -22,20 +22,20 @@ const Project = ({ project, global, contactpage, prev, next }) => {
       bannerImage = media.media[0]
     }
   }
+
   useEffect(() => {
-    function handleScroll () {
-      const yPos = window.scrollY
-      const isDown = yPos < scrollDir
-      if (isDown !== scrollDir) {
-        setScroll(isDown)
-        setScrollDir(yPos)
+    function handleScroll (e) {
+      const top = (window.scrollY < 100)
+      if (scroll !== top) {
+        setScroll(top)
       }
     }
     window.addEventListener('scroll', handleScroll, false)
     return () => {
       window.removeEventListener('scroll', handleScroll, false)
     }
-  }, [scrollDir])
+  }, [scroll])
+  console.log('render project')
 
   return (
 
