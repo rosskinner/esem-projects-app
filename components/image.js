@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 import { getStrapiMedia } from '../lib/api'
-import Image from 'next/image'
 import { m, useAnimation, LazyMotion, domAnimation } from 'framer-motion'
 
 
