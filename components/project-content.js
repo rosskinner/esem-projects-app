@@ -27,7 +27,7 @@ const ProjectContent = ({ className, project, showContent, setShowContent }) => 
                       console.log(article)
                       return (
                         <div className='f6' key={key}>
-                          <Link as={`/article/${article.slug}`} href='/article/[id]'>
+                          <Link scroll={false} as={`/article/${article.slug}`} href='/article/[id]'>
                             <a className='underline'>{article.title}</a>
                           </Link>
                         </div>

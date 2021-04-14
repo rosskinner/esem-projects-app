@@ -6,17 +6,38 @@ import Nav from '../components/nav'
 import 'tachyons'
 import '../styles/globals.css'
 import Footer from '../components/footer'
-import { AnimatePresence } from 'framer-motion'
+import { AnimatePresence, motion } from 'framer-motion'
 // Store Strapi Global object in context
 export const GlobalContext = createContext({})
 
-const EsemApp = ({ Component, pageProps }) => {
+const EsemApp = ({ Component, pageProps, router }) => {
   const { global } = pageProps
 
   useEffect(() => {
     const root = document.documentElement
     root.style.setProperty('--secondary-color', global.secondaryColor)
   })
+
+  const pageTransition = {
+    initial: {
+      opacity: 0
+    },
+    in: {
+      opacity: 1
+    },
+    out: {
+      opacity: 0
+    }
+  }
+
+  const handExitComplete = () => {
+    // Get the hash from the url
+
+    // Smooth scroll to that elment
+    window.scroll({
+      top: 0
+    })
+  }
 
   return (
     <>
@@ -27,10 +48,11 @@ const EsemApp = ({ Component, pageProps }) => {
       <div className='white'>
         <Nav {...pageProps} />
         <GlobalContext.Provider value={global}>
-          <AnimatePresence exitBeforeEnter>
-            <Component {...pageProps} />
+          <AnimatePresence exitBeforeEnter onExitComplete={handExitComplete}>
+            <motion.div key={router.route} initial='initial' animate='in' exit='out' variants={pageTransition}>
+              <Component {...pageProps} />
+            </motion.div>
           </AnimatePresence>
-
         </GlobalContext.Provider>
         <Footer {...pageProps} />
       </div>

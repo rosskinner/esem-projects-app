@@ -21,13 +21,7 @@ const Project = ({ project, global, contactpage, prev, next }) => {
 
   return (
 
-    <motion.div
-      className='flex flex-column'
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ delay: 0.2, duration: 1 }}
-    >
+    <div className='flex flex-column'>
 
       <ProjectContent className='w-100 w-25-l pt6 fixed-l' project={project} />
       <div className='project-details w-100 w-75-l self-end-l'>
@@ -79,7 +73,7 @@ const Project = ({ project, global, contactpage, prev, next }) => {
           }
         })}
       </div>
-    </motion.div>
+    </div>
   )
 }
 

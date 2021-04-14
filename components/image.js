@@ -1,7 +1,11 @@
 import { useEffect, useState } from 'react'
 import { getStrapiMedia } from '../lib/api'
+import Image from 'next/image'
+import { AnimatePresence, motion, useAnimation } from 'framer-motion'
 
-const Image = ({ media }) => {
+
+
+const Img = ({ media }) => {
   const [totalHeight, setTotalHeight] = useState(0)
   let width = 'w-100'
   let cols = 1
@@ -9,6 +13,10 @@ const Image = ({ media }) => {
     width = 'w-100 w-50-l'
     cols = 2
   }
+  const animationVariants = {
+    visible: { opacity: 1 },
+    hidden: { opacity: 0 }
+}
   
   const handleResize = () => {
     let tHeight = 0
@@ -85,18 +93,40 @@ const Image = ({ media }) => {
       
       <div style={style} className={`w-100 flex flex-column flex-wrap `}>
         {media.map((m, key) => {
+          const [loaded, setLoaded] = useState(false)
+          const animationControls = useAnimation()
+
           const mediaUrl = getStrapiMedia(m)
           let ratio = '8x5'
           
           if (m.width < m.height) ratio = '8x10'
           
+          useEffect(() => {
+            if(loaded){
+              animationControls.start("visible")
+            }
+          },[loaded])
+          
           return (
-            <div key={key} className={`relative image-padding ${width}`}>
+
+            <AnimatePresence>
+
+
+            <motion.div key={key} className={`relative image-padding ${width}`}
+            initial={'hidden'}
+            animate={animationControls}
+            variants={animationVariants}
+            transition={{ ease: "easeIn", duration: 1 }}>
               <div className={`aspect-ratio aspect-ratio--${ratio}`}>
-                <div style={{ backgroundImage: `url(${mediaUrl})` }} className='background-image cover center aspect-ratio--object' />
+                {/* <div style={{ backgroundImage: `url(${mediaUrl})` }} className='background-image cover center aspect-ratio--object' /> */}
+                <Image className='background-image cover center aspect-ratio--object' src={mediaUrl} layout='fill' objectFit='cover'
+                  alt={mediaUrl.alternativeText}
+                  onLoad={() => setLoaded(true)}
+          />
               </div>
               <div className='f8 caption pt2 pl2 pl0-l'>{m.caption}</div>
-            </div>
+            </motion.div>
+            </AnimatePresence>
           )
         })}
       </div>
@@ -105,4 +135,4 @@ const Image = ({ media }) => {
   )
 }
 
-export default Image
+export default Img

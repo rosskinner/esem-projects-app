@@ -21,20 +21,20 @@ const Nav = ({ global, heading, description, showLogo = true, contactpage }) => 
       <div className='flex w-100 ph4 ph5-l pv4'>
         <div className='db dtc w-50 v-mid relative'>
           {showLogo &&
-            <Link className='relative' href='/'>
+            <Link scroll={false} className='relative' href='/'>
               {image}
             </Link>}
         </div>
 
         <div className='db dtc w-100 w-50-l tr v-mid pv3 details '>
           <div>
-            <Link href='/projects'>
+            <Link scroll={false} href='/projects'>
               <a className={`mh3 mh4-l dib v-mid nav-item ${active.includes('projects') ? 'nav-active' : ''}`}>Projects</a>
             </Link>
-            <Link href='/articles'>
+            <Link scroll={false} href='/articles'>
               <a className={`mh3 mh4-l dib v-mid nav-item ${active.includes('articles') ? 'nav-active' : ''}`}>News</a>
             </Link>
-            <Link href='/about'>
+            <Link scroll={false} href='/about'>
               <a className={`ml3 ml4-l dib v-mid nav-item ${active.includes('about') ? 'nav-active' : ''}`}>About</a>
             </Link>
 

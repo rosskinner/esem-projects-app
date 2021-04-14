@@ -1,8 +1,8 @@
 import React from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { getStrapiMedia } from '../lib/api'
 import { AnimatePresence, motion } from 'framer-motion'
-
 
 const Card = ({ project, width, category, path, link = true, image = false, description = false }) => {
   const imageObject = project.collectionImage
@@ -24,31 +24,32 @@ const Card = ({ project, width, category, path, link = true, image = false, desc
     padding = 'ph2-ns ph4-l pb4 pb5-l'
   }
   if (description) ratio = 'aspect-ratio--3x4 aspect-ratio--3x4-l'
-    let isCat = false
-    if (project.categories) isCat = category ? (project.categories.length > 0 ? project.categories.find(c => c.name === category.name) : null) : true
-    if (project.tags) isCat = category ? (project.tags.length > 0 ? project.tags.find(c => c.name === category.name) : null) : true
+  let isCat = false
+  if (project.categories) isCat = category ? (project.categories.length > 0 ? project.categories.find(c => c.name === category.name) : null) : true
+  if (project.tags) isCat = category ? (project.tags.length > 0 ? project.tags.find(c => c.name === category.name) : null) : true
   return (
     <>
-    {link &&
-      <AnimatePresence>
-        {isCat &&
-      <Link as={`${path}/${project.slug}`} href={`${path}/[id]`}>
-      <motion.a className={`project-card details ${padding} white w-100 w-third-ns ${width}-l pointer`}
-              layout
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ delay: 0, duration: 0.5 }}>
-        <Content width={width} project={project} thumbnail={thumbnail} margin={margin} ratio={ratio} category={category} image={image} imageObject={imageObject} description={description} />
-      </motion.a>
-    </Link>}
-      </AnimatePresence>
-      }
-    {!link &&
-      <span className={`project-card details ${padding} white w-100 w-third-ns ${width}-l`}>
-        <Content width={width} project={project} thumbnail={thumbnail} margin={margin} ratio={ratio} category={category} image={image} imageObject={imageObject} description={description} />
-      </span>} 
-  </>
+      {link &&
+        <AnimatePresence>
+          {isCat &&
+            <Link scroll={false} as={`${path}/${project.slug}`} href={`${path}/[id]`}>
+              <motion.a
+                className={`project-card details ${padding} white w-100 w-third-ns ${width}-l pointer`}
+                layout
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ delay: 0, duration: 0.5 }}
+              >
+                <Content width={width} project={project} thumbnail={thumbnail} margin={margin} ratio={ratio} category={category} image={image} imageObject={imageObject} description={description} />
+              </motion.a>
+            </Link>}
+        </AnimatePresence>}
+      {!link &&
+        <span className={`project-card details ${padding} white w-100 w-third-ns ${width}-l`}>
+          <Content width={width} project={project} thumbnail={thumbnail} margin={margin} ratio={ratio} category={category} image={image} imageObject={imageObject} description={description} />
+        </span>}
+    </>
   )
 }
 
@@ -67,7 +68,12 @@ const Content = ({ width, project, thumbnail, margin, ratio, category, image, im
     <>
       <div className='db'>
         <div className={`aspect-ratio ${ratio}`}>
-          <div className='project-thumb aspect-ratio--object cover' alt={imageObject.alternativeText} style={{ backgroundImage: `url(${thumbnail})` }} />
+          {/* <div className='project-thumb aspect-ratio--object cover' alt={imageObject.alternativeText} style={{ backgroundImage: `url(${thumbnail})` }} /> */}
+          <Image
+            className='project-thumb aspect-ratio--object cover' src={thumbnail} layout='fill'
+            objectFit='cover'
+            alt={imageObject.alternativeText}
+          />
         </div>
       </div>
       <div className='db'>
@@ -79,7 +85,6 @@ const Content = ({ width, project, thumbnail, margin, ratio, category, image, im
 
             {/* <span className='f6 db'> */}
             {cat.map((c, i) => {
-              
               let comma = ''
               if (i !== cat.length - 1) comma = ','
               return (
