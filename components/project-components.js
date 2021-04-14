@@ -19,7 +19,7 @@ const ProjectComponents = ({ media }) => {
           )
         } else if (m.__component.includes('vimeo')) {
           return (
-            <Video key={key} video={media} />
+            <Video key={key} video={m} />
           )
         } else if (m.__component.includes('sound-cloud')) {
           return (

@@ -126,12 +126,15 @@ const Img = ({ media }) => {
               transition={{ ease: "easeIn", duration: 1 }}>
                 <div  className={`aspect-ratio aspect-ratio--${ratio}`}>
                   <Image className='background-image cover center aspect-ratio--object' src={mediaUrl} layout='fill' objectFit='cover'
-                    alt={mediaUrl.alternativeText}
-                    title={mediaUrl.caption}
+                    // alt={mediaUrl.alternativeText}
+                    // title={mediaUrl.caption}
                     onLoad={checkLoaded}
             />
                 </div>
-                <div className='f8 caption pt2 pl2 pl0-l'>{me.caption}</div>
+                {me.caption &&
+                  <div className='f8 caption pt2 pl2 pl0-l'>{me.caption}</div>
+                }
+                
               </m.div>
             </LazyMotion>
 

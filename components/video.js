@@ -45,6 +45,7 @@ const Video = ({ video }) => {
       }
     }
   }
+
   const id = video.link.split('/')
 
   return (
