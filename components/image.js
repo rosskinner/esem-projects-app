@@ -109,10 +109,10 @@ const Img = ({ media }) => {
           
           return (
 
-            <AnimatePresence>
+            <AnimatePresence key={key} >
 
 
-            <motion.div key={key} className={`relative image-padding ${width}`}
+            <motion.div className={`relative image-padding ${width}`}
             initial={'hidden'}
             animate={animationControls}
             variants={animationVariants}
