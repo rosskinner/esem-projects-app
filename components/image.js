@@ -113,7 +113,6 @@ const Img = ({ media }) => {
           const checkLoaded = (e) => {
             setLoaded(e.target.complete && e.target.naturalHeight !== 0)
           }
-          console.log(me)
           return (
 
 
