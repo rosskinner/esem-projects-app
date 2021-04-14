@@ -113,6 +113,7 @@ const Img = ({ media }) => {
           const checkLoaded = (e) => {
             setLoaded(e.target.complete && e.target.naturalHeight !== 0)
           }
+          console.log(me)
           return (
 
 
@@ -126,14 +127,14 @@ const Img = ({ media }) => {
               transition={{ ease: "easeIn", duration: 1 }}>
                 <div  className={`aspect-ratio aspect-ratio--${ratio}`}>
                   <Image className='background-image cover center aspect-ratio--object' src={mediaUrl} layout='fill' objectFit='cover'
-                    // alt={mediaUrl.alternativeText}
-                    // title={mediaUrl.caption}
+                    alt={me.alternativeText}
+                    title={me.caption}
                     onLoad={checkLoaded}
             />
                 </div>
-                {me.caption &&
-                  <div className='f8 caption pt2 pl2 pl0-l'>{me.caption}</div>
-                }
+                
+                  <div className='f8 caption pt2 pl2 pl0-l'><span>{me.caption}</span></div>
+                
                 
               </m.div>
             </LazyMotion>
