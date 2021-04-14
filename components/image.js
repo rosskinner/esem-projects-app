@@ -102,11 +102,13 @@ const Img = ({ media }) => {
           
           useEffect(() => {
             if(loaded){
+
               animationControls.start("visible")
             }
           },[loaded])
           
           const checkLoaded = (e) => {
+            console.log('LOADED')
             setLoaded(e.target.complete && e.target.naturalHeight !== 0)
           }
           
@@ -118,7 +120,8 @@ const Img = ({ media }) => {
 
               <m.div key={key} className={`relative image-padding ${width}`}
               initial='initial'
-              animate={animationControls}
+              // animate={animationControls}
+              animate='visible'
               variants={animationVariants}
               transition={{ ease: "easeIn", duration: 1 }}>
                 <div  className={`aspect-ratio aspect-ratio--${ratio}`}>
@@ -130,10 +133,10 @@ const Img = ({ media }) => {
                     loader={({src}) => src}
             /> */}
                 <img className='background-image cover center aspect-ratio--object' src={mediaUrl}
+                    loading='lazy'
                     alt={me.alternativeText}
                     title={me.caption}
-                    quality={100}
-                    onLoad={checkLoaded}  />
+                    onLoad={(e) => checkLoaded(e)}  />
                 </div>
                 
                   <div className='f8 caption pt2 pl2 pl0-l'><span>{me.caption}</span></div>
