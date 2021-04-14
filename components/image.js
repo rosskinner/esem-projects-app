@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react'
 import { getStrapiMedia } from '../lib/api'
 import Image from 'next/image'
-import { AnimatePresence, motion, useAnimation } from 'framer-motion'
+import { m, useAnimation, LazyMotion, domAnimation } from 'framer-motion'
+
 
 
 
@@ -93,14 +94,15 @@ const Img = ({ media }) => {
     <div className={`flex flex-column`} >
       
       <div style={style} className={`w-100 flex flex-column flex-wrap `}>
-        {media.map((m, key) => {
+        {media.map((me, key) => {
           const [loaded, setLoaded] = useState(false)
           const animationControls = useAnimation()
-
-          const mediaUrl = getStrapiMedia(m)
+          // console.log(m)
+          const url = (me.formats === null || Object.keys(me.formats).length === 0) ? me : me.formats.large
+          const mediaUrl = getStrapiMedia(url)
           let ratio = '8x5'
           
-          if (m.width < m.height) ratio = '8x10'
+          if (me.width < me.height) ratio = '8x10'
           
           useEffect(() => {
             if(loaded){
@@ -113,24 +115,26 @@ const Img = ({ media }) => {
           }
           return (
 
-            <AnimatePresence key={key} >
+
+            <LazyMotion key={key} features={domAnimation}>
 
 
-            <motion.div className={`relative image-padding ${width}`}
-            initial={'initial'}
-            animate={animationControls}
-            variants={animationVariants}
-            transition={{ ease: "easeIn", duration: 1 }}>
-              <div className={`aspect-ratio aspect-ratio--${ratio}`}>
-                <Image className='background-image cover center aspect-ratio--object' src={mediaUrl} layout='fill' objectFit='cover'
-                  alt={mediaUrl.alternativeText}
-                  title={mediaUrl.caption}
-                  onLoad={checkLoaded}
-          />
-              </div>
-              <div className='f8 caption pt2 pl2 pl0-l'>{m.caption}</div>
-            </motion.div>
-            </AnimatePresence>
+              <m.div key={key} className={`relative image-padding ${width}`}
+              initial='initial'
+              animate={animationControls}
+              variants={animationVariants}
+              transition={{ ease: "easeIn", duration: 1 }}>
+                <div  className={`aspect-ratio aspect-ratio--${ratio}`}>
+                  <Image className='background-image cover center aspect-ratio--object' src={mediaUrl} layout='fill' objectFit='cover'
+                    alt={mediaUrl.alternativeText}
+                    title={mediaUrl.caption}
+                    onLoad={checkLoaded}
+            />
+                </div>
+                <div className='f8 caption pt2 pl2 pl0-l'>{me.caption}</div>
+              </m.div>
+            </LazyMotion>
+
           )
         })}
       </div>

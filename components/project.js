@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import { getStrapiMedia } from '../lib/api'
 import ReactMarkdown from 'react-markdown'
-import Img from './image'
-import ProjectContent from './project-content'
-import Text from './text'
-import Video from './video'
-import Audio from './audio'
+
 import Image from 'next/image'
-import { AnimatePresence, motion } from 'framer-motion'
+import { AnimatePresence, LazyMotion, m, domAnimation } from 'framer-motion'
 import arrow from '../assets/arrow.png'
+import ProjectComponents from './project-components'
+
+import dynamic from 'next/dynamic'
+const ProjectContent = dynamic(() => import('./project-content'))
 
 const Project = ({ project, global, contactpage, prev, next }) => {
   const [scroll, setScroll] = useState(true)
@@ -44,22 +44,22 @@ const Project = ({ project, global, contactpage, prev, next }) => {
       <ProjectContent className='w-100 w-25-l pt6 fixed-l' project={project} />
       <div className='project-details w-100 w-75-l self-end-l'>
         <div className='project-container top-0 w-100'>
-          <AnimatePresence>
-            <motion.div
+          <LazyMotion features={domAnimation}>
+            <m.div
               className='banner-container w-100 flex center relative' initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ ease: 'easeIn', duration: 1 }}
             >
               <Image src={getStrapiMedia(bannerImage)} layout='fill' objectFit='cover' alt={bannerImage.alternativeText} title={bannerImage.caption} className='relative w-100 justify-center center cover' />
-              <motion.img
+              <m.img
                 className='absolute read-indicator white f2'
                 initial={{ opacity: 1 }}
                 animate={{ opacity: scroll ? 1 : 0 }}
                 src={arrow}
               />
-            </motion.div>
+            </m.div>
 
-          </AnimatePresence>
+          </LazyMotion>
         </div>
 
         <div className='w-100 flex flex-column'>
@@ -82,27 +82,7 @@ const Project = ({ project, global, contactpage, prev, next }) => {
         <div className='w-100 mw8 pv4 pl4 pr4 pl0-l pr5-l details f4'>
           <ReactMarkdown source={project.body} escapeHtml={false} />
         </div>
-        {project.media.map((media, key) => {
-          if (media.__component.includes('video-images')) {
-            return (
-              <Img key={key} media={media.media} />
-            )
-          } else if (media.__component.includes('text')) {
-            return (
-              <Text key={key} text={media.text} />
-            )
-          } else if (media.__component.includes('vimeo')) {
-            return (
-              <Video key={key} video={media} />
-            )
-          } else if (media.__component.includes('sound-cloud')) {
-            return (
-              <Audio key={key} audio={media} caption={media.caption} />
-            )
-          } else {
-            return <></>
-          }
-        })}
+        <ProjectComponents media={project.media} />
       </div>
     </div>
   )

@@ -320,6 +320,7 @@ BIG CHANGES
 
 .banner-container {
   height: 100vh;
+  transform: translateZ(0);
 }
 .banner-container img {
   object-fit: cover;
@@ -348,6 +349,7 @@ blockquote {
 }
 .image-padding {
   padding-bottom: 1rem;
+  transform: translateZ(0);
 }
 
 .f8 {
@@ -376,7 +378,7 @@ blockquote {
 .read-indicator {
   top: 100%;
   left: 50%;
-  transform: translateX(-50%) translateY(-100%);
+  transform: translateZ(0) translateX(-50%) translateY(-100%);
   animation-duration: 300ms;
   animation-iteration-count: infinite;
   animation-direction: alternate;
@@ -402,6 +404,11 @@ blockquote {
   to {
     top: 99.5%;
   }
+}
+
+.motion-container {
+  will-change: transform;
+  transform: translateZ(0);
 }
 /* .project-card {
   transition: width ease-in-out 300ms;

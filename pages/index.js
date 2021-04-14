@@ -1,11 +1,8 @@
-import Link from 'next/link'
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
-// import Articles from "../components/articles";
 import Seo from '../components/seo'
 import { fetchAPI, getStrapiMedia } from '../lib/api'
 import Canvas from '../components/canvas'
-import Image from 'next/image'
 
 const Home = ({ category, global }) => {
   

@@ -6,7 +6,8 @@ import Nav from '../components/nav'
 import 'tachyons'
 import '../styles/globals.css'
 import Footer from '../components/footer'
-import { AnimatePresence, motion } from 'framer-motion'
+import { LazyMotion, AnimatePresence, m, domAnimation } from 'framer-motion'
+
 // Store Strapi Global object in context
 export const GlobalContext = createContext({})
 
@@ -48,11 +49,14 @@ const EsemApp = ({ Component, pageProps, router }) => {
       <div className='white'>
         <Nav {...pageProps} />
         <GlobalContext.Provider value={global}>
-          <AnimatePresence exitBeforeEnter onExitComplete={handExitComplete}>
-            <motion.div key={router.route} initial='initial' animate='in' exit='out' variants={pageTransition}>
-              <Component {...pageProps} />
-            </motion.div>
-          </AnimatePresence>
+          <LazyMotion features={domAnimation}>
+
+            <AnimatePresence exitBeforeEnter onExitComplete={handExitComplete}>
+              <m.div className='motion-container' key={router.route} initial='initial' animate='in' exit='out' variants={pageTransition}>
+                <Component {...pageProps} />
+              </m.div>
+            </AnimatePresence>
+          </LazyMotion>
         </GlobalContext.Provider>
         <Footer {...pageProps} />
       </div>

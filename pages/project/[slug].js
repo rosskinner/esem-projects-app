@@ -3,19 +3,19 @@ import Seo from '../../components/seo'
 import ProjectCard from '../../components/project'
 
 
-const Project = ({ global, projects, project, contactpage }) => {
-// console.log('projects', projects)
+const Project = ({ global, project, contactpage }) => {
+
 let nav = []
 
-for (let i = 0; i < projects.length; i++) {
-  const p = projects[i]
-  const prev = i > 0 ? i - 1 : projects.length - 1
-  const next = i >= projects.length - 1 ? 0 : i + 1
+// for (let i = 0; i < projects.length; i++) {
+//   const p = projects[i]
+//   const prev = i > 0 ? i - 1 : projects.length - 1
+//   const next = i >= projects.length - 1 ? 0 : i + 1
   
-  if(p.id === project.id) {
-    nav = [projects[prev],projects[next]]
-  } 
-}
+//   if(p.id === project.id) {
+//     nav = [projects[prev],projects[next]]
+//   } 
+// }
 
   const seo = {
     metaTitle: project.title,
@@ -27,7 +27,7 @@ for (let i = 0; i < projects.length; i++) {
   return (
     <>
       <Seo seo={seo} />
-      <ProjectCard prev={nav[0]} next={nav[1]} project={project} contactpage={contactpage} global={global}/>
+      <ProjectCard project={project} contactpage={contactpage} global={global}/>
     </>
   );
 };
@@ -47,11 +47,6 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params }) {
   const projects = await fetchAPI(`/projects?slug=${params.slug}`)
-  // console.log(params)
-
-
-  // prev={projects[prev]} next={projects[next]} 
-  // const categories = await fetchAPI("/categories");
 
   return {
     props: { project: projects[0] },
