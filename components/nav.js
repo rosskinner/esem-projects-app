@@ -4,13 +4,12 @@ import defaultLogo from '../assets/logo.png'
 import { getStrapiMedia } from '../lib/api'
 import { useRouter } from 'next/router'
 
-const Nav = ({ global, heading, description, showLogo = true, contactpage }) => {
+const Nav = ({ global, showLogo = true }) => {
   let logo
   let image
-  // console.log(global)
+
   if (global) {
     logo = global.logo
-    // console.log(logo)
     image = logo === null ? <img className=' logo pt2 pointer' src={defaultLogo} /> : <img className='logo pt2 pointer' alt={logo.alternativeText} src={getStrapiMedia(logo)} />
   }
 
@@ -37,13 +36,9 @@ const Nav = ({ global, heading, description, showLogo = true, contactpage }) => 
             <Link scroll={false} href='/about'>
               <a className={`ml3 ml4-l dib v-mid nav-item ${active.includes('about') ? 'nav-active' : ''}`}>About</a>
             </Link>
-
           </div>
-
         </div>
-
       </div>
-
     </div>
 
   )

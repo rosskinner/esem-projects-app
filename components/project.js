@@ -56,6 +56,7 @@ const Project = ({ project, global, contactpage, prev, next }) => {
                 initial={{ opacity: 1 }}
                 animate={{ opacity: scroll ? 1 : 0 }}
                 src={arrow}
+                alt='read more'
               />
             </m.div>
 

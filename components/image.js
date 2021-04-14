@@ -98,7 +98,7 @@ const Img = ({ media }) => {
           const [loaded, setLoaded] = useState(false)
           const animationControls = useAnimation()
           // console.log(m)
-          const url = (me.formats === null || Object.keys(me.formats).length === 0) ? me : me.formats.large
+          const url = (me.formats === null || Object.keys(me.formats).length === 0) ? me : (me.formats.large ? me.formats.large : me)
           const mediaUrl = getStrapiMedia(url)
           let ratio = '8x5'
           
@@ -113,6 +113,7 @@ const Img = ({ media }) => {
           const checkLoaded = (e) => {
             setLoaded(e.target.complete && e.target.naturalHeight !== 0)
           }
+          
           return (
 
 

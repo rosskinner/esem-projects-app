@@ -27,6 +27,8 @@ const Articles = ({ articles, tags, tag }) => {
         {articles.map((article, i) => (
           <Card width={width} key={i} index={i} project={article} category={tag} path='/article' />
         ))}
+        {articles.length < 1 &&
+          <div>Sorry, no news today.</div>}
       </div>
     </>
   )
