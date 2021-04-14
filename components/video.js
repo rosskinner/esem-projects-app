@@ -1,7 +1,8 @@
-import Vimeo from '@u-wave/react-vimeo'
 import React, { useState } from 'react'
-import YouTube from 'react-youtube'
 import MediaOverlay from './media-overlay'
+import dynamic from 'next/dynamic'
+const YouTube = dynamic(() => import('react-youtube'))
+const Vimeo = dynamic(() => import('@u-wave/react-vimeo'))
 
 const Video = ({ video }) => {
   // console.log('video', video)

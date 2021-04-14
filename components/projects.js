@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import Card from './card'
 import smallButton from '../assets/small-button.png'
 import largeButton from '../assets/large-button.png'
-import { AnimateSharedLayout, motion } from 'framer-motion'
+import { AnimateSharedLayout } from 'framer-motion'
 
 // import cookieCutter from 'cookie-cutter'
 // const cookieCutter = require('cookie-cutter')

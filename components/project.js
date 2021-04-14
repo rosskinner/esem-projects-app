@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { getStrapiMedia } from '../lib/api'
 import ReactMarkdown from 'react-markdown'
 
 import Image from 'next/image'
-import { AnimatePresence, LazyMotion, m, domAnimation } from 'framer-motion'
+import { LazyMotion, m, domAnimation } from 'framer-motion'
 import arrow from '../assets/arrow.png'
 import ProjectComponents from './project-components'
 
@@ -12,7 +12,6 @@ const ProjectContent = dynamic(() => import('./project-content'))
 
 const Project = ({ project, global, contactpage, prev, next }) => {
   const [scroll, setScroll] = useState(true)
-  const [scrollDir, setScrollDir] = useState(0)
   let bannerImage = ''
   for (let i = 0; i < project.media.length; i++) {
     const media = project.media[i]
@@ -35,7 +34,6 @@ const Project = ({ project, global, contactpage, prev, next }) => {
       window.removeEventListener('scroll', handleScroll, false)
     }
   }, [scroll])
-  console.log('render project')
 
   return (
 
