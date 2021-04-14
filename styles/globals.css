@@ -312,6 +312,7 @@ BIG CHANGES
 
 .background-image {
   background-position: center;
+  object-fit: cover;
 }
 
 .aspect-ratio--8x10 {

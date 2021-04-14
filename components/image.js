@@ -123,11 +123,18 @@ const Img = ({ media }) => {
               variants={animationVariants}
               transition={{ ease: "easeIn", duration: 1 }}>
                 <div  className={`aspect-ratio aspect-ratio--${ratio}`}>
-                  <Image className='background-image cover center aspect-ratio--object' src={mediaUrl} layout='fill' objectFit='cover'
+                  {/* <Image className='background-image cover center aspect-ratio--object' src={mediaUrl} layout='fill' objectFit='cover'
                     alt={me.alternativeText}
                     title={me.caption}
+                    quality={100}
                     onLoad={checkLoaded}
-            />
+                    loader={({src}) => src}
+            /> */}
+                <img className='background-image cover center aspect-ratio--object' src={mediaUrl}
+                    alt={me.alternativeText}
+                    title={me.caption}
+                    quality={100}
+                    onLoad={checkLoaded}  />
                 </div>
                 
                   <div className='f8 caption pt2 pl2 pl0-l'><span>{me.caption}</span></div>

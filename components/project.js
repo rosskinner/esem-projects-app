@@ -64,7 +64,7 @@ const Project = ({ project, global, contactpage, prev, next }) => {
         <div className='w-100 flex flex-column'>
           <div className='project-details w-100 flex flex-column relative mt4 pb4'>
 
-            <div className='w-100 w-two-thirds-l ph4 ph0-l f6 flex flex-wrap flex-column flex-row-l '>
+            <div className='w-100 mw8 ph4 ph0-l f6 flex flex-wrap flex-column flex-row-l '>
               <div className='w-100 w-50-l project-det flex flex-column flex-wrap pr5-l'>
                 <p className='b'>Project Details</p>
                 <ReactMarkdown source={project.details} escapeHtml={false} />
