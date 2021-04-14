@@ -67,14 +67,22 @@ const Content = ({ width, project, thumbnail, margin, ratio, category, image, im
   return (
     <>
       <div className='db'>
-        <div className={`aspect-ratio ${ratio}`}>
-          {/* <div className='project-thumb aspect-ratio--object cover' alt={imageObject.alternativeText} style={{ backgroundImage: `url(${thumbnail})` }} /> */}
+        <motion.div
+          className={`aspect-ratio ${ratio}`}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1 }}
+          whileHover={{
+            opacity: 0.4,
+            transition: { duration: 0.5 }
+          }}
+        >
           <Image
             className='project-thumb aspect-ratio--object cover' src={thumbnail} layout='fill'
             objectFit='cover'
             alt={imageObject.alternativeText}
           />
-        </div>
+        </motion.div>
       </div>
       <div className='db'>
         {!image &&

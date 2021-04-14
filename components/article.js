@@ -3,6 +3,8 @@ import ReactMarkdown from 'react-markdown'
 import { getStrapiURL, getStrapiMedia } from '../lib/api'
 import Moment from 'react-moment'
 import Link from 'next/link'
+import { AnimatePresence, motion } from 'framer-motion'
+import Image from 'next/image'
 
 const Article = ({ article }) => {
   const imageUrl = getStrapiMedia(article.collectionImage)
@@ -48,9 +50,21 @@ const Article = ({ article }) => {
       </div>
       <div className='project-details w-100 w-75-l self-end-l'>
         <div className='project-container top-0 w-100'>
-          <div className='banner-container w-100 flex center'>
+          {/* <div className='banner-container w-100 flex center'>
             <img src={imageUrl} alt={imageUrl.alternativeText} className='relative w-100 justify-center center cover' />
-          </div>
+          </div> */}
+
+          <AnimatePresence>
+            <motion.div
+              className='banner-container w-100 flex center relative' initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ ease: 'easeIn', duration: 1 }}
+            >
+
+              <Image src={imageUrl} alt={imageUrl.alternativeText} title={imageUrl.caption} layout='fill' objectFit='cover' className='relative w-100 justify-center center cover' />
+            </motion.div>
+
+          </AnimatePresence>
         </div>
 
         <div className='w-100 flex flex-column'>

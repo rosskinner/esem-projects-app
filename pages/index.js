@@ -5,6 +5,7 @@ import React, { useEffect, useState } from 'react'
 import Seo from '../components/seo'
 import { fetchAPI, getStrapiMedia } from '../lib/api'
 import Canvas from '../components/canvas'
+import Image from 'next/image'
 
 const Home = ({ category, global }) => {
   
@@ -49,16 +50,15 @@ const Home = ({ category, global }) => {
   }, [loaded])
 
   const onMouseMove = (e) => {
-    // console.log(e)
     if (drag) {
-      const elPos = {left: parseInt(e.target.style.left.split('px')[0]), top: parseInt(e.target.style.top.split('px')[0])}
+      const elPos = {left: parseInt(e.currentTarget.style.left.split('px')[0]), top: parseInt(e.currentTarget.style.top.split('px')[0])}
       // const offset = e.screenX - elPos
       const offset = {left: e.screenX - lastPos.x, top: e.screenY - lastPos.y}
       // console.log(elPos.top, e.screenY - lastPos.y)
       setLastPos({x: e.screenX, y: e.screenY})
       
-      e.target.style.left = `${elPos.left + offset.left}px`
-      e.target.style.top = `${elPos.top + offset.top}px`
+      e.currentTarget.style.left = `${elPos.left + offset.left}px`
+      e.currentTarget.style.top = `${elPos.top + offset.top}px`
       setClick(true)
     }
     
@@ -79,7 +79,7 @@ const Home = ({ category, global }) => {
 
   const onMouseDown = (e) => {
     setLastPos({x: e.screenX, y: e.screenY})
-    e.target.style.zIndex = 100
+    e.currentTarget.style.zIndex = 100
     setDrag(true)
     setClick(false)
     
@@ -88,10 +88,10 @@ const Home = ({ category, global }) => {
 
   const onMouseUp = (e) => {
     if (!click) {
-      console.log(e.target.dataset)
-      router.push(e.target.dataset.href, e.target.dataset.as)
+      console.log(e.currentTarget.dataset)
+      router.push(e.currentTarget.dataset.href, e.currentTarget.dataset.as)
     }
-    e.target.style.zIndex = 1
+    e.currentTarget.style.zIndex = 1
     setDrag(false)
     setClick(false)
   }
@@ -121,13 +121,24 @@ const Home = ({ category, global }) => {
               const imgSrc = getStrapiMedia(url)
 
               return (
-                  <div key ={i} data-as={`project/${project.slug}`} data-href='project/[id]' className={`absolute cover home-image `} width='500px' height={`${project.pos.height}px`} style={{width: '500px', left: `${project.pos.x}px`, top: `${project.pos.y}px`, height: `${project.pos.height}px`, backgroundImage: `url(${imgSrc})`}}  
+                  <div key ={i} data-as={`project/${project.slug}`} data-href='project/[id]' className={`absolute cover home-image`} style={{width: '500px', left: `${project.pos.x}px`, top: `${project.pos.y}px` }}  
                   onMouseMove={onMouseMove} 
                   onMouseDown={onMouseDown} 
                   onMouseUp={onMouseUp}
                   onMouseLeave={onMouseLeave}
                   onMouseOut={onMouseLeave} 
                   >
+                    <div className='aspect-ratio aspect-ratio--8x5'>
+                      
+                      {/* <Image
+                        className='project-thumb aspect-ratio--object cover' src={imgSrc} layout='fill'
+                        objectFit='cover'
+                        alt={url.alternativeText}
+                      /> */}
+                      <div className='project-thumb aspect-ratio--object cover' style={{backgroundImage: `url(${imgSrc})`}}></div>
+                      <div className='overlay-image absolute w-100 h-100'/>
+                    </div>
+          
                   </div>
               )
             })}

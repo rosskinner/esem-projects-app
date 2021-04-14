@@ -355,8 +355,11 @@ blockquote {
 }
 
 .home-image {
-  cursor: move;
-  z-index: 200;
+  cursor: move; /* fallback if grab cursor is unsupported */
+  cursor: grab;
+  cursor: -moz-grab;
+  cursor: -webkit-grab;
+  z-index: 100;
   top: 0;
   left: 0;
   -webkit-transform: translate3d(var(--mouse-x), var(--mouse-y), 0);
@@ -366,10 +369,40 @@ blockquote {
   opacity: 1;
 }
 
-.home-image:hover {
+/* .home-image:hover {
+  opacity: 0.5;
+} */
+
+.read-indicator {
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-100%);
+  animation-duration: 300ms;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  animation-name: bounce;
+}
+
+.overlay-image {
+  opacity: 0;
+  background: var(--secondary-color);
+  z-index: 100;
+  transition: opacity 300ms ease-in-out;
+}
+
+.overlay-image:hover {
   opacity: 0.5;
 }
 
+@keyframes bounce {
+  from {
+    top: 100%;
+  }
+
+  to {
+    top: 99.5%;
+  }
+}
 /* .project-card {
   transition: width ease-in-out 300ms;
 } */

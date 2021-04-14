@@ -1,14 +1,18 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { getStrapiMedia } from '../lib/api'
 import ReactMarkdown from 'react-markdown'
-import Image from './image'
+import Img from './image'
 import ProjectContent from './project-content'
 import Text from './text'
 import Video from './video'
 import Audio from './audio'
-import { motion } from 'framer-motion'
+import Image from 'next/image'
+import { AnimatePresence, motion } from 'framer-motion'
+import arrow from '../assets/arrow.png'
 
 const Project = ({ project, global, contactpage, prev, next }) => {
+  const [scroll, setScroll] = useState(true)
+  const [scrollDir, setScrollDir] = useState(0)
   let bannerImage = ''
   for (let i = 0; i < project.media.length; i++) {
     const media = project.media[i]
@@ -18,6 +22,20 @@ const Project = ({ project, global, contactpage, prev, next }) => {
       bannerImage = media.media[0]
     }
   }
+  useEffect(() => {
+    function handleScroll () {
+      const yPos = window.scrollY
+      const isDown = yPos < scrollDir
+      if (isDown !== scrollDir) {
+        setScroll(isDown)
+        setScrollDir(yPos)
+      }
+    }
+    window.addEventListener('scroll', handleScroll, false)
+    return () => {
+      window.removeEventListener('scroll', handleScroll, false)
+    }
+  }, [scrollDir])
 
   return (
 
@@ -26,9 +44,22 @@ const Project = ({ project, global, contactpage, prev, next }) => {
       <ProjectContent className='w-100 w-25-l pt6 fixed-l' project={project} />
       <div className='project-details w-100 w-75-l self-end-l'>
         <div className='project-container top-0 w-100'>
-          <div className='banner-container w-100 flex center'>
-            <img src={getStrapiMedia(bannerImage)} alt={bannerImage.alternativeText} className='relative w-100 justify-center center cover' />
-          </div>
+          <AnimatePresence>
+            <motion.div
+              className='banner-container w-100 flex center relative' initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ ease: 'easeIn', duration: 1 }}
+            >
+              <Image src={getStrapiMedia(bannerImage)} layout='fill' objectFit='cover' alt={bannerImage.alternativeText} title={bannerImage.caption} className='relative w-100 justify-center center cover' />
+              <motion.img
+                className='absolute read-indicator white f2'
+                initial={{ opacity: 1 }}
+                animate={{ opacity: scroll ? 1 : 0 }}
+                src={arrow}
+              />
+            </motion.div>
+
+          </AnimatePresence>
         </div>
 
         <div className='w-100 flex flex-column'>
@@ -54,7 +85,7 @@ const Project = ({ project, global, contactpage, prev, next }) => {
         {project.media.map((media, key) => {
           if (media.__component.includes('video-images')) {
             return (
-              <Image key={key} media={media.media} />
+              <Img key={key} media={media.media} />
             )
           } else if (media.__component.includes('text')) {
             return (

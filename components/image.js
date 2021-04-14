@@ -14,6 +14,7 @@ const Img = ({ media }) => {
     cols = 2
   }
   const animationVariants = {
+    initial: { opacity: 0 },
     visible: { opacity: 1 },
     hidden: { opacity: 0 }
 }
@@ -107,21 +108,24 @@ const Img = ({ media }) => {
             }
           },[loaded])
           
+          const checkLoaded = (e) => {
+            setLoaded(e.target.complete && e.target.naturalHeight !== 0)
+          }
           return (
 
             <AnimatePresence key={key} >
 
 
             <motion.div className={`relative image-padding ${width}`}
-            initial={'hidden'}
+            initial={'initial'}
             animate={animationControls}
             variants={animationVariants}
             transition={{ ease: "easeIn", duration: 1 }}>
               <div className={`aspect-ratio aspect-ratio--${ratio}`}>
-                {/* <div style={{ backgroundImage: `url(${mediaUrl})` }} className='background-image cover center aspect-ratio--object' /> */}
                 <Image className='background-image cover center aspect-ratio--object' src={mediaUrl} layout='fill' objectFit='cover'
                   alt={mediaUrl.alternativeText}
-                  onLoad={() => setLoaded(true)}
+                  title={mediaUrl.caption}
+                  onLoad={checkLoaded}
           />
               </div>
               <div className='f8 caption pt2 pl2 pl0-l'>{m.caption}</div>
