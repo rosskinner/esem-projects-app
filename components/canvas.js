@@ -9,13 +9,10 @@ let _stageContext,
   _stageHeight
 let _mouseX = 0
 let _mouseY = 0
-const _boxRows = 10
-const _boxCols = 60
 const _mouseRadiusNum = 185
-const _boxArray = []
-const _boxArrayLength = _boxRows * _boxCols
-const _boxSize = 100
-const _boxSpacing = 10
+let _boxArray = []
+
+
 let text
 let words
 //* ** INIT ***
@@ -35,8 +32,17 @@ const requestAnimFrame = function () {
 
 class Canvas {
   constructor() {
+    this.boxRows = 18
+    this.boxCols = 60
+    this.boxArrayLength = this.boxRows * this.boxCols
+    this.boxSize = 100
+    this.boxSpacing = 10
+    this.initialised = false
+    this.textItems = new Map()
 
+    
     this.init = () => {
+      
       this.stage = document.getElementById('stage')
       _stageWidth = this.stage.width = window.innerWidth
       _stageHeight = this.stage.height = window.innerHeight
@@ -44,14 +50,21 @@ class Canvas {
       this.stage.style.width = window.innerWidth
       this.stage.style.height = window.innerHeight
 
+      const widthEm = window.innerWidth / parseFloat(
+        getComputedStyle(
+          document.querySelector('body')
+        )['font-size']
+      )
+      this.boxSize = widthEm
+
       _stageContext = stage.getContext('2d')
       _stageContext.fillStyle = '#fff'
       _stageContext.strokeStyle = '#999'
-      _stageContext.font = `${_boxSize}px Baskervville`
+      _stageContext.font = `${this.boxSize}px Baskervville`
       _stageContext.textBaseline = 'middle'
       text = document.getElementById('home-text').innerHTML.split('')
       words = document.getElementById('home-text').innerHTML.split(' ')
-      this.textItems = new Map()
+      
       let count = 0
       words.map((word, i) => {
         word.split('').map((letter, j) => {
@@ -60,14 +73,37 @@ class Canvas {
         })
         this.textItems.set(count, { letter: ' ', word: word, index: i })
         count++
-        //
-        // textItems[i].word = word
-        // const letters = word.split('')
       })
 
     
       this.createBoxes()
       this.onEnterFrame()
+      window.addEventListener('resize', this.resize.bind(this), false)
+    }
+
+    this.resize = (e) => {
+      
+        _stageWidth = this.stage.width = window.innerWidth
+      _stageHeight = this.stage.height = window.innerHeight
+      this.stage.style.width = window.innerWidth
+      this.stage.style.height = window.innerHeight
+
+      _stageContext.fillStyle = '#fff'
+      _stageContext.strokeStyle = '#999'
+      _stageContext.font = `${this.boxSize}px Baskervville`
+      _stageContext.textBaseline = 'middle'
+      const widthEm = window.innerWidth / parseFloat(
+        getComputedStyle(
+          document.querySelector('body')
+        )['font-size']
+      )
+      
+      this.boxSize = widthEm
+      this.boxRows = 18
+      this.boxCols = (window.innerWidth / this.boxSize) *2.5
+      this.boxArrayLength = this.boxRows * this.boxCols
+      _boxArray = []
+      this.createBoxes()
     }
     
 
@@ -84,24 +120,24 @@ class Canvas {
 
     this.createBoxes = () => {
       let curBox, xSpacing, ySpacing
-      // const startingX = _halfStageWidth - (_boxCols / 2) * _boxSpacing
+      // const startingX = _halfStageWidth - (_boxCols / 2) * this.boxSpacing
       // const startingY = _halfStageHeight - (_boxRows / 2) * _boxSpacing
       const startingX = 0
-      const startingY = _boxSize
+      const startingY = this.boxSize
       let i = 0
       let j = 0
       let count = 0
-      for (j = 0; j < _boxRows; j++) {
-        for (i = 0; i < _boxCols; i++) {
-          xSpacing = startingX + i * (_boxSpacing + _boxSize)
+      for (j = 0; j < this.boxRows; j++) {
+        for (i = 0; i < this.boxCols; i++) {
+          xSpacing = startingX + i * (this.boxSpacing + this.boxSize)
 
-          ySpacing = startingY + j * (_boxSpacing + _boxSize)
+          ySpacing = startingY + j * (this.boxSpacing + this.boxSize)
           if (_boxArray[i - 1] !== undefined) {
             xSpacing = _boxArray[count - 1].x + _boxArray[count - 1].width
           }
 
           curBox = new Box({
-            size: _boxSize,
+            size: this.boxSize,
             x: xSpacing,
             y: ySpacing,
             text: this.textItems.get(count < this.textItems.size - 1 ? count : count % this.textItems.size)
@@ -113,11 +149,11 @@ class Canvas {
       }
     }
 
-    function drawStage () {
+    this.drawStage = () => {
       let i = 0
       let curBox
 
-      for (i = 0; i < _boxArrayLength; i++) {
+      for (i = 0; i < this.boxArrayLength; i++) {
         curBox = _boxArray[i]
         curBox.move()
         curBox.draw()
@@ -126,13 +162,15 @@ class Canvas {
 
     this.onEnterFrame = () => {
       clearStage()
-      drawStage()
+      this.drawStage()
       this.animate = window.requestAnimationFrame(this.onEnterFrame)
     }
 
     this.exitCanvas = () => {
       clearStage()
+      // this.initialised = false
       window.cancelAnimationFrame(this.animate)
+      window.removeEventListener('resize', this.resize.bind(this), false)
     }
 
   }

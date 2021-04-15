@@ -286,7 +286,7 @@ strong {
 }
 
 .home-container {
-  height: calc(100vh - 16rem);
+  height: calc(100vh);
   overflow: hidden;
 }
 
@@ -407,14 +407,9 @@ blockquote {
   }
 }
 
-.motion-container {
-  /* will-change: transform;
-  transform: translateZ(0); */
+footer {
+  background-color: #0E0E13;
 }
-/* .project-card {
-  transition: width ease-in-out 300ms;
-} */
-
 
 
 @media screen and (min-width: 30rem) {
@@ -427,6 +422,10 @@ blockquote {
     min-height: 3rem;
     display: block;
   }
+  /* .home-container {
+    height: calc(100vh - 16rem);
+  } */
+  
  
 
   

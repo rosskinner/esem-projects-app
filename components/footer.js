@@ -1,10 +1,14 @@
 
+import { useRouter } from 'next/router'
 import React from 'react'
 import ReactMarkdown from 'react-markdown'
 
 const Footer = ({ global, contactpage }) => {
+  const route = useRouter().pathname
+  let position = ''
+  if (route === '/') position = 'fixed bottom-0 left-0'
   return (
-    <footer className='white flex flex-column w-100 pa4 pa5-l'>
+    <footer className={`white flex flex-column w-100 pa4 pa5-l ${position}`}>
       <div className='flex flex-row w-100 nav-contact details f6 justify-between'>
         <div className='pb3 pr4-ns'>
           <ReactMarkdown source={contactpage.address} />
