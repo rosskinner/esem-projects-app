@@ -3,7 +3,7 @@ import { getStrapiMedia } from '../lib/api'
 import ReactMarkdown from 'react-markdown'
 
 import Image from 'next/image'
-import { LazyMotion, m, domAnimation } from 'framer-motion'
+import { LazyMotion, m, domAnimation, useAnimation } from 'framer-motion'
 import arrow from '../assets/arrow.png'
 import ProjectComponents from './project-components'
 
@@ -12,6 +12,15 @@ const ProjectContent = dynamic(() => import('./project-content'))
 
 const Project = ({ project, global, contactpage, prev, next }) => {
   const [scroll, setScroll] = useState(true)
+  const [loaded, setLoaded] = useState(false)
+  const animationControls = useAnimation()
+
+  const animationVariants = {
+    initial: { opacity: 0 },
+    visible: { opacity: 1 },
+    hidden: { opacity: 0 }
+  }
+
   let bannerImage = ''
   for (let i = 0; i < project.media.length; i++) {
     const media = project.media[i]
@@ -35,6 +44,17 @@ const Project = ({ project, global, contactpage, prev, next }) => {
     }
   }, [scroll])
 
+  useEffect(() => {
+    if (loaded) {
+      animationControls.start('visible')
+      // animationVariants.initial.opacity = 1
+    }
+  }, [loaded])
+
+  const checkLoaded = (e) => {
+    setLoaded(true)
+  }
+
   return (
 
     <div className='flex flex-column'>
@@ -44,11 +64,16 @@ const Project = ({ project, global, contactpage, prev, next }) => {
         <div className='project-container top-0 w-100'>
           <LazyMotion features={domAnimation}>
             <m.div
-              className='banner-container w-100 flex center relative' initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
+              className='banner-container w-100 flex center relative' initial='initial'
+              animate={animationControls}
+              variants={animationVariants}
               transition={{ ease: 'easeIn', duration: 1 }}
+
             >
-              <Image src={getStrapiMedia(bannerImage)} layout='fill' objectFit='cover' alt={bannerImage.alternativeText} title={bannerImage.caption} className='relative w-100 justify-center center cover' />
+              <Image
+                src={getStrapiMedia(bannerImage)} layout='fill' objectFit='cover' alt={bannerImage.alternativeText} title={bannerImage.caption} className='relative w-100 justify-center center cover'
+                onLoad={checkLoaded}
+              />
               <m.img
                 className='absolute read-indicator white f2'
                 initial={{ opacity: 1 }}

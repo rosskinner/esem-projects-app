@@ -408,8 +408,8 @@ blockquote {
 }
 
 .motion-container {
-  will-change: transform;
-  transform: translateZ(0);
+  /* will-change: transform;
+  transform: translateZ(0); */
 }
 /* .project-card {
   transition: width ease-in-out 300ms;

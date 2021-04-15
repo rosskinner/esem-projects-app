@@ -1,13 +1,33 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import ReactMarkdown from 'react-markdown'
 import { getStrapiURL, getStrapiMedia } from '../lib/api'
 import Moment from 'react-moment'
 import Link from 'next/link'
-import { AnimatePresence, motion } from 'framer-motion'
+import { m, LazyMotion, useAnimation } from 'framer-motion'
 import Image from 'next/image'
 
 const Article = ({ article }) => {
   const imageUrl = getStrapiMedia(article.collectionImage)
+  const [loaded, setLoaded] = useState(false)
+  const animationControls = useAnimation()
+
+  const animationVariants = {
+    initial: { opacity: 0 },
+    visible: { opacity: 1 },
+    hidden: { opacity: 0 }
+  }
+
+  useEffect(() => {
+    if (loaded) {
+      animationControls.start('visible')
+      // animationVariants.initial.opacity = 1
+    }
+  }, [loaded])
+
+  const checkLoaded = (e) => {
+    setLoaded(true)
+  }
+
   return (
 
     <div className='flex flex-column'>
@@ -50,21 +70,23 @@ const Article = ({ article }) => {
       </div>
       <div className='project-details w-100 w-75-l self-end-l'>
         <div className='project-container top-0 w-100'>
-          {/* <div className='banner-container w-100 flex center'>
-            <img src={imageUrl} alt={imageUrl.alternativeText} className='relative w-100 justify-center center cover' />
-          </div> */}
 
-          <AnimatePresence>
-            <motion.div
-              className='banner-container w-100 flex center relative' initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
+          <LazyMotion>
+            <m.div
+              className='banner-container w-100 flex center relative' initial='initial'
+              animate={animationControls}
+              variants={animationVariants}
               transition={{ ease: 'easeIn', duration: 1 }}
             >
 
-              <Image src={imageUrl} alt={imageUrl.alternativeText} title={imageUrl.caption} layout='fill' objectFit='cover' className='relative w-100 justify-center center cover' />
-            </motion.div>
+              <Image
+                src={imageUrl} alt={imageUrl.alternativeText} title={imageUrl.caption} layout='fill' objectFit='cover'
+                className='relative w-100 justify-center center cover'
+                onLoad={checkLoaded}
+              />
+            </m.div>
 
-          </AnimatePresence>
+          </LazyMotion>
         </div>
 
         <div className='w-100 flex flex-column'>

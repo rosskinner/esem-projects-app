@@ -1,8 +1,8 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { getStrapiMedia } from '../lib/api'
-import { AnimatePresence, motion } from 'framer-motion'
+import { AnimatePresence, motion, useAnimation } from 'framer-motion'
 
 const Card = ({ project, width, category, path, link = true, image = false, description = false }) => {
   const imageObject = project.collectionImage
@@ -55,6 +55,14 @@ const Card = ({ project, width, category, path, link = true, image = false, desc
 
 const Content = ({ width, project, thumbnail, margin, ratio, category, image, imageObject, description }) => {
   let cat = [category]
+  const [loaded, setLoaded] = useState(false)
+  const animationControls = useAnimation()
+
+  const animationVariants = {
+    initial: { opacity: 0 },
+    visible: { opacity: 1 },
+    hidden: { opacity: 0 }
+  }
 
   if ((typeof category === 'string')) cat = [{ name: category }]
 
@@ -64,26 +72,41 @@ const Content = ({ width, project, thumbnail, margin, ratio, category, image, im
     cat = project.tags
   }
 
+  useEffect(() => {
+    if (loaded) {
+      animationControls.start('visible')
+      // animationVariants.initial.opacity = 1
+    }
+  }, [loaded])
+
+  const checkLoaded = (e) => {
+    setLoaded(true)
+  }
+
   return (
     <>
-      <div className='db'>
+      <motion.div
+        className='db'
+        whileHover={{
+          opacity: 0.4,
+          transition: { duration: 0.5 }
+        }}
+      >
         <motion.div
           className={`aspect-ratio ${ratio}`}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1 }}
-          whileHover={{
-            opacity: 0.4,
-            transition: { duration: 0.5 }
-          }}
+          initial='initial'
+          animate={animationControls}
+          variants={animationVariants}
+          transition={{ ease: 'easeIn', duration: 1 }}
         >
           <Image
             className='project-thumb aspect-ratio--object cover' src={thumbnail} layout='fill'
             objectFit='cover'
             alt={imageObject.alternativeText}
+            onLoad={checkLoaded}
           />
         </motion.div>
-      </div>
+      </motion.div>
       <div className='db'>
         {!image &&
           <>
