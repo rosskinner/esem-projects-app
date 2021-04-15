@@ -92,7 +92,7 @@ const Home = ({ category, global }) => {
           <h1 id='home-text' className='dn'>{global.defaultSeo.metaDescription}</h1>
         </div>
         <div className='absolute w-100 h-100 image-container'>
-          <canvas id='stage' onMouseMove={onMouseMoveCanvas}/>  
+          <canvas id='stage' onMouseMove={onMouseMoveCanvas} onTouchMove={onMouseMoveCanvas}/>  
         </div>
       </div>
       {loaded &&
@@ -108,6 +108,8 @@ const Home = ({ category, global }) => {
                   onMouseUp={onMouseUp}
                   onMouseLeave={onMouseLeave}
                   onMouseOut={onMouseLeave} 
+                  onTouchMove={onMouseMove}
+                  onTouchCancel={onMouseUp}
                   >
                     <div className='aspect-ratio aspect-ratio--8x5'>
                       <div className='project-thumb aspect-ratio--object cover' style={{backgroundImage: `url(${imgSrc})`}}></div>
