@@ -320,7 +320,7 @@ BIG CHANGES
 }
 
 .banner-container {
-  height: 100vh;
+  height: 50vh;
   transform: translateZ(0);
 }
 .banner-container img {
@@ -431,6 +431,9 @@ footer {
   /* .home-container {
     height: calc(100vh - 16rem);
   } */
+  .banner-container {
+  height: 100vh;
+  }
   
  
 
