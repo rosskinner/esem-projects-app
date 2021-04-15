@@ -12,23 +12,10 @@ let _mouseY = 0
 const _mouseRadiusNum = 185
 let _boxArray = []
 
-
 let text
 let words
+let animate
 //* ** INIT ***
-
-const requestAnimFrame = function () {
-  return (
-    window.requestAnimationFrame ||
-    window.webkitRequestAnimationFrame ||
-    window.mozRequestAnimationFrame ||
-    window.oRequestAnimationFrame ||
-    window.msRequestAnimationFrame ||
-    function (callback) {
-      window.setTimeout(callback, 1000 / 60)
-    }
-  )
-}
 
 class Canvas {
   constructor() {
@@ -39,13 +26,14 @@ class Canvas {
     this.boxSpacing = 10
     this.initialised = false
     this.textItems = new Map()
+    
 
     
     this.init = () => {
-      
       this.stage = document.getElementById('stage')
       _stageWidth = this.stage.width = window.innerWidth
       _stageHeight = this.stage.height = window.innerHeight
+      
       
       this.stage.style.width = window.innerWidth
       this.stage.style.height = window.innerHeight
@@ -74,15 +62,16 @@ class Canvas {
         this.textItems.set(count, { letter: ' ', word: word, index: i })
         count++
       })
-
-    
+      
+      clearStage()
       this.createBoxes()
       this.onEnterFrame()
-      window.addEventListener('resize', this.resize.bind(this), false)
+      resize()
+      window.addEventListener('resize', resize)
+      
     }
 
-    this.resize = (e) => {
-      
+    const resize = (e) => {
         _stageWidth = this.stage.width = window.innerWidth
       _stageHeight = this.stage.height = window.innerHeight
       this.stage.style.width = window.innerWidth
@@ -103,6 +92,7 @@ class Canvas {
       this.boxCols = (window.innerWidth / this.boxSize) *2.5
       this.boxArrayLength = this.boxRows * this.boxCols
       _boxArray = []
+      clearStage()
       this.createBoxes()
     }
     
@@ -163,14 +153,13 @@ class Canvas {
     this.onEnterFrame = () => {
       clearStage()
       this.drawStage()
-      this.animate = window.requestAnimationFrame(this.onEnterFrame)
+      animate = requestAnimationFrame(this.onEnterFrame)
     }
 
     this.exitCanvas = () => {
       clearStage()
-      // this.initialised = false
-      window.cancelAnimationFrame(this.animate)
-      window.removeEventListener('resize', this.resize.bind(this), false)
+      cancelAnimationFrame(animate)
+      window.removeEventListener('resize', resize)
     }
 
   }
