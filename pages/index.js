@@ -72,9 +72,9 @@ const Home = ({ category, global }) => {
             {category.projects.map((project, i) => {
               const url = (project.collectionImage.formats === null || Object.keys(project.collectionImage.formats).length === 0) ? project.collectionImage : project.collectionImage.formats.medium
               const imgSrc = getStrapiMedia(url)
-              let show = 'dn'
+              let show = 'o-0'
               let hover = ''
-              if (current === i) show = ''
+              if (current === i) show = 'o-100'
               if (current === i && !animate) hover = 'hover'
 
               return (
