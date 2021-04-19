@@ -1,126 +1,129 @@
-import { useRouter } from 'next/router'
+import Image from 'next/image'
+import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
 import Seo from '../components/seo'
 import { fetchAPI, getStrapiMedia } from '../lib/api'
-import Canvas from '../components/canvas'
+// import Paper from '../components/paper'
 
 const Home = ({ category, global }) => {
-  const [loaded, setLoaded] = useState(false)
-  const [drag, setDrag] = useState(false)
-  const [lastPos, setLastPos] = useState({x: 0, y: 0})
-  const [click, setClick] = useState(false)
-  const router = useRouter()
-  const letters = new Canvas()
+  const [current, setCurrent] = useState(0)
+  const [animate, setAnimate] = useState(true)
 
   useEffect(() => {
-    const height = window.innerHeight
-    const width = document.getElementsByClassName('image-container')[0].clientWidth
-    const imageWidth = width / category.projects.length
-
-    category.projects.map((project, i) => {
-      const url = (project.collectionImage.formats === null || Object.keys(project.collectionImage.formats).length === 0) ? project.collectionImage : project.collectionImage.formats.medium
-      
-      const imgHeight = ((url.height / url.width) * imageWidth)
-      const maxHeight = height - imgHeight
-      const minHeight = 0
-      const maxWidth = ((width / category.projects.length) * (i + 1)) - 200
-      const minWidth = ((width / category.projects.length) * i)
-      const posY = Math.floor(Math.random() * (maxHeight - minHeight) + minHeight)
-      const posX = Math.floor(Math.random() * (maxWidth - minWidth) + minWidth)
-      project.pos = {}
-      project.pos.height = imgHeight
-      project.pos.x = posX
-      project.pos.y = posY
-      project.pos.width = imageWidth
-      setLastPos({x: project.pos.x, y: project.pos.y})
-      if(i === category.projects.length - 1) setLoaded(true)
-    })
-    
-
-  }, [loaded])
-
-  const onMouseMove = (e) => {
-    if (drag) {
-      const elPos = {left: parseInt(e.currentTarget.style.left.split('px')[0]), top: parseInt(e.currentTarget.style.top.split('px')[0])}
-      const offset = {left: e.screenX - lastPos.x, top: e.screenY - lastPos.y}
-      setLastPos({x: e.screenX, y: e.screenY})
-      
-      e.currentTarget.style.left = `${elPos.left + offset.left}px`
-      e.currentTarget.style.top = `${elPos.top + offset.top}px`
-      setClick(true)
+    let changeProj
+    if (animate) {
+      changeProj = setInterval(function () {
+        setCurrent(current => current === category.projects.length - 1 ? 0 : current + 1)
+      }, 1000)
     }
-    
-  }
 
-  useEffect(() => {
-    letters.init()
-    
-    return() => {  
-      letters.exitCanvas()
+    return () => {
+      clearInterval(changeProj)
     }
-  },[])
+  }, [animate])
 
-  const onMouseMoveCanvas = (e) => {
-    letters.move(e)
+  const mouseEnter = (e) => {
+    console.log('enter')
+    setAnimate(false)
   }
 
-  const onMouseDown = (e) => {
-    setLastPos({x: e.screenX, y: e.screenY})
-    e.currentTarget.style.zIndex = 100
-    setDrag(true)
-    setClick(false)
+  const mouseLeave = (e) => {
+    setAnimate(true)
+    console.log('exit')
+  }
+  let outline
+  
+  if (!animate) {
+    outline = 'hover'
   }
 
-  const onMouseUp = (e) => {
-    if (!click) {
-      console.log(e.currentTarget.dataset)
-      router.push(e.currentTarget.dataset.href, e.currentTarget.dataset.as)
-    }
-    e.currentTarget.style.zIndex = 1
-    setDrag(false)
-    setClick(false)
-  }
+  const selectedUrl = (category.projects[current].collectionImage.formats === null || Object.keys(category.projects[current].collectionImage.formats).length === 0) ? category.projects[current].collectionImage : category.projects[current].collectionImage.formats.medium
+  const imgSrcSelected = getStrapiMedia(selectedUrl)
+  const background = { backgroundImage: `url(${imgSrcSelected})` }
 
-  const onMouseLeave = () => {
-    setDrag(false)
-  }
   return (
     <div>
       <Seo />
-      <div className='home-container pt6 relative'>
-        <div className='baskerville title tc'>
-          <h1 id='home-text' className='dn'>{global.defaultSeo.metaDescription}</h1>
-        </div>
-        <div className='absolute w-100 h-100 image-container'>
-          <canvas id='stage' onMouseMove={onMouseMoveCanvas} onTouchMove={onMouseMoveCanvas}/>  
-        </div>
+      <div>
+        {selectedUrl.mime.includes('image') &&
+          <Image
+            className={`absolute w-100 h-100 bg-home ${outline}`} src={imgSrcSelected}
+            layout='fill'
+            objectFit='cover'
+            alt={selectedUrl.alternativeText}
+          />}
+
+        {selectedUrl.mime.includes('video') &&
+          <video
+            autoPlay
+            loop
+            playsInline
+            preload='auto'
+            muted
+            className={`home-video absolute w-100 h-100 bg-home ${outline}`} src={imgSrcSelected}
+            alt={selectedUrl.alternativeText}
+          />}
       </div>
-      {loaded &&
-            <>
-              {category.projects.map((project, i) => {
+    
+      <div className='home-container relative pt6 relative w-90 w-70-l center'>
+        <div className='w-100 h-100 flex items-center'>
+          <div className='w-100 aspect-ratio aspect-ratio--home center' onMouseEnter={mouseEnter} onMouseLeave={mouseLeave}>
+
+            {category.projects.map((project, i) => {
               const url = (project.collectionImage.formats === null || Object.keys(project.collectionImage.formats).length === 0) ? project.collectionImage : project.collectionImage.formats.medium
               const imgSrc = getStrapiMedia(url)
+              let show = 'dn'
+              let hover = ''
+              if (current === i) show = ''
+              if (current === i && !animate) hover = 'hover'
 
               return (
-                  <div key ={i} data-as={`project/${project.slug}`} data-href='project/[id]' className={`absolute cover home-image`} style={{width: `${project.pos.width}px`, left: `${project.pos.x}px`, top: `${project.pos.y}px` }}  
-                  onMouseMove={onMouseMove} 
-                  onMouseDown={onMouseDown} 
-                  onMouseUp={onMouseUp}
-                  onMouseLeave={onMouseLeave}
-                  onMouseOut={onMouseLeave} 
-                  onTouchMove={onMouseMove}
-                  onTouchCancel={onMouseUp}
-                  >
-                    <div className='aspect-ratio aspect-ratio--8x5'>
-                      <div className='project-thumb aspect-ratio--object cover' style={{backgroundImage: `url(${imgSrc})`}}></div>
-                      <div className='overlay-image absolute w-100 h-100'/>
-                    </div>
-          
+                <Link
+                  key={i} as={`project/${project.slug}`} href='project/[id]'
+                >
+                  <div className={`home-mask absolute cover ${show} ${hover} aspect-ratio aspect-ratio--8x5 pointer`}>
+
+                    {url.mime.includes('image') &&
+                      <Image
+                        className='home-image aspect-ratio--object cover' src={imgSrc}
+                        layout='fill'
+                        objectFit='cover'
+                        alt={url.alternativeText}
+                      />}
+
+                    {url.mime.includes('video') &&
+                      <video
+                        autoPlay
+                        loop
+                        playsInline
+                        preload='auto'
+                        muted
+                        className='home-image aspect-ratio--object cover' src={imgSrc}
+                        alt={url.alternativeText}
+                      />}
+
                   </div>
+
+                </Link>
               )
             })}
-            </>
-          }
+
+            <svg className='home-svg'>
+              <clipPath id='clip' clipPathUnits='objectBoundingBox' transform='scale(0.00350877193, 0.00518134715)'>
+                <path d='M0 192.096V0H116V49H56.5V70H116V118.5H56.5V141.5H116V192.096H0Z' fill='white' />
+                <path d='M195.5 143V192.096H141V0H216.5C238.964 0 249.636 6.82399 262.5 17C275.364 27.176 284.5 48.688 284.5 70C284.5 91.312 278.864 111.48 266 123C253.136 134.52 239.964 143.5 217.5 143.5L195.5 143ZM195.5 93.024H203.5C213.484 93.024 218.276 92.684 222.5 87.5C226.724 82.316 228.5 77.872 228.5 70C228.5 61.168 228.224 59.876 224 54.5C219.776 49.124 214.484 49 204.5 49H195.5V93.024Z' fill='white' />
+              </clipPath>
+            </svg>
+
+            <svg className={`logo-outline ${outline}`} width='100%' viewBox='0 0 285 193'>
+              <path d='M0 192.096V0H116V49H56.5V70H116V118.5H56.5V141.5H116V192.096H0Z' fill='white' />
+              <path d='M195.5 143V192.096H141V0H216.5C238.964 0 249.636 6.82399 262.5 17C275.364 27.176 284.5 48.688 284.5 70C284.5 91.312 278.864 111.48 266 123C253.136 134.52 239.964 143.5 217.5 143.5L195.5 143ZM195.5 93.024H203.5C213.484 93.024 218.276 92.684 222.5 87.5C226.724 82.316 228.5 77.872 228.5 70C228.5 61.168 228.224 59.876 224 54.5C219.776 49.124 214.484 49 204.5 49H195.5V93.024Z' fill='white' />
+            </svg>
+
+          </div>
+        </div>
+
+      </div>
     </div>
   )
 }

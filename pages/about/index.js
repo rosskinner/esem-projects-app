@@ -54,7 +54,7 @@ const Projects = ({ aboutpage, contactpage, teamMembers, clients, awards }) => {
                   return (
                     <div className='w-100 flex flex-column flex-row-l ph4-l mv3 pt4 f4 service' key={i}>
                       <div className='w-100 w-25-l'>
-                        <p className='pl3-l secondary-color'>0{i + 1}.</p>
+                        <p className='pl3-l'>0{i + 1}.</p>
                       </div>
                       <p className='w-100 w-25-l ph3-l'>{service.title}</p>
                       <ReactMarkdown className='w-100 w-50-l pl4-l' source={service.content} escapeHtml={false} />

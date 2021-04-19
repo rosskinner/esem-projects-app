@@ -14,11 +14,6 @@ export const GlobalContext = createContext({})
 const EsemApp = ({ Component, pageProps, router }) => {
   const { global } = pageProps
 
-  useEffect(() => {
-    const root = document.documentElement
-    root.style.setProperty('--secondary-color', global.secondaryColor)
-  })
-
   const pageTransition = {
     initial: {
       opacity: 0

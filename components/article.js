@@ -51,7 +51,7 @@ const Article = ({ article }) => {
                 </p>
                 {article.project &&
                   <div className='mt5'>
-                    <p className='f6 details secondary-color'>Read about the project?</p>
+                    <p className='f6 details'>Read about the project?</p>
                     <div className='flex flex-row'>
                       <div className='f6'>
                         <Link scroll={false} as={`/project/${article.project.slug}`} href='/project/[id]'>

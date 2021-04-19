@@ -8,7 +8,7 @@ const Footer = ({ global, contactpage }) => {
   let position = ''
   if (route === '/') position = 'footer-fixed'
   return (
-    <footer className={`white flex flex-column w-100 pa4 pa5-l ${position}`}>
+    <footer className={`white flex flex-column w-100 pv4 ph4 ph5-l ${position}`}>
       <div className='flex flex-row w-100 nav-contact details f6 justify-between'>
         <div className='pb3 pr4-ns'>
           <ReactMarkdown source={contactpage.address} />
@@ -33,13 +33,13 @@ const Footer = ({ global, contactpage }) => {
         {global.social &&
           <div className='w-50  flex flex-column flex-row-ns justify-end flex-wrap tr'>
             {global.social.facebook &&
-              <a className='f6 details underline secondary-color pl3' href={global.social.facebook} rel='noreferrer' target='_blank'>Facebook</a>}
+              <a className='f6 details underline pl3' href={global.social.facebook} rel='noreferrer' target='_blank'>Facebook</a>}
             {global.social.instagram &&
-              <a className='f6 details underline secondary-color pl3' href={global.social.instagram} rel='noreferrer' target='_blank'>Instagram</a>}
+              <a className='f6 details underline pl3' href={global.social.instagram} rel='noreferrer' target='_blank'>Instagram</a>}
             {global.social.twitter &&
-              <a className='f6 details underline secondary-color pl3' href={global.social.twitter} rel='noreferrer' target='_blank'>Twitter</a>}
+              <a className='f6 details underline pl3' href={global.social.twitter} rel='noreferrer' target='_blank'>Twitter</a>}
             {global.social.linkedin &&
-              <a className='f6 details underline secondary-color pl3' href={global.social.linkedin} rel='noreferrer' target='_blank'>LinkedIn</a>}
+              <a className='f6 details underline pl3' href={global.social.linkedin} rel='noreferrer' target='_blank'>LinkedIn</a>}
 
           </div>}
       </div>

@@ -21,7 +21,7 @@ const ProjectContent = ({ className, project, showContent, setShowContent }) => 
               </p>
               {project.articles.length > 0 &&
                 <div className='mt5'>
-                  <p className='f6 details secondary-color'>Want to read even more?</p>
+                  <p className='f6 details'>Want to read even more?</p>
                   <div className='flex flex-row'>
                     {project.articles.map((article, key) => {
                       console.log(article)

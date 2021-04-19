@@ -99,12 +99,26 @@ const Content = ({ width, project, thumbnail, margin, ratio, category, image, im
           variants={animationVariants}
           transition={{ ease: 'easeIn', duration: 1 }}
         >
-          <Image
-            className='project-thumb aspect-ratio--object cover' src={thumbnail} layout='fill'
-            objectFit='cover'
-            alt={imageObject.alternativeText}
-            onLoad={checkLoaded}
-          />
+          {imageObject.mime.includes('image') &&
+            <Image
+              className='project-thumb aspect-ratio--object cover' src={thumbnail} layout='fill'
+              objectFit='cover'
+              alt={imageObject.alternativeText}
+              onLoad={checkLoaded}
+            />}
+
+          {imageObject.mime.includes('video') &&
+            <video
+              autoPlay
+              loop
+              playsInline
+              preload='auto'
+              muted
+              className='project-thumb aspect-ratio--object cover' src={thumbnail}
+              alt={imageObject.alternativeText}
+              onPlay={checkLoaded}
+            />}
+
         </motion.div>
       </motion.div>
       <div className='db'>
@@ -119,7 +133,7 @@ const Content = ({ width, project, thumbnail, margin, ratio, category, image, im
               let comma = ''
               if (i !== cat.length - 1) comma = ','
               return (
-                <h3 className={`f6 ttc dib pr2 ${description ? 'secondary-color' : ''}`} key={i}>{c.name} {comma} </h3>
+                <h3 className={`f6 ttc dib pr2 ${description ? 'underline' : ''}`} key={i}>{c.name} {comma} </h3>
               )
             })}
             {description &&
