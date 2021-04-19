@@ -10,8 +10,7 @@ import ProjectComponents from './project-components'
 import dynamic from 'next/dynamic'
 const ProjectContent = dynamic(() => import('./project-content'))
 
-const Project = ({ project, global, contactpage, prev, next }) => {
-  const [scroll, setScroll] = useState(true)
+const Project = ({ project, global, contactpage, prev, next, scroll }) => {
   const [loaded, setLoaded] = useState(false)
   const animationControls = useAnimation()
 
@@ -30,19 +29,6 @@ const Project = ({ project, global, contactpage, prev, next }) => {
       bannerImage = media.media[0]
     }
   }
-
-  useEffect(() => {
-    function handleScroll (e) {
-      const top = (window.scrollY < 100)
-      if (scroll !== top) {
-        setScroll(top)
-      }
-    }
-    window.addEventListener('scroll', handleScroll, false)
-    return () => {
-      window.removeEventListener('scroll', handleScroll, false)
-    }
-  }, [scroll])
 
   useEffect(() => {
     if (loaded) {

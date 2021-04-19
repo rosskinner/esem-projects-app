@@ -23,13 +23,11 @@ const Home = ({ category, global }) => {
   }, [animate])
 
   const mouseEnter = (e) => {
-    console.log('enter')
     setAnimate(false)
   }
 
   const mouseLeave = (e) => {
     setAnimate(true)
-    console.log('exit')
   }
   let outline
   
@@ -72,9 +70,9 @@ const Home = ({ category, global }) => {
             {category.projects.map((project, i) => {
               const url = (project.collectionImage.formats === null || Object.keys(project.collectionImage.formats).length === 0) ? project.collectionImage : project.collectionImage.formats.medium
               const imgSrc = getStrapiMedia(url)
-              let show = 'o-0'
+              let show = 'o-0 below'
               let hover = ''
-              if (current === i) show = 'o-100'
+              if (current === i) show = 'o-100 above'
               if (current === i && !animate) hover = 'hover'
 
               return (

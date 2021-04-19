@@ -97,6 +97,7 @@ strong {
 .nav {
   z-index: 999;
   background-color: #0E0E13;
+  transition: background-color ease-in-out 300ms;
 }
 
 .container {
@@ -431,8 +432,14 @@ canvas {
   z-index: -1;
 }
 
+/* .aspect-ratio--home {
+  padding-bottom: calc(70% * 0.6771929825);
+  width: 70%;
+/* }  */
+
 .aspect-ratio--home {
   padding-bottom: 67.71929825%;
+  width: 100%;
 }
 
 .home-svg {
@@ -486,8 +493,16 @@ canvas {
 
 .nav.bg-nav {
   background-color: rgba(0,0,0,0);
+
 }
 
+.below {
+  z-index: 1;
+}
+
+.above {
+  z-index: 10;
+}
 
 @media screen and (min-width: 30rem) {
 
@@ -505,11 +520,14 @@ canvas {
   .banner-container {
   height: 100vh;
   }
-  
- 
+}
 
-  
+@media screen and (max-height: 60rem) and (min-width: 30rem) {
 
+  .aspect-ratio--home {
+    padding-bottom: calc(70% * 0.6771929825);
+    width: 70%;
+  } 
 }
 
 

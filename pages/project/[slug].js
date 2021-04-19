@@ -3,7 +3,7 @@ import Seo from '../../components/seo'
 import ProjectCard from '../../components/project'
 
 
-const Project = ({ global, project, contactpage }) => {
+const Project = ({ global, project, contactpage, scroll }) => {
 
 let nav = []
 
@@ -27,7 +27,7 @@ let nav = []
   return (
     <>
       <Seo seo={seo} />
-      <ProjectCard project={project} contactpage={contactpage} global={global}/>
+      <ProjectCard project={project} contactpage={contactpage} global={global} scroll={scroll}/>
     </>
   );
 };

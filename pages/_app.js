@@ -1,6 +1,6 @@
 import App from 'next/app'
 import Head from 'next/head'
-import { createContext, useEffect } from 'react'
+import { createContext, useEffect, useState } from 'react'
 import { getStrapiMedia, fetchAPI } from '../lib/api'
 import Nav from '../components/nav'
 import 'tachyons'
@@ -13,6 +13,7 @@ export const GlobalContext = createContext({})
 
 const EsemApp = ({ Component, pageProps, router }) => {
   const { global } = pageProps
+  const [scroll, setScroll] = useState(true)
 
   const pageTransition = {
     initial: {
@@ -35,6 +36,19 @@ const EsemApp = ({ Component, pageProps, router }) => {
     })
   }
 
+  useEffect(() => {
+    function handleScroll (e) {
+      const top = (window.scrollY < 100)
+      if (scroll !== top) {
+        setScroll(top)
+      }
+    }
+    window.addEventListener('scroll', handleScroll, false)
+    return () => {
+      window.removeEventListener('scroll', handleScroll, false)
+    }
+  }, [scroll])
+
   return (
     <>
       <Head>
@@ -42,13 +56,13 @@ const EsemApp = ({ Component, pageProps, router }) => {
           <link rel='shortcut icon' href={getStrapiMedia(global.favicon)} />}
       </Head>
       <div className='white'>
-        <Nav {...pageProps} />
+        <Nav {...pageProps} scroll={scroll} />
         <GlobalContext.Provider value={global}>
           <LazyMotion features={domAnimation}>
 
             <AnimatePresence exitBeforeEnter onExitComplete={handExitComplete}>
               <m.div className='motion-container' key={router.route} initial='initial' animate='in' exit='out' variants={pageTransition}>
-                <Component {...pageProps} />
+                <Component {...pageProps} scroll={scroll} />
               </m.div>
             </AnimatePresence>
           </LazyMotion>

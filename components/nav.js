@@ -4,7 +4,7 @@ import defaultLogo from '../assets/logo.png'
 import { getStrapiMedia } from '../lib/api'
 import { useRouter } from 'next/router'
 
-const Nav = ({ global, showLogo = true }) => {
+const Nav = ({ global, showLogo = true, scroll }) => {
   let logo
   let image
 
@@ -14,11 +14,9 @@ const Nav = ({ global, showLogo = true }) => {
   }
 
   const active = useRouter().pathname
-  let bg = ''
-  if (active === '/') bg = 'bg-nav'
 
   return (
-    <div className={`flex flex-column w-100 ttc f6 nav top-0 fixed ${bg}`}>
+    <div className={`flex flex-column w-100 ttc f6 nav top-0 fixed ${scroll ? 'bg-nav' : ''}`}>
       <div className='flex w-100 ph4 ph5-l pv4'>
         <div className='db dtc w-50 v-mid relative'>
           {showLogo &&
