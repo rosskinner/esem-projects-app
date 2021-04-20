@@ -290,7 +290,8 @@ strong {
 }
 
 .home-container {
-  height: calc(100vh - 12rem);
+  min-height: calc(100vh - 12rem);
+  /* height: calc(100vh - 12rem); */
   overflow: hidden;
   z-index: 1;
   
