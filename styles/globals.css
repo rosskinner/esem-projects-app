@@ -530,12 +530,18 @@ canvas {
   } 
 } */
 
-@media (min-aspect-ratio: 8/5) {
+@media (min-aspect-ratio: 8/5) and (max-aspect-ratio: 8/4) {
   .aspect-ratio--home {
     padding-bottom: calc(70% * 0.6771929825);
     width: 70%;
   } 
 
+  .home-container {
+    height: calc(100vh - 12rem);
+  }
+}
+
+@media (min-aspect-ratio: 8/4) {
   .home-container {
     min-height: calc(100vh - 12rem);
   }
