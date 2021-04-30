@@ -291,7 +291,7 @@ strong {
 
 .home-container {
   /* height: calc(100vh - 12rem); */
-  overflow: hidden;
+  /* overflow: hidden; */
   z-index: 1;
   
 }
@@ -438,8 +438,12 @@ canvas {
 /* }  */
 
 .aspect-ratio--home {
-  padding-bottom: 67.71929825%;
+  padding-bottom:109.31989924%;
   width: 100%;
+}
+
+.aspect-ratio--home-item {
+  padding-bottom: 109.31989924%;
 }
 
 .home-svg {
@@ -532,7 +536,7 @@ canvas {
 
 @media (min-aspect-ratio: 8/5) and (max-aspect-ratio: 8/4) {
   .aspect-ratio--home {
-    padding-bottom: calc(70% * 0.6771929825);
+    padding-bottom: calc(70% * 1.0931989924);
     width: 70%;
   } 
 
@@ -555,7 +559,7 @@ canvas {
 
 @media (min-width: 30rem) {
   .aspect-ratio--home {
-    padding-bottom: calc(70% * 0.6771929825);
+    padding-bottom: calc(70% * 1.0931989924);
     width: 70%;
   } 
   
