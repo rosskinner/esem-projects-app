@@ -14,7 +14,7 @@ const Home = ({ category, global }) => {
     if (animate) {
       changeProj = setInterval(function () {
         setCurrent(current => current === category.projects.length - 1 ? 0 : current + 1)
-      }, 1000)
+      }, 3000)
     }
 
     return () => {
