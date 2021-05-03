@@ -7,7 +7,7 @@ const Img = ({ media }) => {
   const width = 'w-100'
   const cols = 1
 
-  let gridStyle = 'onecol'
+  let gridStyle = 'onecol onecol-l'
 
   if (media.length > 1) {
     // width = 'w-100 w-50-l'
