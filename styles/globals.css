@@ -325,7 +325,7 @@ BIG CHANGES
 }
 
 .aspect-ratio--8x10 {
-  padding-bottom: 125%;
+  padding-bottom: calc(125% + 4rem);
 }
 
 .banner-container {
@@ -508,6 +508,39 @@ canvas {
   z-index: 10;
 }
 
+.audio p {
+  max-width: 64rem;
+}
+
+.grid {
+  display: grid;
+  grid-auto-rows: auto;
+  /* grid-auto-flow: column;  */
+  grid-auto-flow: row dense;
+  gap: 0.83rem 3.66rem;
+}
+
+
+/* .grid-item {
+  grid-row: span 3;
+} */
+
+.grid-item-portrait {
+  grid-row: span 2;
+}
+
+.grid-item-landscape {
+  grid-row: span 1;
+}
+
+.onecol{
+  grid-template-columns: repeat(1, 100%);
+}
+
+/* .twocol {
+  grid-template-columns: repeat(2, 50%);
+} */
+
 @media screen and (min-width: 30rem) {
 
   .card-img-ns {
@@ -625,15 +658,13 @@ canvas {
   .f8 {
     font-size: 0.6rem;
   }
+
+  .twocol-l{
+    grid-template-columns: repeat(2, calc(50% - 4rem));
+  }
   
 
 }
-
-
-
-
-
-
 
 @media screen and (min-width: 70rem) {
   .flex-row-xl {

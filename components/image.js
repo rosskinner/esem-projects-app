@@ -10,15 +10,20 @@ const Img = ({ media }) => {
   const [totalHeight, setTotalHeight] = useState(0)
   let width = 'w-100'
   let cols = 1
+
+  let gridStyle = 'onecol'
+
   if (media.length > 1) {
-    width = 'w-100 w-50-l'
-    cols = 2
+    // width = 'w-100 w-50-l'
+    // cols = 2
+    gridStyle = 'onecol twocol-l'
   }
   const animationVariants = {
     initial: { opacity: 0 },
     visible: { opacity: 1 },
     hidden: { opacity: 0 }
   }
+  
   
   const handleResize = () => {
     let tHeight = 0
@@ -72,6 +77,7 @@ const Img = ({ media }) => {
       if (media.length === 1) {
         setHeight = media[0].newHeight
       }
+      console.log(setHeight)
         setTotalHeight(setHeight)
     }
     
@@ -88,9 +94,9 @@ const Img = ({ media }) => {
   const style = totalHeight === 0 ? {height:'auto'} : {maxHeight :`${totalHeight}px`}
 
   return (
-    <div className={`flex flex-column`} >
+    <div className={`w-100`} >
       
-      <div style={style} className={`w-100 flex flex-column flex-wrap `}>
+      <div className={`w-100 grid ${gridStyle}`}>
         {media.map((me, key) => {
           const [loaded, setLoaded] = useState(false)
           const animationControls = useAnimation()
@@ -118,7 +124,7 @@ const Img = ({ media }) => {
             <LazyMotion key={key} features={domAnimation}>
 
 
-              <m.div key={key} className={`relative image-padding ${width}`}
+              <m.div key={key} className={`relative ${width} grid-item grid-item-${me.orientation}`}
               initial='initial'
               animate={animationControls}
               variants={animationVariants}
