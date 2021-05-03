@@ -14,7 +14,7 @@ const Home = ({ category, global }) => {
     if (animate) {
       changeProj = setInterval(function () {
         setCurrent(current => current === category.projects.length - 1 ? 0 : current + 1)
-      }, 3000)
+      }, 10000)
     }
 
     return () => {
@@ -38,6 +38,7 @@ const Home = ({ category, global }) => {
   const selectedUrl = (category.projects[current].collectionImage.formats === null || Object.keys(category.projects[current].collectionImage.formats).length === 0) ? category.projects[current].collectionImage : category.projects[current].collectionImage.formats.medium
   const imgSrcSelected = getStrapiMedia(selectedUrl)
   const background = { backgroundImage: `url(${imgSrcSelected})` }
+  if (selectedUrl.mime.includes('video')) imgSrcSelected.split('upload')[0]+='upload/q_auto:good' + imgSrcSelected.split('upload')[1]
 
   return (
     <div>
@@ -69,11 +70,12 @@ const Home = ({ category, global }) => {
 
             {category.projects.map((project, i) => {
               const url = (project.collectionImage.formats === null || Object.keys(project.collectionImage.formats).length === 0) ? project.collectionImage : project.collectionImage.formats.medium
-              const imgSrc = getStrapiMedia(url)
+              let imgSrc = getStrapiMedia(url)
               let show = 'o-0 below'
               let hover = ''
               if (current === i) show = 'o-100 above'
               if (current === i && !animate) hover = 'hover'
+              if (url.mime.includes('video')) imgSrc.split('upload')[0]+='upload/q_auto:good' + imgSrc.split('upload')[1]
 
               return (
                 <Link
@@ -107,17 +109,15 @@ const Home = ({ category, global }) => {
             })}
 
             <svg className='home-svg'>
-              <clipPath id='clip' clipPathUnits='objectBoundingBox' viewBox="0 0 397 434" transform='scale(0.002518891688, 0.002304147465)'>
-                <path d="M396.54 5.65751L380.289 0L231.792 427.732L248.043 433.389L396.54 5.65751Z" fill="white"/>
-                <path d="M0 118.343V312.948H115.196V261.994H55.3153V240.658H115.196V189.506H55.3153V169.496H115.196V118.343H0Z" fill="white"/>
-                <path d="M198.302 168.966V214.287H207.102C219.607 214.287 230.26 206.8 230.26 191.626C230.26 176.718 219.607 168.966 207.102 168.966H198.302ZM142.391 118.343H207.896C258.712 118.343 287.23 151.937 287.23 191.361C287.23 230.786 259.572 266.036 207.896 266.036H198.302V312.948H142.391V118.343Z" fill="white"/>
+              <clipPath id='clip' clipPathUnits='objectBoundingBox' viewBox="0 0 288 195" transform='scale(0.003472222222, 0.005128205128)'>
+                <path d="M0 0.343262V194.948H115.196V143.994H55.3153V122.658H115.196V71.506H55.3153V51.4956H115.196V0.343262H0Z" fill="white"/>
+                <path d="M198.302 50.9656V96.2871H207.102C219.607 96.2871 230.26 88.7998 230.26 73.6263C230.26 58.7179 219.607 50.9656 207.102 50.9656H198.302ZM142.391 0.343262H207.896C258.712 0.343262 287.23 33.9369 287.23 73.3613C287.23 112.786 259.572 148.036 207.896 148.036H198.302V194.948H142.391V0.343262Z" fill="white"/>
               </clipPath>
             </svg>
 
-            <svg className={`logo-outline ${outline}`} width='100%' viewBox="0 0 397 434">
-              <path d="M396.54 5.65751L380.289 0L231.792 427.732L248.043 433.389L396.54 5.65751Z" fill="white"/>
-              <path d="M0 118.343V312.948H115.196V261.994H55.3153V240.658H115.196V189.506H55.3153V169.496H115.196V118.343H0Z" fill="white"/>
-              <path d="M198.302 168.966V214.287H207.102C219.607 214.287 230.26 206.8 230.26 191.626C230.26 176.718 219.607 168.966 207.102 168.966H198.302ZM142.391 118.343H207.896C258.712 118.343 287.23 151.937 287.23 191.361C287.23 230.786 259.572 266.036 207.896 266.036H198.302V312.948H142.391V118.343Z" fill="white"/>
+            <svg className={`logo-outline ${outline}`} width='100%' viewBox="0 0 288 195">
+              <path d="M0 0.343262V194.948H115.196V143.994H55.3153V122.658H115.196V71.506H55.3153V51.4956H115.196V0.343262H0Z" fill="white"/>
+              <path d="M198.302 50.9656V96.2871H207.102C219.607 96.2871 230.26 88.7998 230.26 73.6263C230.26 58.7179 219.607 50.9656 207.102 50.9656H198.302ZM142.391 0.343262H207.896C258.712 0.343262 287.23 33.9369 287.23 73.3613C287.23 112.786 259.572 148.036 207.896 148.036H198.302V194.948H142.391V0.343262Z" fill="white"/>
             </svg>
 
           </div>

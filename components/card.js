@@ -82,6 +82,7 @@ const Content = ({ width, project, thumbnail, margin, ratio, category, image, im
   const checkLoaded = (e) => {
     setLoaded(true)
   }
+  if (imageObject.mime.includes('video')) thumbnail.split('upload')[0] += 'upload/q_auto:good' + thumbnail.split('upload')[1]
 
   return (
     <>

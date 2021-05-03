@@ -438,12 +438,12 @@ canvas {
 /* }  */
 
 .aspect-ratio--home {
-  padding-bottom:109.31989924%;
+  padding-bottom:67.70833333%;
   width: 100%;
 }
 
 .aspect-ratio--home-item {
-  padding-bottom: 109.31989924%;
+  padding-bottom: 67.70833333%;
 }
 
 .home-svg {
@@ -569,8 +569,8 @@ canvas {
 
 @media (min-aspect-ratio: 8/5) and (max-aspect-ratio: 8/4) {
   .aspect-ratio--home {
-    padding-bottom: calc(70% * 1.0931989924);
-    width: 70%;
+    padding-bottom: calc(80% * 0.6770833333);
+    width: 80%;
   } 
 
   .home-container {
@@ -592,8 +592,8 @@ canvas {
 
 @media (min-width: 30rem) {
   .aspect-ratio--home {
-    padding-bottom: calc(70% * 1.0931989924);
-    width: 70%;
+    padding-bottom: calc(80% * 0.6770833333);
+    width: 80%;
   } 
   
 }
