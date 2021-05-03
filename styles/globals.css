@@ -662,6 +662,10 @@ canvas {
   .twocol-l{
     grid-template-columns: repeat(2, calc(50% - 4rem));
   }
+
+  .onecol{
+    grid-template-columns: repeat(1, calc(100% - 4rem));
+  }
   
 
 }
