@@ -63,6 +63,7 @@ h1,h2,h3,h4,h5,h6 {
 }
 
 
+
 .color-block {
   background-color: #fff;
   color: #000;
@@ -374,6 +375,10 @@ blockquote {
   animation-iteration-count: infinite;
   animation-direction: alternate;
   animation-name: bounce;
+}
+
+.about a {
+  text-decoration: underline;
 }
 
 @keyframes bounce {

@@ -15,7 +15,7 @@ const Projects = ({ aboutpage, contactpage, teamMembers, clients, awards }) => {
 
   return (
     <>
-      <div className='container pt6'>
+      <div className='container pt6 about'>
         <Seo seo={seo} />
         <div className='flex flex-wrap f4'>
 
@@ -29,7 +29,7 @@ const Projects = ({ aboutpage, contactpage, teamMembers, clients, awards }) => {
             <div className='w-100 mb4 mb7-l  ph4 ph5-l flex flex-column flex-row-l'>
               <div className='w-100 w-25-l'>
                 <p className='f2'>{aboutpage.heading}</p>
-                <span className='details f6'>
+                <span className='details f4'>
                   <ReactMarkdown source={aboutpage.teamContent} escapeHtml={false} />
                 </span>
               </div>
@@ -52,11 +52,11 @@ const Projects = ({ aboutpage, contactpage, teamMembers, clients, awards }) => {
               <span className='details flex flex-column flex-row-l flex-wrap w-100'>
                 {aboutpage.services.map((service, i) => {
                   return (
-                    <div className='w-100 flex flex-column flex-row-l ph4-l mv3 pt4 f4 service' key={i}>
-                      <div className='w-100 w-25-l'>
+                    <div className='w-100 flex flex-column flex-row-l pr4-l mv3 pt4 f4 service' key={i}>
+                      {/* <div className='w-100 w-25-l'>
                         <p className='pl3-l'>0{i + 1}.</p>
-                      </div>
-                      <p className='w-100 w-25-l ph3-l'>{service.title}</p>
+                      </div> */}
+                      <p className='w-100 w-25-l pr3-l'>{service.title}</p>
                       <ReactMarkdown className='w-100 w-50-l pl4-l' source={service.content} escapeHtml={false} />
                     </div>
 
@@ -64,37 +64,34 @@ const Projects = ({ aboutpage, contactpage, teamMembers, clients, awards }) => {
                 })}
               </span>
             </div>
+            <div className='w-100 flex flex-column flex-row-l'>
 
-            <div className='w-100 pt4 pt5-l pb5 f4 mb4 mb7-l ph4 ph5-l color-block'>
-              <div className='w-100'>
-                <p className='f2'>Awards</p>
-
-              </div>
-              <div className='projects w-100 flex flex-column flex-row-l flex-wrap mv5-l pt3-l details f4 w-75'>
-                <div className='w-100 w-25-l mb3'>
-                  <span className='details f6'>{aboutpage.awardsContent}</span>
+              <div className='w-100 w-50-l pt4 pt5-l pb5 f4 mb4 mb7-l pr2 pl4 pl5-l br-l'>
+                <div className='w-100'>
+                  <p className='f2'>Awards</p>
                 </div>
-                {awards.map((award, i) => {
-                  return (
-                    <div key={i} className='w-100 w-25-l ph4-l mb3'>
-                      <a className='f4 details' href={award.link} rel='noreferrer' target='_blank'>{award.title}</a>
-                    </div>
-                  )
-                })}
+                <div className='projects w-100 flex flex-column flex-row-l flex-wrap details f4 w-75'>
+                  <div className='w-100 w-50-l mb3 pr3-l'>
+                    <span className='details f4'>{aboutpage.awardsContent}</span>
+                  </div>
+                  <div className='w-100 w-50-l'>
+                    {awards.map((award, i) => {
+                      return (
+                        <div key={i} className='w-100 ph4-l mb3'>
+                          <a className='f4 details' href={award.link} rel='noreferrer' target='_blank'>{award.title}</a>
+                        </div>
+                      )
+                    })}
+                  </div>
+                </div>
               </div>
-            </div>
 
-            <div className='w-100 f4 ph4 ph5-l mb7 flex flex-column flex-row-xl'>
-              <div className='w-100 w-25-xl'>
-                <p className='f2'>Clients</p>
-                <p className='w-100 w-70-l details f6'>{aboutpage.clientContent}</p>
-              </div>
-              <div className='mv3 w-100 w-75-xl flex flex-row flex-wrap details mv5'>
-                {clients.map((client, i) => {
-                  return (
-                    <Thumbnail className='w-sixth w-sixth-m mv3 mv0-l ph2-ns ph4-l center' key={i} index={i} item={client} />
-                  )
-                })}
+              <div className='w-100 w-50-l f4 pt4 pt5-l ph4 ph5-l mb7 flex flex-column flex-row-l'>
+                <div className='w-100 mw7'>
+                  <p className='f2'>Clients</p>
+                  <ReactMarkdown className='w-100 w-70-l details f4'>{aboutpage.clientContent}</ReactMarkdown>
+                </div>
+
               </div>
             </div>
 
