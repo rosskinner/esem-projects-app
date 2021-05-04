@@ -109,6 +109,7 @@ const Home = ({ category, global }) => {
                         className={`home-image aspect-ratio--object cover ${loaded ? 'o-1' : 'o-0'}`} src={imgSrc}
                         alt={url.alternativeText}
                         onPlay={checkLoaded}
+                        onCanPlay={checkLoaded}
                       />}
                     {!loaded &&
                       <div className='home-image aspect-ratio--object cover bg-white' />}
