@@ -218,6 +218,7 @@ strong {
 
 .project-thumb {
   background-position: center;
+  object-fit: cover;
 }
 
 /* .card-img {
@@ -436,9 +437,7 @@ canvas {
   -moz-clip-path: url(#clip);
   -webkit-clip-path: url(#clip);
   clip-path: url(#clip);
-}
-.clip {
-  
+  transition: opacity 1s ease-in;
 }
 
 /* .aspect-ratio--home {

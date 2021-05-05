@@ -9,13 +9,16 @@ const Home = ({ category, global }) => {
   const [current, setCurrent] = useState(0)
   const [animate, setAnimate] = useState(true)
   const [loaded, setLoaded] = useState(false)
+  const [play, setPlay] = useState(false)
+  const [suspend, setSuspend] = useState(false)
 
   useEffect(() => {
     let changeProj
+    const time = play ? 10000 : 6000
     if (animate) {
       changeProj = setInterval(function () {
         setCurrent(current => current === category.projects.length - 1 ? 0 : current + 1)
-      }, 10000)
+      }, time)
     }
 
     return () => {
@@ -27,6 +30,14 @@ const Home = ({ category, global }) => {
     setLoaded(true)
   }
 
+  const onPlay = () => {
+    setLoaded(true)
+    setPlay(true)
+  }
+  const checkSuspended = () => {
+    if (!play) setSuspend(true)
+  }
+
   const mouseEnter = (e) => {
     setAnimate(false)
   }
@@ -34,6 +45,7 @@ const Home = ({ category, global }) => {
   const mouseLeave = (e) => {
     setAnimate(true)
   }
+
   let outline
 
   if (!animate) {
@@ -47,24 +59,38 @@ const Home = ({ category, global }) => {
         const url = (project.collectionImage.formats === null || Object.keys(project.collectionImage.formats).length === 0) ? project.collectionImage : project.collectionImage.formats.medium
         let imgSrc = getStrapiMedia(url)
         if (url.mime.includes('video')) imgSrc = imgSrc.split('upload')[0] += 'upload/q_auto:good' + imgSrc.split('upload')[1]
+        if (suspend) {
+          const remove = imgSrc.split('/')
+          remove[remove.length - 1] = url.hash + '.png'
+          imgSrc = remove.join('/')
+        }
+
         return (
-          <div key={i}>
+          <div key={i} className={`${current === i ? 'db' : 'dn'}`}>
             {url.mime.includes('image') &&
               <Image
-                className={`absolute w-100 h-100 bg-home fixed ${outline} ${current === i ? 'db' : 'dn'}`} src={imgSrc}
+                className={`absolute w-100 h-100 bg-home fixed ${outline} `} src={imgSrc}
                 layout='fill'
                 objectFit='cover'
                 alt={url.alternativeText}
               />}
 
-            {url.mime.includes('video') &&
+            {url.mime.includes('video') && !suspend &&
               <video
                 autoPlay
                 loop
                 playsInline
                 preload='auto'
                 muted
-                className={`home-video absolute w-100 h-100 bg-home fixed ${outline} ${current === i ? 'db' : 'dn'}`} src={imgSrc}
+                className={`home-video absolute w-100 h-100 bg-home fixed ${outline} `} src={imgSrc}
+                alt={url.alternativeText}
+                onSuspend={checkSuspended}
+              />}
+            {suspend &&
+              <Image
+                className={`absolute w-100 h-100 bg-home fixed ${outline} `} src={imgSrc}
+                layout='fill'
+                objectFit='cover'
                 alt={url.alternativeText}
               />}
 
@@ -84,6 +110,11 @@ const Home = ({ category, global }) => {
               if (current === i) show = 'o-100 above'
               if (current === i && !animate) hover = 'hover'
               if (url.mime.includes('video')) imgSrc = imgSrc.split('upload')[0] += 'upload/q_auto:good' + imgSrc.split('upload')[1]
+              if (suspend) {
+                const remove = imgSrc.split('/')
+                remove[remove.length - 1] = url.hash + '.png'
+                imgSrc = remove.join('/')
+              }
 
               return (
                 <Link
@@ -99,7 +130,7 @@ const Home = ({ category, global }) => {
                         alt={url.alternativeText}
                       />}
 
-                    {url.mime.includes('video') &&
+                    {url.mime.includes('video') && !suspend &&
                       <div className={`home-image aspect-ratio--object cover ${loaded ? 'o-1' : 'o-0'}`}>
                         <video
                           autoPlay
@@ -109,13 +140,21 @@ const Home = ({ category, global }) => {
                           muted
                           src={imgSrc}
                           alt={url.alternativeText}
-                          onPlay={checkLoaded}
+                          onPlay={onPlay}
                           className='vid cover w-100 h-100'
                           onCanPlay={checkLoaded}
+                          onSuspend={checkSuspended}
                         />
                       </div>}
-                    {!loaded &&
-                      <div className='home-image aspect-ratio--object cover bg-white' />}
+                    {suspend &&
+                      <Image
+                        className='home-image aspect-ratio--object cover' src={imgSrc}
+                        layout='fill'
+                        objectFit='cover'
+                        alt={url.alternativeText}
+                      />}
+
+                    <div className={`home-image aspect-ratio--object cover bg-white ${!loaded && !suspend ? 'o-1' : 'o-0'}`} />
 
                   </div>
 

@@ -56,6 +56,8 @@ const Card = ({ project, width, category, path, link = true, image = false, desc
 const Content = ({ width, project, thumbnail, margin, ratio, category, image, imageObject, description }) => {
   let cat = [category]
   const [loaded, setLoaded] = useState(false)
+  const [play, setPlay] = useState(false)
+  const [suspend, setSuspend] = useState(false)
   const animationControls = useAnimation()
 
   const animationVariants = {
@@ -82,7 +84,20 @@ const Content = ({ width, project, thumbnail, margin, ratio, category, image, im
   const checkLoaded = (e) => {
     setLoaded(true)
   }
+
+  const onPlay = () => {
+    setLoaded(true)
+    setPlay(true)
+  }
+  const checkSuspended = () => {
+    if (!play) setSuspend(true)
+  }
   if (imageObject.mime.includes('video')) thumbnail.split('upload')[0] += 'upload/q_auto:good' + thumbnail.split('upload')[1]
+  if (suspend) {
+    const remove = thumbnail.split('/')
+    remove[remove.length - 1] = imageObject.hash + '.png'
+    thumbnail = remove.join('/')
+  }
 
   return (
     <>
@@ -108,7 +123,7 @@ const Content = ({ width, project, thumbnail, margin, ratio, category, image, im
               onLoad={checkLoaded}
             />}
 
-          {imageObject.mime.includes('video') &&
+          {imageObject.mime.includes('video') && !suspend &&
             <video
               autoPlay
               loop
@@ -117,7 +132,16 @@ const Content = ({ width, project, thumbnail, margin, ratio, category, image, im
               muted
               className='project-thumb aspect-ratio--object cover' src={thumbnail}
               alt={imageObject.alternativeText}
-              onPlay={checkLoaded}
+              onPlay={onPlay}
+              onCanPlay={checkLoaded}
+              onSuspend={checkSuspended}
+            />}
+          {suspend &&
+            <Image
+              className='project-thumb aspect-ratio--object cover' src={thumbnail} layout='fill'
+              objectFit='cover'
+              alt={imageObject.alternativeText}
+              onLoad={checkLoaded}
             />}
 
         </motion.div>
