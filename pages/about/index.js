@@ -4,10 +4,8 @@ import Seo from '../../components/seo'
 import { fetchAPI } from '../../lib/api'
 import ReactMarkdown from 'react-markdown'
 import Card from '../../components/card'
-import Thumbnail from '../../components/thumbnail'
 
 const Projects = ({ aboutpage, contactpage, teamMembers, clients, awards }) => {
-  console.log(contactpage)
   const seo = {
     metaTitle: aboutpage.heading,
     metaDescription: aboutpage.content
