@@ -131,6 +131,7 @@ const Home = ({ category, global }) => {
                         layout='fill'
                         objectFit='cover'
                         alt={url.alternativeText}
+                        onLoad={checkLoaded}
                       />}
 
                     {url.mime.includes('video') && !suspend &&
@@ -155,9 +156,10 @@ const Home = ({ category, global }) => {
                         layout='fill'
                         objectFit='cover'
                         alt={url.alternativeText}
+                        onLoad={checkLoaded}
                       />}
 
-                    <div className={`home-image aspect-ratio--object cover bg-white ${!loaded && !suspend ? 'o-1' : 'o-0'}`} />
+                    <div className={`home-image aspect-ratio--object cover bg-white ${!loaded ? 'o-1' : 'o-0'}`} />
 
                   </div>
 
