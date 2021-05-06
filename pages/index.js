@@ -31,6 +31,7 @@ const Home = ({ category, global }) => {
   }
 
   const onPlay = () => {
+    // console.log('play')
     setLoaded(true)
     setPlay(true)
   }
@@ -54,6 +55,7 @@ const Home = ({ category, global }) => {
   if (!animate) {
     outline = 'hover'
   }
+  // console.log('loaded', loaded)
 
   return (
     <div>
@@ -63,11 +65,10 @@ const Home = ({ category, global }) => {
         let imgSrc = getStrapiMedia(url)
         if (url.mime.includes('video')) imgSrc = imgSrc.split('upload')[0] += 'upload/q_auto:good' + imgSrc.split('upload')[1]
         let fallback = ''
-        if (!play) {
-          const remove = imgSrc.split('/')
-          remove[remove.length - 1] = url.hash + '.png'
-          fallback = remove.join('/')
-        }
+
+        const remove = imgSrc.split('/')
+        remove[remove.length - 1] = url.hash + '.png'
+        fallback = remove.join('/')
 
         return (
           <div key={i} className={`${current === i ? 'db' : 'dn'}`}>
@@ -91,7 +92,7 @@ const Home = ({ category, global }) => {
                 onSuspend={checkSuspended}
               />}
 
-            {url.mime.includes('video') && !play &&
+            {url.mime.includes('video') && (!play || suspend) &&
               <Image
                 className={`absolute w-100 h-100 bg-home fixed ${outline} `} src={fallback}
                 layout='fill'
@@ -116,11 +117,10 @@ const Home = ({ category, global }) => {
               if (current === i && !animate) hover = 'hover'
               if (url.mime.includes('video')) imgSrc = imgSrc.split('upload')[0] += 'upload/q_auto:good' + imgSrc.split('upload')[1]
               let fallback = ''
-              if (!play) {
-                const remove = imgSrc.split('/')
-                remove[remove.length - 1] = url.hash + '.png'
-                fallback = remove.join('/')
-              }
+
+              const remove = imgSrc.split('/')
+              remove[remove.length - 1] = url.hash + '.png'
+              fallback = remove.join('/')
 
               return (
                 <Link
@@ -153,7 +153,7 @@ const Home = ({ category, global }) => {
                           onSuspend={checkSuspended}
                         />
                       </div>}
-                    {url.mime.includes('video') && !play &&
+                    {url.mime.includes('video') && (!play || suspend) &&
                       <Image
                         className='home-image aspect-ratio--object cover' src={fallback}
                         layout='fill'
