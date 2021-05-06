@@ -81,6 +81,7 @@ a {
 
 .f4 {
   line-height: 1.5rem;
+  font-size: 1.15rem;
 }
 
 .heading {
@@ -560,8 +561,8 @@ canvas {
 }
 
 .about-heading {
-  font-size: 5rem;
-  line-height: 4.2rem;
+  font-size: 3rem;
+  line-height: 2.5rem;
   color: #CFB7C1;
 }
 
@@ -580,6 +581,12 @@ canvas {
   } */
   .banner-container {
   height: 100vh;
+  }
+
+  .about-heading {
+    font-size: 5rem;
+    line-height: 4.2rem;
+    color: #CFB7C1;
   }
 }
 /* 

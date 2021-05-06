@@ -3,7 +3,7 @@ import ReactMarkdown from 'react-markdown'
 import { getStrapiURL, getStrapiMedia } from '../lib/api'
 import Moment from 'react-moment'
 import Link from 'next/link'
-import { m, LazyMotion, useAnimation } from 'framer-motion'
+import { m, LazyMotion, useAnimation, domAnimation } from 'framer-motion'
 import Image from 'next/image'
 
 const Article = ({ article }) => {
@@ -71,7 +71,7 @@ const Article = ({ article }) => {
       <div className='project-details w-100 w-75-l self-end-l'>
         <div className='project-container top-0 w-100'>
 
-          <LazyMotion>
+          <LazyMotion features={domAnimation}>
             <m.div
               className='banner-container w-100 flex center relative' initial='initial'
               animate={animationControls}

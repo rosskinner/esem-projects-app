@@ -4,11 +4,8 @@ import Seo from '../../components/seo'
 import { fetchAPI, getStrapiMedia } from '../../lib/api'
 import ReactMarkdown from 'react-markdown'
 import Card from '../../components/card'
-import Link from 'next/link'
-import { AnimatePresence, motion, useAnimation } from 'framer-motion'
-import Image from 'next/image'
 
-const Projects = ({ aboutpage, contactpage, teamMembers, projects, featured, awards }) => {
+const Projects = ({ aboutpage, projects, featured, awards }) => {
   const seo = {
     metaTitle: aboutpage.heading,
     metaDescription: aboutpage.content
@@ -17,8 +14,6 @@ const Projects = ({ aboutpage, contactpage, teamMembers, projects, featured, awa
   const url = (aboutpage.aboutImage.formats === null || Object.keys(aboutpage.aboutImage.formats).length === 0) ? aboutpage.aboutImage : aboutpage.aboutImage.formats.medium
   const imgSrc = getStrapiMedia(url)
 
-  console.log('featured.projects', aboutpage)
-
   return (
     <>
       <div className='container pt6 about'>
@@ -26,7 +21,7 @@ const Projects = ({ aboutpage, contactpage, teamMembers, projects, featured, awa
         <div className='flex flex-wrap f4'>
 
           <div className='ph4 ph5-l w-100 w-70-l mb4 mb7-l pr5'>
-            <h1 className='about-heading mv3 mv5-l'>{aboutpage.heading}</h1>
+            <h1 className='about-heading about-heading-l mv4 mv5-l'>{aboutpage.heading}</h1>
             <img
               className='w-100'
               src={imgSrc}
@@ -135,17 +130,15 @@ const Projects = ({ aboutpage, contactpage, teamMembers, projects, featured, awa
 
 export async function getStaticProps ({ params }) {
   // Run API calls in parallel
-  const [aboutpage, contactpage, teamMembers, projects, featured, awards] = await Promise.all([
+  const [aboutpage, projects, featured, awards] = await Promise.all([
     fetchAPI('/about-page'),
-    fetchAPI('/contact-page'),
-    fetchAPI('/team-members'),
     fetchAPI('/projects'),
     fetchAPI('/categories?slug=featured'),
     fetchAPI('/awards')
   ])
 
   return {
-    props: { aboutpage, contactpage, teamMembers, projects, featured: featured[0], awards },
+    props: { aboutpage, projects, featured: featured[0], awards },
     revalidate: 1
   }
 }
