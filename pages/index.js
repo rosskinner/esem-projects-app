@@ -62,10 +62,11 @@ const Home = ({ category, global }) => {
         const url = (project.collectionImage.formats === null || Object.keys(project.collectionImage.formats).length === 0) ? project.collectionImage : project.collectionImage.formats.medium
         let imgSrc = getStrapiMedia(url)
         if (url.mime.includes('video')) imgSrc = imgSrc.split('upload')[0] += 'upload/q_auto:good' + imgSrc.split('upload')[1]
-        if (suspend) {
+        let fallback = ''
+        if (!play) {
           const remove = imgSrc.split('/')
           remove[remove.length - 1] = url.hash + '.png'
-          imgSrc = remove.join('/')
+          fallback = remove.join('/')
         }
 
         return (
@@ -78,20 +79,21 @@ const Home = ({ category, global }) => {
                 alt={url.alternativeText}
               />}
 
-            {url.mime.includes('video') && !suspend &&
+            {url.mime.includes('video') &&
               <video
                 autoPlay
                 loop
                 playsInline
                 preload='auto'
                 muted
-                className={`home-video absolute w-100 h-100 bg-home fixed ${outline} `} src={imgSrc}
+                className={`home-video absolute w-100 h-100 bg-home fixed ${play ? outline : 'o-0'}`} src={imgSrc}
                 alt={url.alternativeText}
                 onSuspend={checkSuspended}
               />}
+
             {url.mime.includes('video') && !play &&
               <Image
-                className={`absolute w-100 h-100 bg-home fixed ${outline} `} src={imgSrc}
+                className={`absolute w-100 h-100 bg-home fixed ${outline} `} src={fallback}
                 layout='fill'
                 objectFit='cover'
                 alt={url.alternativeText}
@@ -113,10 +115,11 @@ const Home = ({ category, global }) => {
               if (current === i) show = 'o-100 above'
               if (current === i && !animate) hover = 'hover'
               if (url.mime.includes('video')) imgSrc = imgSrc.split('upload')[0] += 'upload/q_auto:good' + imgSrc.split('upload')[1]
-              if (suspend) {
+              let fallback = ''
+              if (!play) {
                 const remove = imgSrc.split('/')
                 remove[remove.length - 1] = url.hash + '.png'
-                imgSrc = remove.join('/')
+                fallback = remove.join('/')
               }
 
               return (
@@ -134,7 +137,7 @@ const Home = ({ category, global }) => {
                         onLoad={checkLoaded}
                       />}
 
-                    {url.mime.includes('video') && !suspend &&
+                    {url.mime.includes('video') &&
                       <div className={`home-image aspect-ratio--object cover ${loaded ? 'o-1' : 'o-0'}`}>
                         <video
                           autoPlay
@@ -152,7 +155,7 @@ const Home = ({ category, global }) => {
                       </div>}
                     {url.mime.includes('video') && !play &&
                       <Image
-                        className='home-image aspect-ratio--object cover' src={imgSrc}
+                        className='home-image aspect-ratio--object cover' src={fallback}
                         layout='fill'
                         objectFit='cover'
                         alt={url.alternativeText}
@@ -167,14 +170,14 @@ const Home = ({ category, global }) => {
               )
             })}
 
-            <svg className='home-svg pointer'>
+            <svg className='home-svg'>
               <clipPath id='clip' clipPathUnits='objectBoundingBox' viewBox='0 0 288 195' transform='scale(0.003472222222, 0.005128205128)'>
                 <path d='M0 0.343262V194.948H115.196V143.994H55.3153V122.658H115.196V71.506H55.3153V51.4956H115.196V0.343262H0Z' fill='white' />
                 <path d='M198.302 50.9656V96.2871H207.102C219.607 96.2871 230.26 88.7998 230.26 73.6263C230.26 58.7179 219.607 50.9656 207.102 50.9656H198.302ZM142.391 0.343262H207.896C258.712 0.343262 287.23 33.9369 287.23 73.3613C287.23 112.786 259.572 148.036 207.896 148.036H198.302V194.948H142.391V0.343262Z' fill='white' />
               </clipPath>
             </svg>
 
-            <svg className={`logo-outline ${outline}`} width='100%' viewBox='0 0 288 195'>
+            <svg className={`logo-outline pointer ${outline}`} width='100%' viewBox='0 0 288 195'>
               <path d='M0 0.343262V194.948H115.196V143.994H55.3153V122.658H115.196V71.506H55.3153V51.4956H115.196V0.343262H0Z' fill='white' />
               <path d='M198.302 50.9656V96.2871H207.102C219.607 96.2871 230.26 88.7998 230.26 73.6263C230.26 58.7179 219.607 50.9656 207.102 50.9656H198.302ZM142.391 0.343262H207.896C258.712 0.343262 287.23 33.9369 287.23 73.3613C287.23 112.786 259.572 148.036 207.896 148.036H198.302V194.948H142.391V0.343262Z' fill='white' />
             </svg>

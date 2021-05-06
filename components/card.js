@@ -93,10 +93,11 @@ const Content = ({ width, project, thumbnail, margin, ratio, category, image, im
     if (!play) setSuspend(true)
   }
   if (imageObject.mime.includes('video')) thumbnail.split('upload')[0] += 'upload/q_auto:good' + thumbnail.split('upload')[1]
-  if (suspend) {
+  let fallback = ''
+  if (!play) {
     const remove = thumbnail.split('/')
     remove[remove.length - 1] = imageObject.hash + '.png'
-    thumbnail = remove.join('/')
+    fallback = remove.join('/')
   }
 
   return (
@@ -123,7 +124,7 @@ const Content = ({ width, project, thumbnail, margin, ratio, category, image, im
               onLoad={checkLoaded}
             />}
 
-          {imageObject.mime.includes('video') && !suspend &&
+          {imageObject.mime.includes('video') &&
             <video
               autoPlay
               loop
@@ -136,9 +137,10 @@ const Content = ({ width, project, thumbnail, margin, ratio, category, image, im
               onCanPlay={checkLoaded}
               onSuspend={checkSuspended}
             />}
+
           {imageObject.mime.includes('video') && !play &&
             <Image
-              className='project-thumb aspect-ratio--object cover' src={thumbnail} layout='fill'
+              className='project-thumb aspect-ratio--object cover' src={fallback} layout='fill'
               objectFit='cover'
               alt={imageObject.alternativeText}
               onLoad={checkLoaded}

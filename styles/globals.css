@@ -459,6 +459,7 @@ canvas {
   height: 100%;
   position: absolute;
   z-index: 100;
+  pointer-events: none;
 }
 
 .vid{
@@ -485,6 +486,7 @@ canvas {
   z-index: 100;
   opacity: 0;
   transition: opacity ease-in-out 1s;
+  pointer-events: none;
 }
 
 .hover.logo-outline {
