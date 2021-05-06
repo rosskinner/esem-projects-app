@@ -20,7 +20,7 @@ const Projects = ({ aboutpage, projects, featured, awards }) => {
         <Seo seo={seo} />
         <div className='flex flex-wrap f4'>
 
-          <div className='ph4 ph5-l w-100 w-70-l mb4 mb7-l pr5'>
+          <div className='ph4 ph5-l w-100 w-70-l mb4 mb6-l pr5'>
             <h1 className='about-heading about-heading-l mv4 mv5-l'>{aboutpage.heading}</h1>
             <img
               className='w-100'
@@ -34,7 +34,7 @@ const Projects = ({ aboutpage, projects, featured, awards }) => {
 
           </div>
           <div className='w-100'>
-            <div className='w-100 mb4 mb7-l  ph4 ph5-l flex flex-column flex-row-l'>
+            <div className='w-100 mb4 mb6-l  ph4 ph5-l flex flex-column flex-row-l'>
               <div className='w-100 w-25-l'>
                 <p className='f2'>{aboutpage.teamHeading}</p>
                 <span className='details f4'>
@@ -51,7 +51,7 @@ const Projects = ({ aboutpage, projects, featured, awards }) => {
               </div>
             </div>
 
-            <div className='w-100 mb4 mb7-l  ph4 ph5-l flex flex-column flex-row-l'>
+            <div className='w-100 mb4 mb6-l  ph4 ph5-l flex flex-column flex-row-l'>
               <div className='w-100 w-25-l'>
                 <p className='f2'>{aboutpage.projectsHeading}</p>
                 <span className='details f4'>
@@ -69,7 +69,7 @@ const Projects = ({ aboutpage, projects, featured, awards }) => {
               </div>
             </div>
 
-            <div className='w-100 f4 ph4 ph5-l mb4 mb7-l flex flex-column'>
+            <div className='w-100 f4 ph4 ph5-l mb4 mb6-l flex flex-column'>
               <div className='w-100 w-25-l'>
                 <p className='f2'>Our Services</p>
 
@@ -92,7 +92,7 @@ const Projects = ({ aboutpage, projects, featured, awards }) => {
             </div>
             <div className='w-100 flex flex-column flex-row-l'>
 
-              <div className='w-100 w-50-l pt4 pt5-l pb5 f4 mb4 mb7-l pr2 pl4 pl5-l br-l'>
+              <div className='w-100 w-50-l pt4 pt5-l pb5 f4 mb4 mb6-l pr2 pl4 pl5-l br-l'>
                 <div className='w-100'>
                   <p className='f2'>Awards</p>
                 </div>
@@ -112,7 +112,7 @@ const Projects = ({ aboutpage, projects, featured, awards }) => {
                 </div>
               </div>
 
-              <div className='w-100 w-50-l f4 pt4 pt5-l ph4 ph5-l mb7 flex flex-column flex-row-l'>
+              <div className='w-100 w-50-l f4 pt4 pt5-l ph4 ph5-l mb6 flex flex-column flex-row-l'>
                 <div className='w-100 mw7'>
                   <p className='f2'>Clients</p>
                   <ReactMarkdown className='w-100 w-70-l details f4'>{aboutpage.clientContent}</ReactMarkdown>
