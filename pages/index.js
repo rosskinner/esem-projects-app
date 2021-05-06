@@ -35,7 +35,10 @@ const Home = ({ category, global }) => {
     setPlay(true)
   }
   const checkSuspended = () => {
-    if (!play) setSuspend(true)
+    if (!play) {
+      setSuspend(true)
+      setLoaded(true)
+    }
   }
 
   const mouseEnter = (e) => {
@@ -86,7 +89,7 @@ const Home = ({ category, global }) => {
                 alt={url.alternativeText}
                 onSuspend={checkSuspended}
               />}
-            {suspend &&
+            {url.mime.includes('video') && !play &&
               <Image
                 className={`absolute w-100 h-100 bg-home fixed ${outline} `} src={imgSrc}
                 layout='fill'
@@ -146,7 +149,7 @@ const Home = ({ category, global }) => {
                           onSuspend={checkSuspended}
                         />
                       </div>}
-                    {suspend &&
+                    {url.mime.includes('video') && !play &&
                       <Image
                         className='home-image aspect-ratio--object cover' src={imgSrc}
                         layout='fill'

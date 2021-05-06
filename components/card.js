@@ -136,7 +136,7 @@ const Content = ({ width, project, thumbnail, margin, ratio, category, image, im
               onCanPlay={checkLoaded}
               onSuspend={checkSuspended}
             />}
-          {suspend &&
+          {imageObject.mime.includes('video') && !play &&
             <Image
               className='project-thumb aspect-ratio--object cover' src={thumbnail} layout='fill'
               objectFit='cover'
