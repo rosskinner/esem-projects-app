@@ -131,7 +131,7 @@ const Content = ({ width, project, thumbnail, margin, ratio, category, image, im
               playsInline
               preload='auto'
               muted
-              className='project-thumb aspect-ratio--object cover' src={thumbnail}
+              className={`project-thumb aspect-ratio--object cover ${play ? 'o-1' : 'o-0'}`} src={thumbnail}
               alt={imageObject.alternativeText}
               onPlay={onPlay}
               onCanPlay={checkLoaded}

@@ -138,13 +138,14 @@ const Home = ({ category, global }) => {
                       />}
 
                     {url.mime.includes('video') &&
-                      <div className={`home-image aspect-ratio--object cover ${loaded ? 'o-1' : 'o-0'}`}>
+                      <div className={`home-image aspect-ratio--object cover ${play ? 'o-1' : 'o-0'}`}>
                         <video
                           autoPlay
                           loop
                           playsInline
                           preload='auto'
                           muted
+                          controls
                           src={imgSrc}
                           alt={url.alternativeText}
                           onPlay={onPlay}
