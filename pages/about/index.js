@@ -11,7 +11,7 @@ const Projects = ({ aboutpage, projects, featured, awards }) => {
     metaDescription: aboutpage.content
   }
 
-  const url = (aboutpage.aboutImage.formats === null || Object.keys(aboutpage.aboutImage.formats).length === 0) ? aboutpage.aboutImage : aboutpage.aboutImage.formats.medium
+  const url = (aboutpage.aboutImage.formats === null || Object.keys(aboutpage.aboutImage.formats).length === 0) ? aboutpage.aboutImage : aboutpage.aboutImage.formats.large
   const imgSrc = getStrapiMedia(url)
 
   return (
