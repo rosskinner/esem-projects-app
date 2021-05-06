@@ -1,15 +1,23 @@
 import React from 'react'
 // import Articles from "../components/articles";
 import Seo from '../../components/seo'
-import { fetchAPI } from '../../lib/api'
+import { fetchAPI, getStrapiMedia } from '../../lib/api'
 import ReactMarkdown from 'react-markdown'
 import Card from '../../components/card'
+import Link from 'next/link'
+import { AnimatePresence, motion, useAnimation } from 'framer-motion'
+import Image from 'next/image'
 
-const Projects = ({ aboutpage, contactpage, teamMembers, clients, awards }) => {
+const Projects = ({ aboutpage, contactpage, teamMembers, projects, featured, awards }) => {
   const seo = {
     metaTitle: aboutpage.heading,
     metaDescription: aboutpage.content
   }
+
+  const url = (aboutpage.aboutImage.formats === null || Object.keys(aboutpage.aboutImage.formats).length === 0) ? aboutpage.aboutImage : aboutpage.aboutImage.formats.medium
+  const imgSrc = getStrapiMedia(url)
+
+  console.log('featured.projects', aboutpage)
 
   return (
     <>
@@ -18,7 +26,14 @@ const Projects = ({ aboutpage, contactpage, teamMembers, clients, awards }) => {
         <div className='flex flex-wrap f4'>
 
           <div className='ph4 ph5-l w-100 w-70-l mb4 mb7-l pr5'>
-            <p className='pt6-l f2'>About</p>
+            <h1 className='about-heading mv3 mv5-l'>{aboutpage.heading}</h1>
+            <img
+              className='w-100'
+              src={imgSrc}
+              alt={url.alternativeText}
+              title={url.caption}
+            />
+            <p className='pt5-l f2'>About</p>
 
             <ReactMarkdown className='details f4' source={aboutpage.content} escapeHtml={false} />
 
@@ -26,16 +41,34 @@ const Projects = ({ aboutpage, contactpage, teamMembers, clients, awards }) => {
           <div className='w-100'>
             <div className='w-100 mb4 mb7-l  ph4 ph5-l flex flex-column flex-row-l'>
               <div className='w-100 w-25-l'>
-                <p className='f2'>{aboutpage.heading}</p>
+                <p className='f2'>{aboutpage.teamHeading}</p>
                 <span className='details f4'>
                   <ReactMarkdown source={aboutpage.teamContent} escapeHtml={false} />
                 </span>
               </div>
 
-              <div className='projects flex flex-column w-75 flex-row-ns flex-wrap mv3 mv5-l pt4'>
-                {teamMembers.map((person, i) => {
+              <div className='projects flex flex-column w-100 w-75-l flex-row-ns flex-wrap mv3 mv5-l pt4'>
+                {aboutpage.team_members.map((person, i) => {
                   return (
                     <Card width='w-third' key={i} index={i} project={person} category={person.role} link={false} description />
+                  )
+                })}
+              </div>
+            </div>
+
+            <div className='w-100 mb4 mb7-l  ph4 ph5-l flex flex-column flex-row-l'>
+              <div className='w-100 w-25-l'>
+                <p className='f2'>{aboutpage.projectsHeading}</p>
+                <span className='details f4'>
+                  <ReactMarkdown source={aboutpage.projectsContent} escapeHtml={false} />
+                </span>
+              </div>
+
+              <div className='projects flex flex-column w-100 w-75-l flex-row-ns flex-wrap mv3 mv5-l pt4'>
+                {projects.map((project, i) => {
+                  return (
+                    <Card width='w-third' key={i} index={i} project={project} category={featured} path='/project' portrait />
+
                   )
                 })}
               </div>
@@ -102,16 +135,17 @@ const Projects = ({ aboutpage, contactpage, teamMembers, clients, awards }) => {
 
 export async function getStaticProps ({ params }) {
   // Run API calls in parallel
-  const [aboutpage, contactpage, teamMembers, clients, awards] = await Promise.all([
+  const [aboutpage, contactpage, teamMembers, projects, featured, awards] = await Promise.all([
     fetchAPI('/about-page'),
     fetchAPI('/contact-page'),
     fetchAPI('/team-members'),
-    fetchAPI('/clients'),
+    fetchAPI('/projects'),
+    fetchAPI('/categories?slug=featured'),
     fetchAPI('/awards')
   ])
 
   return {
-    props: { aboutpage, contactpage, teamMembers, clients, awards },
+    props: { aboutpage, contactpage, teamMembers, projects, featured: featured[0], awards },
     revalidate: 1
   }
 }

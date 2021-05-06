@@ -559,9 +559,11 @@ canvas {
   grid-template-columns: repeat(1, 100%);
 }
 
-/* .twocol {
-  grid-template-columns: repeat(2, 50%);
-} */
+.about-heading {
+  font-size: 5rem;
+  line-height: 4.2rem;
+  color: #CFB7C1;
+}
 
 @media screen and (min-width: 30rem) {
 

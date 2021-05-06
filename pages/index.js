@@ -124,7 +124,7 @@ const Home = ({ category, global }) => {
 
               return (
                 <Link
-                  key={i} as={`project/${project.slug}`} href='project/[id]'
+                  key={i} as='about' href='about'
                 >
                   <div className={`home-mask absolute cover ${show} ${hover} aspect-ratio aspect-ratio--home-item pointer`}>
 
@@ -145,7 +145,6 @@ const Home = ({ category, global }) => {
                           playsInline
                           preload='auto'
                           muted
-                          controls
                           src={imgSrc}
                           alt={url.alternativeText}
                           onPlay={onPlay}

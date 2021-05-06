@@ -4,7 +4,7 @@ import Image from 'next/image'
 import { getStrapiMedia } from '../lib/api'
 import { AnimatePresence, motion, useAnimation } from 'framer-motion'
 
-const Card = ({ project, width, category, path, link = true, image = false, description = false }) => {
+const Card = ({ project, width, category, path, link = true, image = false, description = false, portrait = false }) => {
   const imageObject = project.collectionImage
   // console.log(project.title, imageObject)
   // if (imageObject === null) {
@@ -24,9 +24,11 @@ const Card = ({ project, width, category, path, link = true, image = false, desc
     padding = 'ph2-ns ph4-l pb4 pb5-l'
   }
   if (description) ratio = 'aspect-ratio--3x4 aspect-ratio--3x4-l'
+  if (portrait) ratio = 'aspect-ratio--3x4 aspect-ratio--3x4-l'
   let isCat = false
   if (project.categories) isCat = category ? (project.categories.length > 0 ? project.categories.find(c => c.name === category.name) : null) : true
   if (project.tags) isCat = category ? (project.tags.length > 0 ? project.tags.find(c => c.name === category.name) : null) : true
+
   return (
     <>
       {link &&
@@ -41,7 +43,7 @@ const Card = ({ project, width, category, path, link = true, image = false, desc
                 exit={{ opacity: 0 }}
                 transition={{ delay: 0, duration: 0.5 }}
               >
-                <Content width={width} project={project} thumbnail={thumbnail} margin={margin} ratio={ratio} category={category} image={image} imageObject={imageObject} description={description} />
+                <Content link width={width} project={project} thumbnail={thumbnail} margin={margin} ratio={ratio} category={category} image={image} imageObject={imageObject} description={description} />
               </motion.a>
             </Link>}
         </AnimatePresence>}
@@ -53,7 +55,7 @@ const Card = ({ project, width, category, path, link = true, image = false, desc
   )
 }
 
-const Content = ({ width, project, thumbnail, margin, ratio, category, image, imageObject, description }) => {
+const Content = ({ width, link, project, thumbnail, margin, ratio, category, image, imageObject, description }) => {
   let cat = [category]
   const [loaded, setLoaded] = useState(false)
   const [play, setPlay] = useState(false)
@@ -105,7 +107,7 @@ const Content = ({ width, project, thumbnail, margin, ratio, category, image, im
       <motion.div
         className='db'
         whileHover={{
-          opacity: 0.4,
+          opacity: link ? 0.4 : 1,
           transition: { duration: 0.5 }
         }}
       >
@@ -160,11 +162,11 @@ const Content = ({ width, project, thumbnail, margin, ratio, category, image, im
               let comma = ''
               if (i !== cat.length - 1) comma = ','
               return (
-                <h3 className={`f6 ttc dib pr2 ${description ? 'underline' : ''}`} key={i}>{c.name} {comma} </h3>
+                <h3 className='f6 ttc dib pr2' key={i}>{c.name} {comma} </h3>
               )
             })}
             {description &&
-              <p className='f4 details'>{project.description}</p>}
+              <p className='f6 details'>{project.description}</p>}
 
             {project.linkedin &&
               <a className='f6 details underline' href={project.linkedin} rel='noreferrer' target='_blank'>LinkedIn</a>}
