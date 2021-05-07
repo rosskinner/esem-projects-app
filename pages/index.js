@@ -98,6 +98,13 @@ const Home = ({ category, global }) => {
                 alt={url.alternativeText}
                 onSuspend={checkSuspended}
               />}
+            {url.mime.includes('video') && (!play || suspend) &&
+              <Image
+                className={`absolute w-100 h-100 bg-home fixed ${outline} `} src={fallback}
+                layout='fill'
+                objectFit='cover'
+                alt={url.alternativeText}
+              />}
 
           </div>
         )
@@ -160,6 +167,15 @@ const Home = ({ category, global }) => {
                           onSuspend={checkSuspended}
                         />
                       </div>}
+
+                    {url.mime.includes('video') && (!play || suspend) &&
+                      <Image
+                        className='home-image aspect-ratio--object cover' src={fallback}
+                        layout='fill'
+                        objectFit='cover'
+                        alt={url.alternativeText}
+                        onLoad={checkLoaded}
+                      />}
 
                     <div className={`home-image aspect-ratio--object cover bg-white ${!loaded ? 'o-1' : 'o-0'}`} />
 
