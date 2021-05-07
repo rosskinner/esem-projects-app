@@ -35,20 +35,20 @@ const Projects = ({ aboutpage, projects, featured, awards }) => {
           </div>
           <div className='w-100 mb4 mb6-l  ph4 ph5-l flex flex-column flex-row-l'>
             <div className='w-100 w-25-l'>
-                <p className='f2'>{aboutpage.projectsHeading}</p>
-                <span className='details f4'>
-                  <ReactMarkdown source={aboutpage.projectsContent} escapeHtml={false} />
-                </span>
-              </div>
+              <p className='f2'>{aboutpage.projectsHeading}</p>
+              <span className='details f4'>
+                <ReactMarkdown source={aboutpage.projectsContent} escapeHtml={false} />
+              </span>
+            </div>
 
             <div className='projects flex flex-column w-100 w-75-l flex-row-ns flex-wrap mv3 mv5-l pt4'>
-                {projects.map((project, i) => {
-                  return (
-                    <Card width='w-third' key={i} index={i} project={project} category={featured} path='/project' portrait />
+              {projects.map((project, i) => {
+                return (
+                  <Card width='w-third' key={i} index={i} project={project} category={featured} path='/project' portrait />
 
-                  )
-                })}
-              </div>
+                )
+              })}
+            </div>
           </div>
           <div className='w-100'>
             <div className='w-100 mb4 mb6-l  ph4 ph5-l flex flex-column flex-row-l'>

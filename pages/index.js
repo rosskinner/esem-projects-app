@@ -79,6 +79,13 @@ const Home = ({ category, global }) => {
                 objectFit='cover'
                 alt={url.alternativeText}
               />}
+            {url.mime.includes('video') &&
+              <Image
+                className={`absolute w-100 h-100 bg-home fixed ${outline} `} src={fallback}
+                layout='fill'
+                objectFit='cover'
+                alt={url.alternativeText}
+              />}
 
             {url.mime.includes('video') &&
               <video
@@ -90,14 +97,6 @@ const Home = ({ category, global }) => {
                 className={`home-video absolute w-100 h-100 bg-home fixed ${play ? outline : 'o-0'}`} src={imgSrc}
                 alt={url.alternativeText}
                 onSuspend={checkSuspended}
-              />}
-
-            {url.mime.includes('video') && (!play || suspend) &&
-              <Image
-                className={`absolute w-100 h-100 bg-home fixed ${outline} `} src={fallback}
-                layout='fill'
-                objectFit='cover'
-                alt={url.alternativeText}
               />}
 
           </div>
@@ -138,6 +137,14 @@ const Home = ({ category, global }) => {
                       />}
 
                     {url.mime.includes('video') &&
+                      <Image
+                        className='home-image aspect-ratio--object cover' src={fallback}
+                        layout='fill'
+                        objectFit='cover'
+                        alt={url.alternativeText}
+                        onLoad={checkLoaded}
+                      />}
+                    {url.mime.includes('video') &&
                       <div className={`home-image aspect-ratio--object cover ${play ? 'o-1' : 'o-0'}`}>
                         <video
                           autoPlay
@@ -153,14 +160,6 @@ const Home = ({ category, global }) => {
                           onSuspend={checkSuspended}
                         />
                       </div>}
-                    {url.mime.includes('video') && (!play || suspend) &&
-                      <Image
-                        className='home-image aspect-ratio--object cover' src={fallback}
-                        layout='fill'
-                        objectFit='cover'
-                        alt={url.alternativeText}
-                        onLoad={checkLoaded}
-                      />}
 
                     <div className={`home-image aspect-ratio--object cover bg-white ${!loaded ? 'o-1' : 'o-0'}`} />
 
