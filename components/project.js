@@ -56,17 +56,21 @@ const Project = ({ project, global, contactpage, prev, next, scroll }) => {
               transition={{ ease: 'easeIn', duration: 1 }}
 
             >
-              <Image
-                src={getStrapiMedia(bannerImage)} layout='fill' objectFit='cover' alt={bannerImage.alternativeText} title={bannerImage.caption} className='relative w-100 justify-center center cover'
-                onLoad={checkLoaded}
-              />
-              <m.img
-                className='absolute read-indicator white f2'
-                initial={{ opacity: 1 }}
-                animate={{ opacity: scroll ? 1 : 0 }}
-                src={arrow}
-                alt='read more'
-              />
+              {bannerImage.length > 0 &&
+                <>
+                  <Image
+                    src={getStrapiMedia(bannerImage)} layout='fill' objectFit='cover' alt={bannerImage.alternativeText} title={bannerImage.caption} className='relative w-100 justify-center center cover'
+                    onLoad={checkLoaded}
+                  />
+                  <m.img
+                    className='absolute read-indicator white f2'
+                    initial={{ opacity: 1 }}
+                    animate={{ opacity: scroll ? 1 : 0 }}
+                    src={arrow}
+                    alt='read more'
+                  />
+                </>}
+
             </m.div>
 
           </LazyMotion>

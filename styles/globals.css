@@ -538,7 +538,6 @@ canvas {
 .grid {
   display: grid;
   grid-auto-rows: auto;
-  /* grid-auto-flow: column;  */
   grid-auto-flow: row dense;
   gap: 0.83rem 3.66rem;
 }

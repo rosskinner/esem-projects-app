@@ -14,7 +14,7 @@ const Home = ({ category, global }) => {
 
   useEffect(() => {
     let changeProj
-    const time = play ? 10000 : 6000
+    const time = play ? 6000 : 3000
     if (animate) {
       changeProj = setInterval(function () {
         setCurrent(current => current === category.projects.length - 1 ? 0 : current + 1)
