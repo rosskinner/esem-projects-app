@@ -96,9 +96,8 @@ const Home = ({ category, global }) => {
                 muted
                 className={`home-video absolute w-100 h-100 bg-home fixed ${play ? outline : 'o-0'}`} src={imgSrc}
                 alt={url.alternativeText}
-                onSuspend={checkSuspended}
               />}
-            {url.mime.includes('video') && (!play || suspend) &&
+            {url.mime.includes('video') && !play &&
               <Image
                 className={`absolute w-100 h-100 bg-home fixed ${outline} `} src={fallback}
                 layout='fill'
@@ -168,7 +167,7 @@ const Home = ({ category, global }) => {
                         />
                       </div>}
 
-                    {url.mime.includes('video') && (!play || suspend) &&
+                    {url.mime.includes('video') && !play &&
                       <Image
                         className='home-image aspect-ratio--object cover' src={fallback}
                         layout='fill'

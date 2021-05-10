@@ -129,15 +129,14 @@ const Projects = ({ aboutpage, projects, featured, awards }) => {
 
 export async function getStaticProps ({ params }) {
   // Run API calls in parallel
-  const [aboutpage, projects, featured, awards] = await Promise.all([
+  const [aboutpage, featured, awards] = await Promise.all([
     fetchAPI('/about-page'),
-    fetchAPI('/projects'),
     fetchAPI('/categories?slug=featured'),
     fetchAPI('/awards')
   ])
 
   return {
-    props: { aboutpage, projects, featured: featured[0], awards },
+    props: { aboutpage, featured: featured[0], awards },
     revalidate: 1
   }
 }
