@@ -41,6 +41,7 @@ const Project = ({ project, global, contactpage, prev, next, scroll }) => {
     setLoaded(true)
   }
 
+
   return (
 
     <div className='flex flex-column'>
@@ -56,7 +57,7 @@ const Project = ({ project, global, contactpage, prev, next, scroll }) => {
               transition={{ ease: 'easeIn', duration: 1 }}
 
             >
-              {bannerImage.length > 0 &&
+              {Object.keys(bannerImage).length > 0 &&
                 <>
                   <Image
                     src={getStrapiMedia(bannerImage)} layout='fill' objectFit='cover' alt={bannerImage.alternativeText} title={bannerImage.caption} className='relative w-100 justify-center center cover'
