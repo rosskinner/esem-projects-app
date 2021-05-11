@@ -6,14 +6,11 @@ import { AnimatePresence, motion, useAnimation } from 'framer-motion'
 
 const Card = ({ project, width, category, path, link = true, image = false, description = false, portrait = false }) => {
   const imageObject = project.collectionImage
-  // console.log(project.title, imageObject)
-  // if (imageObject === null) {
-  //   console.log(project.title)
-  // }
-  const url = (project.collectionImage.formats === null || Object.keys(project.collectionImage.formats).length === 0) ? project.collectionImage : project.collectionImage.formats.medium
-  const thumbnail = getStrapiMedia(url)
-  //
-  // console.log(thumbnail)
+  let thumbnail = null
+  if (project.collectionImage) {
+    const url = (project.collectionImage.formats === null || Object.keys(project.collectionImage.formats).length === 0) ? project.collectionImage : project.collectionImage.formats.medium
+    thumbnail = getStrapiMedia(url)
+  }
 
   let ratio = 'aspect-ratio--8x5 aspect-ratio--8x5-l '
   let margin = 'mt3'
@@ -94,9 +91,10 @@ const Content = ({ width, link, project, thumbnail, margin, ratio, category, ima
   const checkSuspended = () => {
     if (!play) setSuspend(true)
   }
-  if (imageObject.mime.includes('video')) thumbnail.split('upload')[0] += 'upload/q_auto:good' + thumbnail.split('upload')[1]
   let fallback = ''
-  if (!play) {
+  if (thumbnail) {
+    if (imageObject.mime.includes('video')) thumbnail.split('upload')[0] += 'upload/q_auto:good' + thumbnail.split('upload')[1]
+
     const remove = thumbnail.split('/')
     remove[remove.length - 1] = imageObject.hash + '.png'
     fallback = remove.join('/')
@@ -118,35 +116,38 @@ const Content = ({ width, link, project, thumbnail, margin, ratio, category, ima
           variants={animationVariants}
           transition={{ ease: 'easeIn', duration: 1 }}
         >
-          {imageObject.mime.includes('image') &&
-            <Image
-              className='project-thumb aspect-ratio--object cover' src={thumbnail} layout='fill'
-              objectFit='cover'
-              alt={imageObject.alternativeText}
-              onLoad={checkLoaded}
-            />}
+          {thumbnail &&
+            <>
+              {imageObject.mime.includes('image') &&
+                <Image
+                  className='project-thumb aspect-ratio--object cover' src={thumbnail} layout='fill'
+                  objectFit='cover'
+                  alt={imageObject.alternativeText}
+                  onLoad={checkLoaded}
+                />}
 
-          {imageObject.mime.includes('video') &&
-            <video
-              autoPlay
-              loop
-              playsInline
-              preload='auto'
-              muted
-              className={`project-thumb aspect-ratio--object cover ${play ? 'o-1' : 'o-0'}`} src={thumbnail}
-              alt={imageObject.alternativeText}
-              onPlay={onPlay}
-              onCanPlay={checkLoaded}
-              onSuspend={checkSuspended}
-            />}
+              {imageObject.mime.includes('video') &&
+                <video
+                  autoPlay
+                  loop
+                  playsInline
+                  preload='auto'
+                  muted
+                  className={`project-thumb aspect-ratio--object cover ${play ? 'o-1' : 'o-0'}`} src={thumbnail}
+                  alt={imageObject.alternativeText}
+                  onPlay={onPlay}
+                  onCanPlay={checkLoaded}
+                  onSuspend={checkSuspended}
+                />}
 
-          {imageObject.mime.includes('video') && !play &&
-            <Image
-              className='project-thumb aspect-ratio--object cover' src={fallback} layout='fill'
-              objectFit='cover'
-              alt={imageObject.alternativeText}
-              onLoad={checkLoaded}
-            />}
+              {imageObject.mime.includes('video') && !play &&
+                <Image
+                  className='project-thumb aspect-ratio--object cover' src={fallback} layout='fill'
+                  objectFit='cover'
+                  alt={imageObject.alternativeText}
+                  onLoad={checkLoaded}
+                />}
+            </>}
 
         </motion.div>
       </motion.div>

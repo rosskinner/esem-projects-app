@@ -7,16 +7,6 @@ const Project = ({ global, project, contactpage, scroll }) => {
 
 let nav = []
 
-// for (let i = 0; i < projects.length; i++) {
-//   const p = projects[i]
-//   const prev = i > 0 ? i - 1 : projects.length - 1
-//   const next = i >= projects.length - 1 ? 0 : i + 1
-  
-//   if(p.id === project.id) {
-//     nav = [projects[prev],projects[next]]
-//   } 
-// }
-
   const seo = {
     metaTitle: project.title,
     metaDescription: project.description,
