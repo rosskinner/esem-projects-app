@@ -26,8 +26,13 @@ let nav = []
 
   return (
     <>
-      <Seo seo={seo} />
-      <ProjectCard project={project} contactpage={contactpage} global={global} scroll={scroll}/>
+    {project &&
+      <>
+        <Seo seo={seo} />
+        <ProjectCard project={project} contactpage={contactpage} global={global} scroll={scroll}/>
+      </>
+    }
+      
     </>
   );
 };
@@ -49,7 +54,7 @@ export async function getStaticProps({ params }) {
   const projects = await fetchAPI(`/projects?slug=${params.slug}`)
 
   return {
-    props: { project: projects[0] },
+    props: { project: projects[0] || null},
     revalidate: 1
   }
 }
