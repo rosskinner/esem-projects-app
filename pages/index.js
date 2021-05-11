@@ -56,7 +56,6 @@ const Home = ({ category, global }) => {
   if (!animate) {
     outline = 'hover'
   }
-  // console.log('loaded', loaded)
 
   return (
     <div>
