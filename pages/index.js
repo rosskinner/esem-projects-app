@@ -11,10 +11,10 @@ const Home = ({ category, global }) => {
   const [loaded, setLoaded] = useState(false)
   const [play, setPlay] = useState(false)
   const [suspend, setSuspend] = useState(false)
+  const [time, setTime] = useState(3000)
 
   useEffect(() => {
     let changeProj
-    const time = play ? 6000 : 3000
     if (animate) {
       changeProj = setInterval(function () {
         setCurrent(current => current === category.projects.length - 1 ? 0 : current + 1)
@@ -32,6 +32,7 @@ const Home = ({ category, global }) => {
 
   const onPlay = () => {
     // console.log('play')
+    setTime(6000)
     setLoaded(true)
     setPlay(true)
   }
