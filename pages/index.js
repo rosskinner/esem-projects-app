@@ -205,7 +205,6 @@ const Home = ({ category, global }) => {
 }
 
 export async function getStaticProps () {
-  // Run API calls in parallel
   let category = await fetchAPI('/categories?slug=featured')
   category = category[0]
 
