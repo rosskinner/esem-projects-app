@@ -43,12 +43,13 @@ const Article = ({ article }) => {
           <div className='w-100 project-panel ph4 ph5-l'>
             <div className='w-100 pv2 v-mid flex'>
               <div className='w-100'>
-                <p className='mv0 details f6'>by {article.team_member.name}</p>
-                <p className='f6'>
-                  <strong>
-                    <Moment format='D MMM YYYY'>{article.published_at}</Moment>
-                  </strong>
-                </p>
+                {article.team_member && <p className='mv0 details f6'>by {article.team_member.name}</p>}
+                {article.date &&
+                  <p className='f6'>
+                    <strong>
+                      <Moment format='D MMM YYYY'>{article.date}</Moment>
+                    </strong>
+                  </p>}
                 {article.project &&
                   <div className='mt5'>
                     <p className='f6 details'>Read about the project?</p>

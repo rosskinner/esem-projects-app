@@ -28,7 +28,7 @@ const Projects = ({ aboutpage, projects, featured, awards }) => {
               alt={url.alternativeText}
               title={url.caption}
             />
-            <p className='pt5-l f2'>About</p>
+            <p className='pt5-l f2'>About Us</p>
 
             <ReactMarkdown className='details f4' source={aboutpage.content} escapeHtml={false} />
 
@@ -90,6 +90,13 @@ const Projects = ({ aboutpage, projects, featured, awards }) => {
               </span>
             </div>
             <div className='w-100 flex flex-column flex-row-l'>
+              <div className='w-100 w-50-l f4 pt4 pt5-l ph4 ph5-l mb6 flex flex-column flex-row-l'>
+                <div className='w-100 mw7'>
+                <p className='f2'>Clients</p>
+                <ReactMarkdown className='w-100 w-70-l details f4'>{aboutpage.clientContent}</ReactMarkdown>
+              </div>
+
+              </div>
 
               <div className='w-100 w-50-l pt4 pt5-l pb5 f4 mb4 mb6-l pr2 pl4 pl5-l br-l'>
                 <div className='w-100'>
@@ -111,13 +118,6 @@ const Projects = ({ aboutpage, projects, featured, awards }) => {
                 </div>
               </div>
 
-              <div className='w-100 w-50-l f4 pt4 pt5-l ph4 ph5-l mb6 flex flex-column flex-row-l'>
-                <div className='w-100 mw7'>
-                  <p className='f2'>Clients</p>
-                  <ReactMarkdown className='w-100 w-70-l details f4'>{aboutpage.clientContent}</ReactMarkdown>
-                </div>
-
-              </div>
             </div>
 
           </div>

@@ -159,13 +159,15 @@ const Content = ({ width, link, project, thumbnail, margin, ratio, category, ima
             </h2>
 
             {/* <span className='f6 db'> */}
-            {cat.map((c, i) => {
-              let comma = ''
-              if (i !== cat.length - 1) comma = ','
-              return (
-                <h3 className='f6 ttc dib pr2' key={i}>{c.name} {comma} </h3>
-              )
-            })}
+            <div className='db flex flex-row flex-wrap'>
+              {cat.map((c, i) => {
+                let comma = ''
+                if (i !== cat.length - 1) comma = ','
+                return (
+                  <h3 className='f6 ttc dib pr2' key={i}>{`${c.name}${comma}`} </h3>
+                )
+              })}
+            </div>
             {description &&
               <p className='f6 details'>{project.description}</p>}
 

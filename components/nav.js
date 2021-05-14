@@ -52,13 +52,13 @@ const Nav = ({ global, showLogo = true, scroll }) => {
         <div className='db dtc w-100 w-50-l tr v-mid pv3 details '>
           <div>
             <Link scroll={false} href='/projects'>
-              <a className={`mh3 mh4-l dib v-mid nav-item ${active.includes('projects') ? 'nav-active' : ''}`}>Projects</a>
+              <a className={`mh3 mh4-l dib v-mid nav-item bold ${active.includes('projects') ? 'nav-active' : ''}`}>Projects</a>
             </Link>
             <Link scroll={false} href='/articles'>
-              <a className={`mh3 mh4-l dib v-mid nav-item ${active.includes('articles') ? 'nav-active' : ''}`}>News</a>
+              <a className={`mh3 mh4-l dib v-mid nav-item bold ${active.includes('articles') ? 'nav-active' : ''}`}>Stories</a>
             </Link>
             <Link scroll={false} href='/about'>
-              <a className={`ml3 ml4-l dib v-mid nav-item ${active.includes('about') ? 'nav-active' : ''}`}>About</a>
+              <a className={`ml3 ml4-l dib v-mid nav-item bold ${active.includes('about') ? 'nav-active' : ''}`}>About</a>
             </Link>
           </div>
         </div>
