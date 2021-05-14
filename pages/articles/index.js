@@ -33,8 +33,8 @@ export async function getStaticProps ({ params }) {
   ])
 
   const articles = art.sort((a, b) => {
-    return new Date(a.published_at).getTime() -
-        new Date(b.published_at).getTime()
+    return new Date(a.date).getTime() -
+        new Date(b.date).getTime()
   }).reverse()
   return {
     props: { articles, tags },
