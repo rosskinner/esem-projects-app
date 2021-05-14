@@ -568,6 +568,9 @@ canvas {
   line-height: 2.5rem;
   color: #CFB7C1;
 }
+.featured-projects a {
+  text-decoration: none;
+}
 
 @media screen and (min-width: 30rem) {
 

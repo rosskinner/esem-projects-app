@@ -41,7 +41,7 @@ const Projects = ({ aboutpage, projects, featured, awards }) => {
               </span>
             </div>
 
-            <div className='projects flex flex-column w-100 w-75-l flex-row-ns flex-wrap mv3 mv5-l pt4'>
+            <div className='projects flex flex-column w-100 w-75-l flex-row-ns flex-wrap mv3 mv5-l pt4 featured-projects'>
               {projects.map((project, i) => {
                 return (
                   <Card width='w-third' key={i} index={i} project={project} category={featured} path='/project' portrait />
