@@ -50,21 +50,26 @@ const Projects = ({ aboutpage, projects, featured, awards }) => {
               })}
             </div>
           </div>
-          <div className='w-100'>
-            <div className='w-100 mb4 mb6-l  ph4 ph5-l flex flex-column flex-row-l'>
-              <div className='w-100 w-25-l'>
+          <div className='w-100 flex flex-column'>
+            <div className='w-100 mb4 mb6-l  ph4 ph5-l flex flex-column'>
+              <div>
                 <p className='f2'>{aboutpage.teamHeading}</p>
-                <span className='details f4'>
-                  <ReactMarkdown source={aboutpage.teamContent} escapeHtml={false} />
-                </span>
               </div>
+              <div className='w-100 flex flex-row-l flex-column-reverse'>
+                <div className='w-100 w-25-l'>
 
-              <div className='projects flex flex-column w-100 w-75-l flex-row-ns flex-wrap mv3 mv5-l pt4'>
-                {aboutpage.teamMembers.map((person, i) => {
-                  return (
-                    <Card width='w-third' key={i} index={i} project={person.team_member} category={person.team_member.role} link={false} description />
-                  )
-                })}
+                  <span className='details f4'>
+                    <ReactMarkdown source={aboutpage.teamContent} escapeHtml={false} />
+                  </span>
+                </div>
+
+                <div className='projects flex flex-column w-100 w-75-l flex-row-ns flex-wrap mv3 '>
+                  {aboutpage.teamMembers.map((person, i) => {
+                    return (
+                      <Card width='w-third' key={i} index={i} project={person.team_member} category={person.team_member.role} link={false} description />
+                    )
+                  })}
+                </div>
               </div>
             </div>
 
@@ -92,9 +97,9 @@ const Projects = ({ aboutpage, projects, featured, awards }) => {
             <div className='w-100 flex flex-column flex-row-l'>
               <div className='w-100 w-50-l f4 pt4 pt5-l ph4 ph5-l mb6 flex flex-column flex-row-l'>
                 <div className='w-100 mw7'>
-                <p className='f2'>Clients</p>
-                <ReactMarkdown className='w-100 w-70-l details f4'>{aboutpage.clientContent}</ReactMarkdown>
-              </div>
+                  <p className='f2'>Clients</p>
+                  <ReactMarkdown className='w-100 w-70-l details f4'>{aboutpage.clientContent}</ReactMarkdown>
+                </div>
 
               </div>
 
