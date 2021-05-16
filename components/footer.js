@@ -24,7 +24,7 @@ const Footer = ({ global, contactpage }) => {
 
       </div>
 
-      <div className='flex flex-row justify-between'>
+      <div className='flex flex-row justify-between items-end'>
         {/* {global.add} */}
         <div className='w-50 w-20-ns'>
           © {global.siteName} 2021
@@ -40,6 +40,8 @@ const Footer = ({ global, contactpage }) => {
               <a className='f6 details underline pl3' href={global.social.twitter} rel='noreferrer' target='_blank'>Twitter</a>}
             {global.social.linkedin &&
               <a className='f6 details underline pl3' href={global.social.linkedin} rel='noreferrer' target='_blank'>LinkedIn</a>}
+            {global.social.vimeo &&
+              <a className='f6 details underline pl3' href={global.social.vimeo} rel='noreferrer' target='_blank'>Vimeo</a>}
 
           </div>}
       </div>

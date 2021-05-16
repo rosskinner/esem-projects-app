@@ -52,8 +52,8 @@ const Article = ({ article }) => {
                   </p>}
                 {article.project &&
                   <div className='mt5'>
-                    <p className='f6 details'>Read about the project?</p>
-                    <div className='flex flex-row'>
+                    <p className='f6 b'>Related Project</p>
+                    <div className='flex flex-column'>
                       <div className='f6'>
                         <Link scroll={false} as={`/project/${article.project.slug}`} href='/project/[id]'>
                           <a className='mv0 f6 details underline'>{article.project.title}</a>
@@ -92,7 +92,7 @@ const Article = ({ article }) => {
 
         <div className='w-100 flex flex-column'>
           <div className='w-100 mw8 pv4 pl4 pr4 pl0-l pr5-l details f4'>
-            <ReactMarkdown source={article.content} transformImageUri={(uri) => `${getStrapiURL()}${uri}`} linkTarget='_blank' escapeHtml={false} />
+            <ReactMarkdown source={article.content} linkTarget='_blank' escapeHtml={false} />
           </div>
         </div>
       </div>

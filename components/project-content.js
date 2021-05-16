@@ -20,13 +20,12 @@ const ProjectContent = ({ className, project, showContent, setShowContent }) => 
                 </strong>
               </p>
               {project.articles.length > 0 &&
-                <div className='mt5'>
-                  <p className='f6 details'>Want to read even more?</p>
-                  <div className='flex flex-row'>
+                <div className='mt5 dn db-l'>
+                  <p className='f6 details'>Read More</p>
+                  <div className='flex flex-column pb4'>
                     {project.articles.map((article, key) => {
-                      console.log(article)
                       return (
-                        <div className='f6' key={key}>
+                        <div className='f6 bold pb3' key={key}>
                           <Link scroll={false} as={`/article/${article.slug}`} href='/article/[id]'>
                             <a className='underline'>{article.title}</a>
                           </Link>

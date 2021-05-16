@@ -16,7 +16,6 @@ const Video = ({ video }) => {
   }
 
   const playVid = (e) => {
-    console.log(video, target)
     const type = video.link.includes('you') ? 'youtube' : 'vimeo'
     if (target) {
       if (type === 'vimeo' && isPlaying) {
@@ -47,6 +46,10 @@ const Video = ({ video }) => {
     }
   }
 
+  const onPause = () => {
+    setIsPlaying(false)
+  }
+
   const id = video.link.split('/')
 
   return (
@@ -61,6 +64,7 @@ const Video = ({ video }) => {
               videoId={id[id.length - 1]}
               opts={{ width: '100%', height: '100%', playerVars: { modestbranding: 1, controls: 0, loop: 1, enablejsapi: 1 } }}
               onReady={onReady}
+              onClick={playVid}
             />
 
             <MediaOverlay show={isPlaying ? 'active' : ''} onClick={playVid} />
@@ -73,12 +77,11 @@ const Video = ({ video }) => {
               width='100%'
               height='100%'
               className='video-container w-100 justify-center center contain'
-              frameBorder='0'
-              allow='autoplay; fullscreen;'
-              allowFullScreen
-              loop
-              controls={false}
+              allow='playbar;'
+              controls
+              showByline
               onReady={onReady}
+              onPause={onPause}
             />
 
             <MediaOverlay show={isPlaying ? 'active' : ''} onClick={playVid} />

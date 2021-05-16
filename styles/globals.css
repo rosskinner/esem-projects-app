@@ -272,14 +272,16 @@ strong {
 .image-overlay {
   z-index: 1;
   visibility: visible;
-  transition: all 3s ease-in;
+  transition: all 1s ease-in;
   background-color: #0E0E13;
   top: 0;
   left:0;
+  display:flex;
 }
 
 .image-overlay.active {
   opacity: 0;
+  visibility:hidden;
 }
 
 .closeButton {
@@ -544,6 +546,8 @@ canvas {
   grid-auto-rows: auto;
   grid-auto-flow: row dense;
   gap: 0.83rem 3.66rem;
+  padding-top: 0.415rem;
+  padding-bottom: 0.415rem;
 }
 
 
