@@ -2,6 +2,7 @@ import Head from 'next/head'
 import { useContext } from 'react'
 import { getStrapiMedia } from '../lib/api'
 import { GlobalContext } from '../pages/_app'
+import {useRouter} from 'next/router'
 
 const Seo = ({ seo }) => {
   const { defaultSeo, siteName } = useContext(GlobalContext)
@@ -9,6 +10,9 @@ const Seo = ({ seo }) => {
     ...defaultSeo,
     ...seo
   }
+
+  const router = useRouter()
+  console.log(router)
   const fullSeo = {
     ...seoWithDefaults,
     // Add title suffix
@@ -23,6 +27,8 @@ const Seo = ({ seo }) => {
   return (
     <Head>
       <meta name='viewport' content='width=device-width,initial-scale=1' />
+      <meta property='og:type' content='article' />
+      <meta property='og:url' content={`https://esemprojects.com${router.asPath}`} />
       {fullSeo.metaTitle && (
         <>
           <title>{fullSeo.metaTitle}</title>
@@ -45,7 +51,6 @@ const Seo = ({ seo }) => {
         </>
       }
 
-      <meta property='og:type' content='article' />
 
       <meta name='twitter:card' content='summary_large_image' />
       <link rel='canonical' href='https://esemprojects.com/' />
