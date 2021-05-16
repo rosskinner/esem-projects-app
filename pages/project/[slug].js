@@ -19,7 +19,7 @@ for (let i = 0; i < project.media.length; i++) {
   const seo = {
     metaTitle: project.title,
     metaDescription: project.description,
-    shareImage: shareImage,
+    shareImage: shareImage.url,
     project: true,
   };
 

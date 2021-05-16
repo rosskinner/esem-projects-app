@@ -8,7 +8,7 @@ const Article = ({ article }) => {
   const seo = {
     metaTitle: article.title,
     metaDescription: article.description,
-    shareImage: article.collectionIamge,
+    shareImage: article.collectionImage.url,
     article: true,
   };
 
