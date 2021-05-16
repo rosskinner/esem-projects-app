@@ -16,6 +16,7 @@ const Seo = ({ seo }) => {
     // Get full image URL
     // shareImage: getStrapiMedia(seoWithDefaults.shareImage),
   }
+  const shareImage = getStrapiMedia(fullSeo.shareImage)
 
   return (
     <Head>
@@ -36,9 +37,9 @@ const Seo = ({ seo }) => {
       )}
       {fullSeo.shareImage && 
         <>
-          <meta property='og:image' content={fullSeo.shareImage} />
-          <meta name='twitter:image' content={fullSeo.shareImage} />
-          <meta name='image' content={fullSeo.shareImage} />
+          <meta property='og:image' content={shareImage} />
+          <meta name='twitter:image' content={shareImage} />
+          <meta name='image' content={shareImage} />
         </>
       }
 
