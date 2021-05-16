@@ -43,9 +43,9 @@ const Seo = ({ seo }) => {
           <meta name='image' content={shareImage} />
         </>
       )}
-      {fullSeo.article && <meta property='og:type' content='article' />}
+      {fullSeo.article && <meta property='og:type' content={fullSeo.article} />}
 
-      {fullSeo.project && <meta property='og:type' content='project' />}
+      {fullSeo.project && <meta property='og:type' content={fullSeo.article} />}
       <meta name='twitter:card' content='summary_large_image' />
       <link rel='canonical' href='https://esemprojects.com/' />
     </Head>

@@ -6,11 +6,18 @@ import ProjectCard from '../../components/project'
 const Project = ({ global, project, contactpage, scroll }) => {
 
 let nav = []
+let shareImage = null
+const media = project.media[0]
+media.type = media.__component
+
+if (media.type.includes('video-images') && bannerImage.length === 0) {
+  shareImage = media.media[0]
+}
 
   const seo = {
     metaTitle: project.title,
     metaDescription: project.description,
-    shareImage: project.collectionImage,
+    shareImage: shareImage,
     project: true,
   };
 

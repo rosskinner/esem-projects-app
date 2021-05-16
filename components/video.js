@@ -46,9 +46,9 @@ const Video = ({ video }) => {
     }
   }
 
-  const onPause = () => {
-    setIsPlaying(false)
-  }
+  // const onPause = () => {
+  //   setIsPlaying(false)
+  // }
 
   const id = video.link.split('/')
 
@@ -81,7 +81,6 @@ const Video = ({ video }) => {
               controls
               showByline
               onReady={onReady}
-              onPause={onPause}
             />
 
             <MediaOverlay show={isPlaying ? 'active' : ''} onClick={playVid} />
