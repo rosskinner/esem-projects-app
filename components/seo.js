@@ -16,7 +16,9 @@ const Seo = ({ seo }) => {
     // Get full image URL
     // shareImage: getStrapiMedia(seoWithDefaults.shareImage),
   }
-  const shareImage = getStrapiMedia(fullSeo.shareImage)
+  let shareImage = null
+  if (fullSeo.shareImage) shareImage = getStrapiMedia(fullSeo.shareImage)
+  
 
   return (
     <Head>
