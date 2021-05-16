@@ -10,7 +10,7 @@ let shareImage = null
 const media = project.media[0]
 media.type = media.__component
 
-if (media.type.includes('video-images') && bannerImage.length === 0) {
+if (media.type.includes('video-images')) {
   shareImage = media.media[0]
 }
 
