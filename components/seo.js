@@ -27,7 +27,10 @@ const Seo = ({ seo }) => {
   return (
     <Head>
       <meta name='viewport' content='width=device-width,initial-scale=1' />
+      <meta property='type' content='article' />
       <meta property='og:type' content='article' />
+      <meta property='twitter:type' content='article' />
+
       <meta property='og:url' content={`https://esemprojects.com${router.asPath}`} />
       {fullSeo.metaTitle && (
         <>
