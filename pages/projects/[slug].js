@@ -8,7 +8,7 @@ import Tag from '../../components/tag'
 const Projects = ({ projects, category, categories, projectpage }) => {
   
   const seo = {
-    metaTitle: projectpage.heading,
+    metaTitle: `${projectpage.heading}: ${category}`,
     metaDescription: projectpage.description
   }
   return (

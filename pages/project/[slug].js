@@ -7,11 +7,13 @@ const Project = ({ global, project, contactpage, scroll }) => {
 
 let nav = []
 let shareImage = null
-const media = project.media[0]
-media.type = media.__component
+for (let i = 0; i < project.media.length; i++) {
+  const media = project.media[i]
+  media.type = media.__component
 
-if (media.type.includes('video-images')) {
-  shareImage = media.media[0]
+  if (media.type.includes('video-images') && shareImage === null) {
+    shareImage = media.media[0]
+  }
 }
 
   const seo = {

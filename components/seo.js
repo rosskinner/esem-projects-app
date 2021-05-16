@@ -17,8 +17,6 @@ const Seo = ({ seo }) => {
     // shareImage: getStrapiMedia(seoWithDefaults.shareImage),
   }
 
-  const shareImage = getStrapiMedia(fullSeo.shareImage)
-
   return (
     <Head>
       <meta name='viewport' content='width=device-width,initial-scale=1' />
@@ -36,16 +34,17 @@ const Seo = ({ seo }) => {
           <meta name='twitter:description' content={fullSeo.metaDescription} />
         </>
       )}
-      {shareImage && (
+      {fullSeo.shareImage && 
         <>
-          <meta property='og:image' content={shareImage} />
-          <meta name='twitter:image' content={shareImage} />
-          <meta name='image' content={shareImage} />
+          <meta property='og:image' content={fullSeo.shareImage} />
+          <meta name='twitter:image' content={fullSeo.shareImage} />
+          <meta name='image' content={fullSeo.shareImage} />
         </>
-      )}
-      {fullSeo.article && <meta property='og:type' content={fullSeo.article} />}
+      }
 
-      {fullSeo.project && <meta property='og:type' content={fullSeo.article} />}
+      {fullSeo.article && <meta property='og:type' content='article' />}
+
+      {fullSeo.project && <meta property='og:type' content='project' />}
       <meta name='twitter:card' content='summary_large_image' />
       <link rel='canonical' href='https://esemprojects.com/' />
     </Head>
