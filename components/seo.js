@@ -12,7 +12,7 @@ const Seo = ({ seo }) => {
   }
 
   const router = useRouter()
-  console.log(router)
+  
   const fullSeo = {
     ...seoWithDefaults,
     // Add title suffix
@@ -21,7 +21,10 @@ const Seo = ({ seo }) => {
     // shareImage: getStrapiMedia(seoWithDefaults.shareImage),
   }
   let shareImage = null
-  if (fullSeo.shareImage) shareImage = getStrapiMedia(fullSeo.shareImage)
+  if (fullSeo.shareImage) {
+    const url = (fullSeo.shareImage.formats === null || Object.keys(fullSeo.shareImage.formats).length === 0) ? fullSeo.shareImage : (fullSeo.shareImage.formats.thumbnail ? fullSeo.shareImage.formats.thumbnail : fullSeo.shareImage)
+    shareImage = getStrapiMedia(url)
+  }
   
 
   return (
