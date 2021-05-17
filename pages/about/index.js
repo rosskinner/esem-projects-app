@@ -34,21 +34,27 @@ const Projects = ({ aboutpage, projects, featured, awards }) => {
             <ReactMarkdown className='details f4' source={aboutpage.content} escapeHtml={false} />
 
           </div>
-          <div className='w-100 mb4 mb6-l  ph4 ph5-l flex flex-column flex-row-l'>
-            <div className='w-100 w-25-l'>
-              <p className='f2'>{aboutpage.projectsHeading}</p>
-              <span className='details f4'>
-                <ReactMarkdown source={aboutpage.projectsContent} escapeHtml={false} />
-              </span>
-            </div>
+          <div className='w-100 flex flex-column'>
+            <div className='w-100 mb4 mb6-l ph4 ph5-l flex flex-column'>
+              <div>
+                <p className='f2'>{aboutpage.projectsHeading}</p>
+              </div>
 
-            <div className='projects flex flex-column w-100 w-75-l flex-row-ns flex-wrap mv3 mv5-l pt4 featured-projects pl4-l'>
-              {projects.map((project, i) => {
-                return (
-                  <Card width='w-third' key={i} index={i} project={project} category={featured} path='/project' portrait />
+              <div className='projects flex flex-column w-100 w-75-l flex-row-ns flex-wrap mv3 mv5-l pt4 featured-projects pr4-l'>
+                {projects.map((project, i) => {
+                  return (
+                    <Card width='w-third' key={i} index={i} project={project} category={featured} path='/project' portrait />
 
-                )
-              })}
+                  )
+                })}
+              </div>
+              <div className='w-100 w-25-l'>
+
+                <span className='details f4'>
+                  <ReactMarkdown source={aboutpage.projectsContent} escapeHtml={false} />
+                </span>
+              </div>
+
             </div>
           </div>
           <div className='w-100 flex flex-column'>
@@ -56,21 +62,20 @@ const Projects = ({ aboutpage, projects, featured, awards }) => {
               <div>
                 <p className='f2'>{aboutpage.teamHeading}</p>
               </div>
-              <div className='w-100 flex flex-row-l flex-column-reverse'>
-                <div className='w-100 w-25-l'>
-
-                  <span className='details f4'>
-                    <ReactMarkdown source={aboutpage.teamContent} escapeHtml={false} />
-                  </span>
-                </div>
-
-                <div className='projects flex flex-column w-100 w-75-l flex-row-ns flex-wrap mv3 pl4-l'>
+              <div className='w-100 flex flex-row-l flex-column'>
+                <div className='projects flex flex-column w-100 w-75-l flex-row-ns flex-wrap mv3 pr4-l'>
                   {aboutpage.teamMembers.map((person, i) => {
                     return (
                       <Card width='w-third' key={i} index={i} project={person.team_member} category={person.team_member.role} link={false} description />
                     )
                   })}
                 </div>
+                <div className='w-100 w-25-l'>
+                  <span className='details f4'>
+                    <ReactMarkdown source={aboutpage.teamContent} escapeHtml={false} />
+                  </span>
+                </div>
+
               </div>
             </div>
 

@@ -8,7 +8,7 @@ const Tag = ({ children, categories, seo, path }) => {
   const active = useRouter().query.slug
   return (
     <div className='mh4 mh5-l flex flex-row flex-wrap'>
-      <ul className='w-100 w-80-ns w-50-l pa0 ma0'>
+      <ul className='w-100 w-80-ns w-75-l pa0 ma0'>
         <li className='dib mv3'>
           <Link scroll={false} href={`/${path}`}>
             <a className={`ba tag b--white br-pill pv2 ph3 f6 mr3 mb3 ${active === undefined ? 'tag-active' : ''}`}>All</a>

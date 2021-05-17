@@ -4,7 +4,7 @@ import Link from 'next/link'
 
 const ProjectContent = ({ className, project, showContent, setShowContent }) => {
   return (
-    <div className={className}>
+    <div className={`${className} wrap`}>
       <div className='w-100 ph4 ph5-l pt4 mb3'>
         <h1 className='mb3 f2 heading'>{project.title}</h1>
         <span className='mt0 f6'>{project.description}</span>
@@ -34,6 +34,10 @@ const ProjectContent = ({ className, project, showContent, setShowContent }) => 
                     })}
                   </div>
                 </div>}
+
+              <Link href='/projects'>
+                <a className='underline db mb2 f6'> {'< Back to Projects'}</a>
+              </Link>
             </div>
           </div>
 

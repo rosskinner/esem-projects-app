@@ -576,6 +576,17 @@ canvas {
   text-decoration: none;
 }
 
+.wrap {
+  overflow-wrap: break-word;
+  hyphens: auto;
+}
+
+.back-button {
+  background-color: #0E0E13;
+  z-index: 999;
+}
+
+
 @media screen and (min-width: 30rem) {
 
   .card-img-ns {

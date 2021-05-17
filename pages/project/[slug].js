@@ -21,7 +21,7 @@ for (let i = 0; i < project.media.length; i++) {
     metaDescription: project.description,
     shareImage: shareImage,
     project: true,
-  };
+  }
 
   return (
     <>
@@ -31,10 +31,9 @@ for (let i = 0; i < project.media.length; i++) {
         <ProjectCard project={project} contactpage={contactpage} global={global} scroll={scroll}/>
       </>
     }
-      
     </>
-  );
-};
+  )
+}
 
 export async function getStaticPaths() {
   const projects = await fetchAPI('/projects')
