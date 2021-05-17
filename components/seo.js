@@ -22,7 +22,7 @@ const Seo = ({ seo }) => {
   }
   let shareImage = null
   if (fullSeo.shareImage) {
-    const url = (fullSeo.shareImage.formats === null || Object.keys(fullSeo.shareImage.formats).length === 0) ? fullSeo.shareImage : (fullSeo.shareImage.formats.thumbnail ? fullSeo.shareImage.formats.thumbnail : fullSeo.shareImage)
+    const url = (fullSeo.shareImage.formats === null || Object.keys(fullSeo.shareImage.formats).length === 0) ? fullSeo.shareImage : (fullSeo.shareImage.formats.small ? fullSeo.shareImage.formats.small : fullSeo.shareImage)
     shareImage = getStrapiMedia(url)
   }
   
