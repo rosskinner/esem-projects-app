@@ -6,13 +6,14 @@ import ReactMarkdown from 'react-markdown'
 import Card from '../../components/card'
 
 const Projects = ({ aboutpage, projects, featured, awards }) => {
-  const seo = {
-    metaTitle: aboutpage.heading,
-    metaDescription: aboutpage.content
-  }
-
   const url = (aboutpage.aboutImage.formats === null || Object.keys(aboutpage.aboutImage.formats).length === 0) ? aboutpage.aboutImage : aboutpage.aboutImage.formats.large
   const imgSrc = getStrapiMedia(url)
+
+  const seo = {
+    metaTitle: aboutpage.heading,
+    metaDescription: aboutpage.content,
+    shareImage: url
+  }
 
   return (
     <>
