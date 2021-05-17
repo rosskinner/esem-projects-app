@@ -12,7 +12,7 @@ const Projects = ({ aboutpage, projects, featured, awards }) => {
   const seo = {
     metaTitle: aboutpage.heading,
     metaDescription: aboutpage.content,
-    shareImage: url
+    shareImage: aboutpage.aboutImage
   }
 
   return (
