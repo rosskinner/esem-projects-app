@@ -15,11 +15,11 @@ module.exports = {
   async headers () {
     return [
       {
-        source: '/*',
+        source: '/:path*',
         headers: [
           {
             key: 'Cache-Control',
-            value: 'max-age=31536000'
+            value: 'public, max-age=15552000'
           }
         ]
       }
