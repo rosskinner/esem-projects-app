@@ -18,7 +18,7 @@ module.exports = {
         source: '/*',
         headers: [
           {
-            key: 'cache-control',
+            key: 'Cache-Control',
             value: 'max-age=31536000'
           }
         ]
