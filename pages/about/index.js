@@ -1,17 +1,18 @@
-import React from 'react'
+import React, { useState } from 'react'
 // import Articles from "../components/articles";
 import Seo from '../../components/seo'
 import { fetchAPI, getStrapiMedia } from '../../lib/api'
 import ReactMarkdown from 'react-markdown'
 import Card from '../../components/card'
 
-const Projects = ({ aboutpage, projects, featured, awards }) => {
+const About = ({ aboutpage, projects, featured, awards }) => {
   const url = (aboutpage.aboutImage.formats === null || Object.keys(aboutpage.aboutImage.formats).length === 0) ? aboutpage.aboutImage : aboutpage.aboutImage.formats.large
   const imgSrc = getStrapiMedia(url)
+  const imgSrcPage = getStrapiMedia(aboutpage.aboutImage)
 
   const seo = {
     metaTitle: aboutpage.heading,
-    metaDescription: aboutpage.content,
+    metaDescription: `${aboutpage.content.split('\n')[0]}`,
     shareImage: aboutpage.aboutImage
   }
 
@@ -25,7 +26,7 @@ const Projects = ({ aboutpage, projects, featured, awards }) => {
             <h1 className='about-heading about-heading-l mv4 mv5-l'>{aboutpage.heading}</h1>
             <img
               className='w-100'
-              src={imgSrc}
+              src={imgSrcPage}
               alt={url.alternativeText}
               title={url.caption}
             />
@@ -39,20 +40,21 @@ const Projects = ({ aboutpage, projects, featured, awards }) => {
               <div>
                 <p className='f2'>{aboutpage.projectsHeading}</p>
               </div>
+              <div className='w-100 flex flex-row-l flex-column'>
+                <div className='projects flex flex-column w-100 w-75-l flex-row-ns flex-wrap mv3 featured-projects pr4-l'>
+                  {projects.map((project, i) => {
+                    return (
+                      <Card width='w-third' key={i} index={i} project={project} category={featured} path='/project' portrait />
 
-              <div className='projects flex flex-column w-100 w-75-l flex-row-ns flex-wrap mv3 mv5-l pt4 featured-projects pr4-l'>
-                {projects.map((project, i) => {
-                  return (
-                    <Card width='w-third' key={i} index={i} project={project} category={featured} path='/project' portrait />
+                    )
+                  })}
+                </div>
+                <div className='w-100 w-25-l'>
 
-                  )
-                })}
-              </div>
-              <div className='w-100 w-25-l'>
-
-                <span className='details f4'>
-                  <ReactMarkdown source={aboutpage.projectsContent} escapeHtml={false} />
-                </span>
+                  <span className='details f4'>
+                    <ReactMarkdown source={aboutpage.projectsContent} escapeHtml={false} />
+                  </span>
+                </div>
               </div>
 
             </div>
@@ -66,9 +68,10 @@ const Projects = ({ aboutpage, projects, featured, awards }) => {
                 <div className='projects flex flex-column w-100 w-75-l flex-row-ns flex-wrap mv3 pr4-l'>
                   {aboutpage.teamMembers.map((person, i) => {
                     return (
-                      <Card width='w-third' key={i} index={i} project={person.team_member} category={person.team_member.role} link={false} description />
+                      <Card width='w-third' key={i} index={i} project={person.team_member} category={person.team_member.role} description path='/about' />
                     )
                   })}
+
                 </div>
                 <div className='w-100 w-25-l'>
                   <span className='details f4'>
@@ -152,4 +155,4 @@ export async function getStaticProps ({ params }) {
   }
 }
 
-export default Projects
+export default About

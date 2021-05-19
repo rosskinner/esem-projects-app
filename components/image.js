@@ -88,7 +88,7 @@ const Img = ({ media }) => {
                 <div className={`aspect-ratio aspect-ratio--${ratio}`}>
                   <Image
                     className='background-image cover center aspect-ratio--object' src={mediaUrl} layout='fill' objectFit='cover'
-                    alt={me.alternativeText}
+                    alt={me.alternativeText || me.name}
                     title={me.caption}
                     quality={100}
                     onLoad={checkLoaded}

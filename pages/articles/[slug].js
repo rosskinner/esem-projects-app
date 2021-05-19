@@ -14,7 +14,7 @@ const Articles = ({ articles, tags, tag }) => {
   return (
     <>
       <div className='container pt6'>
-        <p className='f2 pt5-l ph4 ph5-l'>News</p>
+        <h1 className='f2 pt5-l ph4 ph5-l'>News</h1>
         <Tag categories={tags} path='articles'>
           <Seo seo={seo} />
           <ArticlesCard articles={articles} tag={tag} tags={tags} />

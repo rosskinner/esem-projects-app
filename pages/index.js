@@ -77,14 +77,14 @@ const Home = ({ category, global }) => {
                 className={`absolute w-100 h-100 bg-home fixed ${outline} `} src={imgSrc}
                 layout='fill'
                 objectFit='cover'
-                alt={url.alternativeText}
+                alt={url.alternativeText || url.name}
               />}
             {url.mime.includes('video') &&
               <Image
                 className={`absolute w-100 h-100 bg-home fixed ${outline} `} src={fallback}
                 layout='fill'
                 objectFit='cover'
-                alt={url.alternativeText}
+                alt={url.alternativeText || url.name}
               />}
 
             {url.mime.includes('video') &&
@@ -102,7 +102,7 @@ const Home = ({ category, global }) => {
                 className={`absolute w-100 h-100 bg-home fixed ${outline} `} src={fallback}
                 layout='fill'
                 objectFit='cover'
-                alt={url.alternativeText}
+                alt={url.alternativeText || url.name}
               />}
 
           </div>
@@ -138,7 +138,7 @@ const Home = ({ category, global }) => {
                         className='home-image aspect-ratio--object cover' src={imgSrc}
                         layout='fill'
                         objectFit='cover'
-                        alt={url.alternativeText}
+                        alt={url.alternativeText || url.name}
                         onLoad={checkLoaded}
                       />}
 
@@ -147,7 +147,7 @@ const Home = ({ category, global }) => {
                         className='home-image aspect-ratio--object cover' src={fallback}
                         layout='fill'
                         objectFit='cover'
-                        alt={url.alternativeText}
+                        alt={url.alternativeText || url.name}
                         onLoad={checkLoaded}
                       />}
                     {url.mime.includes('video') &&
@@ -172,7 +172,7 @@ const Home = ({ category, global }) => {
                         className='home-image aspect-ratio--object cover' src={fallback}
                         layout='fill'
                         objectFit='cover'
-                        alt={url.alternativeText}
+                        alt={url.alternativeText || url.name}
                         onLoad={checkLoaded}
                       />}
 

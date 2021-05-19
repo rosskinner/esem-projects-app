@@ -23,6 +23,7 @@ const Card = ({ project, width, category, path, link = true, image = false, desc
   if (description) ratio = 'aspect-ratio--3x4 aspect-ratio--3x4-l'
   if (portrait) ratio = 'aspect-ratio--3x4 aspect-ratio--3x4-l'
   let isCat = false
+  if (description) isCat = true
   if (project.categories) isCat = category ? (project.categories.length > 0 ? project.categories.find(c => c.name === category.name) : null) : true
   if (project.tags) isCat = category ? (project.tags.length > 0 ? project.tags.find(c => c.name === category.name) : null) : true
 
@@ -32,7 +33,7 @@ const Card = ({ project, width, category, path, link = true, image = false, desc
         <AnimatePresence>
           {isCat &&
             <Link scroll={false} as={`${path}/${project.slug}`} href={`${path}/[id]`}>
-              <motion.a
+              <motion.div
                 className={`project-card details ${padding} white w-100 w-third-ns ${width}-l pointer`}
                 layout
                 initial={{ opacity: 0 }}
@@ -41,7 +42,7 @@ const Card = ({ project, width, category, path, link = true, image = false, desc
                 transition={{ delay: 0, duration: 0.5 }}
               >
                 <Content link width={width} project={project} thumbnail={thumbnail} margin={margin} ratio={ratio} category={category} image={image} imageObject={imageObject} description={description} />
-              </motion.a>
+              </motion.div>
             </Link>}
         </AnimatePresence>}
       {!link &&
@@ -122,7 +123,7 @@ const Content = ({ width, link, project, thumbnail, margin, ratio, category, ima
                 <Image
                   className='project-thumb aspect-ratio--object cover' src={thumbnail} layout='fill'
                   objectFit='cover'
-                  alt={imageObject.alternativeText}
+                  alt={imageObject.alternativeText || imageObject.name}
                   onLoad={checkLoaded}
                 />}
 
@@ -144,7 +145,7 @@ const Content = ({ width, link, project, thumbnail, margin, ratio, category, ima
                 <Image
                   className='project-thumb aspect-ratio--object cover' src={fallback} layout='fill'
                   objectFit='cover'
-                  alt={imageObject.alternativeText}
+                  alt={imageObject.alternativeText || imageObject.name}
                   onLoad={checkLoaded}
                 />}
             </>}
@@ -169,10 +170,11 @@ const Content = ({ width, link, project, thumbnail, margin, ratio, category, ima
               })}
             </div>
             {description &&
-              <p className='f6 details'>{project.description}</p>}
+              <p className='f6 details team-description'>{project.description}</p>}
 
-            {project.linkedin &&
-              <a className='f6 details underline' href={project.linkedin} rel='noreferrer' target='_blank'>LinkedIn</a>}
+            {project.email &&
+              <a className='f6 details underline' href={`mailto:${project.email}`} rel='noreferrer' target='_blank'>{project.email}</a>}
+
           </>}
 
       </div>

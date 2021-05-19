@@ -43,7 +43,7 @@ const Article = ({ article }) => {
           <div className='w-100 project-panel ph4 ph5-l'>
             <div className='w-100 pv2 v-mid flex'>
               <div className='w-100'>
-                {article.team_member && <p className='mv0 details f6'>by {article.team_member.name}</p>}
+                {article.team_member && <Link as={`/about/${article.team_member.slug}`} href='/about/[id]'><p className='mv0 details f6 underline'>by {article.team_member.name}</p></Link>}
                 {article.date &&
                   <p className='f6'>
                     <strong>
@@ -81,7 +81,7 @@ const Article = ({ article }) => {
             >
 
               <Image
-                src={imageUrl} alt={imageUrl.alternativeText} title={imageUrl.caption} layout='fill' objectFit='cover'
+                src={imageUrl} alt={imageUrl.alternativeText || imageUrl.name} title={imageUrl.caption} layout='fill' objectFit='cover'
                 className='relative w-100 justify-center center cover'
                 onLoad={checkLoaded}
               />

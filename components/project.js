@@ -60,7 +60,7 @@ const Project = ({ project, global, contactpage, prev, next, scroll }) => {
               {Object.keys(bannerImage).length > 0 &&
                 <>
                   <Image
-                    src={getStrapiMedia(bannerImage)} layout='fill' objectFit='cover' alt={bannerImage.alternativeText} title={bannerImage.caption} className='relative w-100 justify-center center cover'
+                    src={getStrapiMedia(bannerImage)} layout='fill' objectFit='cover' alt={bannerImage.alternativeText || bannerImage.name} title={bannerImage.caption} className='relative w-100 justify-center center cover'
                     onLoad={checkLoaded}
                   />
                   <m.img
