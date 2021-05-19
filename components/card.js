@@ -1,9 +1,7 @@
 import Link from 'next/link'
-
 import { getStrapiMedia } from '../lib/api'
-import { AnimatePresence, motion } from 'framer-motion'
+import { LazyMotion, domAnimation, m } from 'framer-motion'
 import dynamic from 'next/dynamic'
-
 const CardContent = dynamic(() => import('./card-content'))
 
 const Card = ({ project, width, category, path, link = true, image = false, description = false, portrait = false }) => {
@@ -32,10 +30,10 @@ const Card = ({ project, width, category, path, link = true, image = false, desc
   return (
     <>
       {link &&
-        <AnimatePresence>
+        <LazyMotion features={domAnimation}>
           {isCat &&
             <Link scroll={false} as={`${path}/${project.slug}`} href={`${path}/[id]`}>
-              <motion.div
+              <m.div
                 className={`project-card details ${padding} white w-100 w-third-ns ${width}-l pointer`}
                 layout
                 initial={{ opacity: 0 }}
@@ -44,9 +42,9 @@ const Card = ({ project, width, category, path, link = true, image = false, desc
                 transition={{ delay: 0, duration: 0.5 }}
               >
                 <CardContent link width={width} project={project} thumbnail={thumbnail} margin={margin} ratio={ratio} category={category} image={image} imageObject={imageObject} description={description} />
-              </motion.div>
+              </m.div>
             </Link>}
-        </AnimatePresence>}
+        </LazyMotion>}
       {!link &&
         <span className={`project-card details ${padding} white w-100 w-third-ns ${width}-l`}>
           <CardContent width={width} project={project} thumbnail={thumbnail} margin={margin} ratio={ratio} category={category} image={image} imageObject={imageObject} description={description} />

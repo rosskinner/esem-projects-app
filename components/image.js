@@ -22,32 +22,18 @@ const Img = ({ media }) => {
 
   const handleResize = () => {
     // let tHeight = 0
-    const widthEm = window.innerWidth / parseFloat(
-      getComputedStyle(
-        document.querySelector('body')
-      )['font-size']
-    )
 
-    if (widthEm > 60) {
-      media.map((m, key) => {
-        m.index = key
-        m.orientation = 'landscape'
+    media.map((m, key) => {
+      m.index = key
+      m.orientation = 'landscape'
 
-        let ratio = 0.625
-        if (m.width < m.height) {
-          m.orientation = 'portrait'
-          ratio = 1.25
-        }
-
-        const width = ((window.innerWidth * 0.75) / cols) - ((2 * 16) * 3)
-        m.newHeight = width * ratio + (2 * 16) * 2
-      })
-    }
+      if (m.width < m.height) {
+        m.orientation = 'portrait'
+      }
+    })
   }
   useEffect(() => {
-    window.addEventListener('resize', handleResize, false)
     handleResize()
-    return () => window.removeEventListener('resize', handleResize)
   })
 
   return (

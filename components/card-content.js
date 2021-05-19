@@ -1,8 +1,8 @@
-import { motion, useAnimation } from 'framer-motion'
+import { m, useAnimation } from 'framer-motion'
 import Image from 'next/image'
 import { useState, useEffect } from 'react'
 
-const CardContent = ({ width, link, project, thumbnail, margin, ratio, category, image, imageObject, description }) => {
+const CardContent = ({ link, project, thumbnail, margin, ratio, category, image, imageObject, description }) => {
   let cat = [category]
   const [loaded, setLoaded] = useState(false)
   const [play, setPlay] = useState(false)
@@ -52,14 +52,14 @@ const CardContent = ({ width, link, project, thumbnail, margin, ratio, category,
 
   return (
     <>
-      <motion.div
+      <m.div
         className='db'
         whileHover={{
           opacity: link ? 0.4 : 1,
           transition: { duration: 0.5 }
         }}
       >
-        <motion.div
+        <m.div
           className={`aspect-ratio ${ratio}`}
           initial='initial'
           animate={animationControls}
@@ -99,8 +99,8 @@ const CardContent = ({ width, link, project, thumbnail, margin, ratio, category,
                 />}
             </>}
 
-        </motion.div>
-      </motion.div>
+        </m.div>
+      </m.div>
       <div className='db'>
         {!image &&
           <>
