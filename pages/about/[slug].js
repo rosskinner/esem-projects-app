@@ -1,5 +1,3 @@
-import React, { useState } from 'react'
-// import Articles from "../components/articles";
 import Seo from '../../components/seo'
 import { fetchAPI, getStrapiMedia } from '../../lib/api'
 import ReactMarkdown from 'react-markdown'

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import MediaOverlay from './media-overlay'
 import dynamic from 'next/dynamic'
 const YouTube = dynamic(() => import('react-youtube'))

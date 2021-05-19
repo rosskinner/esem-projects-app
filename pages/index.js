@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import Seo from '../components/seo'
 import { fetchAPI, getStrapiMedia } from '../lib/api'
 // import Paper from '../components/paper'

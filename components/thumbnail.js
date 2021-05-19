@@ -1,5 +1,4 @@
 
-import React from 'react'
 import { getStrapiMedia } from '../lib/api'
 
 const Thumbnail = ({ item, className }) => {

@@ -1,13 +1,13 @@
 const withImages = require('next-images')
+const DuplicatePackageCheckerPlugin = require('duplicate-package-checker-webpack-plugin')
 
 module.exports = {
   images: {
-    domains: ['localhost', 'res.cloudinary.com', 'herokuapp.com']
+    domains: ['localhost', 'res.cloudinary.com', 'herokuapp.com', 'esemprojects.com']
   },
   links: {
     domains: ['api.heroku.com', 'www.linkedin.com', 'linkedin.com']
   },
-  ...withImages(),
   future: {
     webpack5: true
   },
@@ -24,5 +24,10 @@ module.exports = {
         ]
       }
     ]
-  }
+  },
+  webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
+    config.plugins.push(new DuplicatePackageCheckerPlugin())
+    return config
+  },
+  ...withImages()
 }

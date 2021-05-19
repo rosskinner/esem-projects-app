@@ -1,4 +1,3 @@
-import React from 'react'
 import Link from 'next/link'
 import defaultLogo from '../assets/logo.png'
 import { getStrapiMedia } from '../lib/api'

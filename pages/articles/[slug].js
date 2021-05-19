@@ -1,5 +1,3 @@
-import React from 'react'
-// import Articles from "../components/articles";
 import Seo from '../../components/seo'
 import { fetchAPI } from '../../lib/api'
 import ArticlesCard from '../../components/articles'

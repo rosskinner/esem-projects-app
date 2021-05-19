@@ -1,5 +1,3 @@
-import React from 'react'
-// import Articles from "../components/articles";
 import Seo from '../../components/seo'
 import { fetchAPI } from '../../lib/api'
 import Project from '../../components/projects'
@@ -39,15 +37,21 @@ export async function getStaticPaths() {
 
 export async function getStaticProps ({params}) {
   // Run API calls in parallel
-  const [ categories, projectpage] = await Promise.all([
-    // fetchAPI('/projects'),
+  const [proj, categories, projectpage] = await Promise.all([
+    fetchAPI('/projects'),
     fetchAPI('/categories'),
     fetchAPI('/project-page')
   ])
+
+  const projects = proj.sort((a, b) => {
+    return new Date(a.year).getTime() -
+        new Date(b.year).getTime()
+  }).reverse()
+
   const category = (await fetchAPI(`/categories?slug=${params.slug}`))[0]
 
   return {
-    props: { categories, category,  projectpage },
+    props: { projects, categories, category,  projectpage },
     revalidate: 1
   }
 }

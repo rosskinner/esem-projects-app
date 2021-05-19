@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react'
-import Card from './card'
+import { useEffect, useState } from 'react'
+import dynamic from 'next/dynamic'
 import smallButton from '../assets/small-button.png'
 import largeButton from '../assets/large-button.png'
+const Card = dynamic(() => import('./card'))
 
 const Articles = ({ articles, tags, tag }) => {
   const [width, setWidth] = useState('w-25')

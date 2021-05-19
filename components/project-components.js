@@ -1,4 +1,3 @@
-import React from 'react'
 import dynamic from 'next/dynamic'
 const Img = dynamic(() => import('./image'))
 const Text = dynamic(() => import('./text'))

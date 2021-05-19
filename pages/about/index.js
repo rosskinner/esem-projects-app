@@ -1,10 +1,10 @@
-import React from 'react'
 import Seo from '../../components/seo'
 import { fetchAPI, getStrapiMedia } from '../../lib/api'
 import ReactMarkdown from 'react-markdown'
-import Card from '../../components/card'
+import dynamic from 'next/dynamic'
+const Card = dynamic(() => import('../../components/card'))
 
-const About = ({ aboutpage, projects, featured, awards }) => {
+const About = ({ aboutpage, featured, awards }) => {
   const imgSrcPage = getStrapiMedia(aboutpage.aboutImage)
 
   const seo = {
@@ -39,7 +39,7 @@ const About = ({ aboutpage, projects, featured, awards }) => {
               </div>
               <div className='w-100 flex flex-row-l flex-column'>
                 <div className='projects flex flex-column w-100 w-75-l flex-row-ns flex-wrap mv3 featured-projects pr4-l'>
-                  {projects.map((project, i) => {
+                  {featured.projects.map((project, i) => {
                     return (
                       <Card width='w-third' key={i} index={i} project={project} category={featured} path='/project' portrait />
 

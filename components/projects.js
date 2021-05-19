@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react'
-import Card from './card'
+import dynamic from 'next/dynamic'
 import smallButton from '../assets/small-button.png'
 import largeButton from '../assets/large-button.png'
 import { AnimateSharedLayout } from 'framer-motion'
+const Card = dynamic(() => import('./card'))
 
 // import cookieCutter from 'cookie-cutter'
 // const cookieCutter = require('cookie-cutter')

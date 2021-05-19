@@ -1,4 +1,3 @@
-import React from 'react'
 import playButton from '../assets/play.svg'
 
 const MediaOverlay = ({ show, onClick, play }) => {
