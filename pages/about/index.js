@@ -27,8 +27,8 @@ const About = ({ aboutpage, projects, featured, awards }) => {
             <img
               className='w-100'
               src={imgSrcPage}
-              alt={url.alternativeText}
-              title={url.caption}
+              alt={aboutpage.aboutImage.alternativeText || aboutpage.aboutImage.name}
+              title={aboutpage.aboutImage.caption}
             />
             <p className='pt5-l f2'>About Us</p>
 
