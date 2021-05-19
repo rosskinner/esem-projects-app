@@ -1,5 +1,6 @@
-import Moment from 'react-moment'
 import Link from 'next/link'
+import moment from 'moment'
+console.log(moment)
 
 const ProjectContent = ({ className, project, showContent, setShowContent }) => {
   return (
@@ -15,7 +16,8 @@ const ProjectContent = ({ className, project, showContent, setShowContent }) => 
             <div className='w-100'>
               <p className='f6'>
                 <strong>
-                  <Moment format='YYYY'>{project.year}</Moment>
+                  {/* <Moment>{project.year}</Moment> */}
+                  <span>{moment(project.year).format('YYYY')}</span>
                 </strong>
               </p>
               {project.articles.length > 0 &&

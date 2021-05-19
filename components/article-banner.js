@@ -1,5 +1,6 @@
-import Moment from 'react-moment'
 import Link from 'next/link'
+
+import moment from 'moment'
 
 const ArticleBanner = ({ article }) => {
   return (
@@ -18,7 +19,7 @@ const ArticleBanner = ({ article }) => {
               {article.date &&
                 <p className='f6'>
                   <strong>
-                    <Moment format='D MMM YYYY'>{article.date}</Moment>
+                    <span>{moment(article.date).format('YYD MMM YYYYYY')}</span>
                   </strong>
                 </p>}
               {article.project &&

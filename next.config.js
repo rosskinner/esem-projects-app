@@ -1,13 +1,11 @@
-const withImages = require('next-images')
+const Images = require('next-images')
+const withPlugins = require('next-compose-plugins')
 const DuplicatePackageCheckerPlugin = require('duplicate-package-checker-webpack-plugin')
+const BundleAnalyzer = require('@next/bundle-analyzer')({
+  enabled: process.env.ANALYZE === 'true'
+})
 
 module.exports = {
-  images: {
-    domains: ['localhost', 'res.cloudinary.com', 'herokuapp.com', 'esemprojects.com']
-  },
-  links: {
-    domains: ['api.heroku.com', 'www.linkedin.com', 'linkedin.com']
-  },
   future: {
     webpack5: true
   },
@@ -27,7 +25,20 @@ module.exports = {
   },
   webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
     config.plugins.push(new DuplicatePackageCheckerPlugin())
+    webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)
     return config
-  },
-  ...withImages()
+  }
 }
+
+module.exports = withPlugins([
+  [BundleAnalyzer],
+  [Images, {
+    images: {
+      domains: ['localhost', 'res.cloudinary.com', 'herokuapp.com', 'esemprojects.com']
+    },
+    links: {
+      domains: ['api.heroku.com', 'www.linkedin.com', 'linkedin.com']
+    }
+  }]
+  // your other plugins here
+])
