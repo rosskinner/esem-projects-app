@@ -25,6 +25,9 @@ const Seo = ({ seo }) => {
     const url = (fullSeo.shareImage.formats === null || Object.keys(fullSeo.shareImage.formats).length === 0) ? fullSeo.shareImage : (fullSeo.shareImage.formats.small ? fullSeo.shareImage.formats.small : fullSeo.shareImage)
     shareImage = getStrapiMedia(url)
   }
+
+  const path = router.asPath
+
   
 
   return (
@@ -59,7 +62,7 @@ const Seo = ({ seo }) => {
 
 
       <meta name='twitter:card' content='summary_large_image' />
-      <link rel='canonical' href='https://esemprojects.com/' />
+      <link rel='canonical' href={`https://esemprojects.com${path}`} />
     </Head>
   )
 }
