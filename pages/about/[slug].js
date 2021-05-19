@@ -3,14 +3,12 @@ import React, { useState } from 'react'
 import Seo from '../../components/seo'
 import { fetchAPI, getStrapiMedia } from '../../lib/api'
 import ReactMarkdown from 'react-markdown'
-import Card from '../../components/card'
-import Img from '../../components/image'
 import Link from 'next/link'
 import Image from 'next/image'
 
 
 
-const TeamMember = ({ aboutpage, teamMember }) => { 
+const TeamMember = ({ teamMember }) => { 
   const url = (teamMember.collectionImage.formats === null || Object.keys(teamMember.collectionImage.formats).length === 0) ? teamMember.collectionImage : teamMember.collectionImage.formats.large
   const imgSrc = getStrapiMedia(url)
 
@@ -90,13 +88,11 @@ export async function getStaticPaths() {
 
 export async function getStaticProps ({ params }) {
   // Run API calls in parallel
-  const [aboutpage, teamMember] = await Promise.all([
-    fetchAPI('/about-page'),
-    fetchAPI(`/team-members?slug=${params.slug}`)
-  ])
+  const teamMember = fetchAPI(`/team-members?slug=${params.slug}`)
+
 
   return {
-    props: { aboutpage, teamMember: teamMember[0] },
+    props: { teamMember: teamMember[0] },
     revalidate: 1
   }
 }

@@ -6,8 +6,8 @@ const ProjectContent = ({ className, project, showContent, setShowContent }) => 
   return (
     <div className={`${className} wrap`}>
       <div className='w-100 ph4 ph5-l pt4 mb3'>
-        <h1 className='mb3 f2 heading'>{project.title}</h1>
-        <span className='mt0 f6'>{project.description}</span>
+        <h1 className='mb3 f2 heading mv4'>{project.title}</h1>
+        <h2 className='mt0 f6'>{project.description}</h2>
       </div>
       <div className='w-100 flex flex-column'>
 

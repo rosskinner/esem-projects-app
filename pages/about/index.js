@@ -1,13 +1,10 @@
-import React, { useState } from 'react'
-// import Articles from "../components/articles";
+import React from 'react'
 import Seo from '../../components/seo'
 import { fetchAPI, getStrapiMedia } from '../../lib/api'
 import ReactMarkdown from 'react-markdown'
 import Card from '../../components/card'
 
 const About = ({ aboutpage, projects, featured, awards }) => {
-  const url = (aboutpage.aboutImage.formats === null || Object.keys(aboutpage.aboutImage.formats).length === 0) ? aboutpage.aboutImage : aboutpage.aboutImage.formats.large
-  const imgSrc = getStrapiMedia(url)
   const imgSrcPage = getStrapiMedia(aboutpage.aboutImage)
 
   const seo = {
@@ -92,9 +89,6 @@ const About = ({ aboutpage, projects, featured, awards }) => {
                 {aboutpage.services.map((service, i) => {
                   return (
                     <div className='w-100 flex flex-column flex-row-l pr4-l mv3 pt4 f4 service' key={i}>
-                      {/* <div className='w-100 w-25-l'>
-                        <p className='pl3-l'>0{i + 1}.</p>
-                      </div> */}
                       <p className='w-100 w-25-l pr3-l'>{service.title}</p>
                       <ReactMarkdown className='w-100 w-50-l pl4-l' source={service.content} escapeHtml={false} />
                     </div>

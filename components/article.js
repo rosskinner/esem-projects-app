@@ -34,7 +34,7 @@ const Article = ({ article }) => {
 
       <div className='w-100 w-25-l pt6 fixed-l'>
         <div className='w-100 ph4 ph5-l pt4 mb3'>
-          <h1 className='mb3 f2 heading'>{article.title}</h1>
+          <h1 className='mb3 f2 heading mv4'>{article.title}</h1>
           <h2 className='mt0 f6'>{article.description}</h2>
         </div>
 
