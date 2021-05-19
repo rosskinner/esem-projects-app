@@ -37,7 +37,7 @@ const TeamMember = ({ teamMember }) => {
                 />
               </div>
               <h1 className='mb3 f2 heading pt3'>{teamMember.name}</h1>
-              <span className='mt0 f6 pb3 db '>{teamMember.role}</span>
+              <h2 className='mt0 f6 pb3 db '>{teamMember.role}</h2>
               <span className='mt0 f6 pb3 db '>{teamMember.description}</span>
               {teamMember.linkedin &&
                 <a className='f6 details underline db' href={teamMember.linkedin} rel='noreferrer' target='_blank'>LinkedIn</a>}
@@ -88,8 +88,8 @@ export async function getStaticPaths() {
 
 export async function getStaticProps ({ params }) {
   // Run API calls in parallel
-  const teamMember = fetchAPI(`/team-members?slug=${params.slug}`)
-
+  const teamMember = await fetchAPI(`/team-members?slug=${params.slug}`)
+  
 
   return {
     props: { teamMember: teamMember[0] },
