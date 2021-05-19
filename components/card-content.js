@@ -43,7 +43,9 @@ const CardContent = ({ link, project, thumbnail, margin, ratio, category, image,
   }
   let fallback = ''
   if (thumbnail) {
-    if (imageObject.mime.includes('video')) thumbnail.split('upload')[0] += 'upload/q_auto:good' + thumbnail.split('upload')[1]
+    if (imageObject.mime.includes('video')) {
+      thumbnail = thumbnail.split('upload')[0] += 'upload/q_auto:low' + thumbnail.split('upload')[1]
+    }
 
     const remove = thumbnail.split('/')
     remove[remove.length - 1] = imageObject.hash + '.png'

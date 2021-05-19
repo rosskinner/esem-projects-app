@@ -1,6 +1,5 @@
 import Link from 'next/link'
 import moment from 'moment'
-console.log(moment)
 
 const ProjectContent = ({ className, project, showContent, setShowContent }) => {
   return (
