@@ -62,7 +62,7 @@ const Seo = ({ seo }) => {
 
 
       <meta name='twitter:card' content='summary_large_image' />
-      <link rel='canonical' href={`https://esemprojects.com${path}`} />
+      <link rel='canonical' href={`https://www.esemprojects.com${path}`} />
     </Head>
   )
 }
