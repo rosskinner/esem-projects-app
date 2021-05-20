@@ -37,7 +37,7 @@ const Seo = ({ seo }) => {
       <meta property='og:type' content='article' />
       <meta property='twitter:type' content='article' />
 
-      <meta property='og:url' content={`https://esemprojects.com${router.asPath}`} />
+      <meta property='og:url' content={`https://www.esemprojects.com${router.asPath}`} />
       {fullSeo.metaTitle && (
         <>
           <title>{fullSeo.metaTitle}</title>
