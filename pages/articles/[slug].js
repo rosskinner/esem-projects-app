@@ -5,8 +5,8 @@ import Tag from '../../components/tag'
 
 const Articles = ({ tags, tag }) => {
   const seo = {
-    metaTitle: 'Stories',
-    metaDescription: 'Stories'
+    metaTitle: `Stories: ${category.name}`,
+    metaDescription: `Stories: ${category.name}`
   }
 
   return (

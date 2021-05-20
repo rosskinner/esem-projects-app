@@ -6,8 +6,8 @@ import Tag from '../../components/tag'
 const Projects = ({ category, categories, projectpage }) => {
   
   const seo = {
-    metaTitle: `${projectpage.heading}: ${category}`,
-    metaDescription: projectpage.description
+    metaTitle: `${projectpage.heading}: ${category.name}`,
+    metaDescription: `${category.name}: ${projectpage.description}`
   }
   // if (project.categories) isCat = category ? (project.categories.length > 0 ? project.categories.find(c => c.name === category.name) : null) : true
   // if (project.tags) isCat = category ? (project.tags.length > 0 ? project.tags.find(c => c.name === category.name) : null) : true

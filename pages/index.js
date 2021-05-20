@@ -5,13 +5,17 @@ import Seo from '../components/seo'
 import { fetchAPI, getStrapiMedia } from '../lib/api'
 // import Paper from '../components/paper'
 
-const Home = ({ category, global }) => {
+const Home = ({ category, homepage, global }) => {
   const [current, setCurrent] = useState(0)
   const [animate, setAnimate] = useState(true)
   const [loaded, setLoaded] = useState(false)
   const [play, setPlay] = useState(false)
   const [suspend, setSuspend] = useState(false)
   const [time, setTime] = useState(3000)
+
+  const seo = {
+    metaDescription: homepage.content
+  }
 
   useEffect(() => {
     let changeProj
@@ -59,7 +63,7 @@ const Home = ({ category, global }) => {
 
   return (
     <div>
-      <Seo />
+      <Seo seo={seo} />
       {category.projects.map((project, i) => {
         const url = (project.collectionImage.formats === null || Object.keys(project.collectionImage.formats).length === 0) ? project.collectionImage : project.collectionImage.formats.medium
         let imgSrc = getStrapiMedia(url)
@@ -205,11 +209,14 @@ const Home = ({ category, global }) => {
 }
 
 export async function getStaticProps () {
-  let category = await fetchAPI('/categories?slug=featured')
+  let [category, homepage] = await Promise.all([
+    fetchAPI('/categories?slug=featured'),
+    fetchAPI('/home-page')
+  ])
   category = category[0]
 
   return {
-    props: { category },
+    props: { category, homepage },
     revalidate: 1
   }
 }
