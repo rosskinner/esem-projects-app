@@ -4,11 +4,11 @@ import { LazyMotion, domAnimation, m } from 'framer-motion'
 import dynamic from 'next/dynamic'
 const CardContent = dynamic(() => import('./card-content'))
 
-const Card = ({ project, width, category, path, link = true, image = false, description = false, portrait = false }) => {
+const Card = ({ project, width, category, path, link = true, image = false, description = false, portrait = false, className }) => {
   const imageObject = project.collectionImage
   let thumbnail = null
   if (project.collectionImage) {
-    const url = (project.collectionImage.formats === null || Object.keys(project.collectionImage.formats).length === 0) ? project.collectionImage : project.collectionImage.formats.medium
+    const url = (project.collectionImage.formats === null || Object.keys(project.collectionImage.formats).length === 0) ? project.collectionImage : project.collectionImage.formats.small
     thumbnail = getStrapiMedia(url)
   }
 
@@ -34,7 +34,7 @@ const Card = ({ project, width, category, path, link = true, image = false, desc
           {isCat &&
             <Link scroll={false} as={`${path}/${project.slug}`} href={`${path}/[id]`}>
               <m.div
-                className={`project-card details ${padding} white w-100 w-third-ns ${width}-l pointer`}
+                className={`project-card details ${padding} white w-100 w-third-ns ${width}-l pointer ${className}`}
                 layout
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
