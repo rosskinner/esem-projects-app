@@ -120,7 +120,7 @@ const Home = ({ category, global }) => {
               let hover = ''
               if (current === i) show = 'o-100 above'
               if (current === i && !animate) hover = 'hover'
-              if (url.mime.includes('video')) imgSrc = imgSrc.split('upload')[0] += 'upload/q_auto:good' + imgSrc.split('upload')[1]
+              if (url.mime.includes('video')) imgSrc = imgSrc.split('upload')[0] += 'upload/q_auto:eco' + imgSrc.split('upload')[1]
               let fallback = ''
 
               const remove = imgSrc.split('/')
