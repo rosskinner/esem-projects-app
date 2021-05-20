@@ -15,7 +15,7 @@ const Articles = ({ articles, tags, tag }) => {
         <h1 className='f2 pt5-l ph4 ph5-l mv4'>Stories</h1>
         <Tag categories={tags} path='articles'>
           <Seo seo={seo} />
-          <ArticlesCard articles={articles} tags={tags} />
+          <ArticlesCard articles={articles} tags={tags} limit={12} />
         </Tag>
       </div>
     </>

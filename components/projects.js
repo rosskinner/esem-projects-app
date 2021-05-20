@@ -36,7 +36,6 @@ const Projects = ({ projects, category, limit }) => {
     const scrollHeight = window.pageYOffset + window.innerHeight
     if (!loaded && pagination < projects.length) {
       if (scrollHeight >= document.body.offsetHeight - 60) {
-        console.log(window.pageYOffset, window.innerHeight, document.body.offsetHeight)
         setLoaded(true)
         setPagination(pagination + limit)
         setHeight(document.body.offsetHeight - 60)
@@ -51,8 +50,8 @@ const Projects = ({ projects, category, limit }) => {
     <AnimateSharedLayout>
 
       <div className='w-100 w-20-ns w-25-l tr'>
-        <img className={`dn dib-l pointer button ma2 small-${width}`} src={smallButton} alt='small-view' data-value='w-25' onClick={toggleView} />
-        <img className={`dn dib-l pointer button ma2 large-${width}`} src={largeButton} alt='large-view' data-value='w-third' onClick={toggleView} />
+        <img className={`dn dib-l pointer button ma2 small-${width}`} width='20px' height='20px' src={smallButton} alt='small-view' data-value='w-25' onClick={toggleView} />
+        <img className={`dn dib-l pointer button ma2 large-${width}`} width='20px' height='20px' src={largeButton} alt='large-view' data-value='w-third' onClick={toggleView} />
       </div>
 
       <div

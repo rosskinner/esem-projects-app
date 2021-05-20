@@ -3,7 +3,7 @@ import { fetchAPI } from '../../lib/api'
 import ArticlesCard from '../../components/articles'
 import Tag from '../../components/tag'
 
-const Articles = ({ articles, tags, tag }) => {
+const Articles = ({ tags, tag }) => {
   const seo = {
     metaTitle: 'Stories',
     metaDescription: 'Stories'
@@ -15,7 +15,7 @@ const Articles = ({ articles, tags, tag }) => {
         <h1 className='f2 pt5-l ph4 ph5-l mv4'>Stories</h1>
         <Tag categories={tags} path='articles'>
           <Seo seo={seo} />
-          <ArticlesCard articles={articles} tag={tag} tags={tags} />
+          <ArticlesCard articles={tag.articles} tag={tag} tags={tags} limit={12} />
         </Tag>
       </div>
     </>
@@ -38,19 +38,11 @@ export async function getStaticPaths() {
 
 export async function getStaticProps ({ params }) {
   // Run API calls in parallel
-  const [art, tags] = await Promise.all([
-    fetchAPI('/articles'),
-    fetchAPI('/tags')
+  const tags = await fetchAPI('/tags')
 
-  ])
-
-  const articles = art.sort((a, b) => {
-    return new Date(a.date).getTime() -
-        new Date(b.date).getTime()
-  }).reverse()
   const tag = (await fetchAPI(`/tags?slug=${params.slug}`))[0]
   return {
-    props: { articles, tags, tag },
+    props: { tags, tag },
     revalidate: 1
   }
 
