@@ -59,9 +59,15 @@ const Projects = ({ projects, category, limit }) => {
         className='projects w-100 flex flex-row flex-wrap pt6'
       >
         {projects.map((project, i) => {
-          return (
-            <Card width={width} key={i} index={i} project={project} category={category} path='/project' className={i <= (pagination - 1) ? 'db' : 'dn'} />
-          )
+          if (i <= (pagination - 1)) {
+            return (
+              <Card width={width} key={i} index={i} project={project} category={category} path='/project' />
+            )
+          } else {
+            return (
+              <div key={i} />
+            )
+          }
         }
         )}
       </div>
