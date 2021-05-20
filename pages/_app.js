@@ -54,6 +54,8 @@ const EsemApp = ({ Component, pageProps, router }) => {
       <Head>
         {global.favicon &&
           <link rel='shortcut icon' href={getStrapiMedia(global.favicon)} />}
+        <link href={getStrapiMedia(global.favicon)} rel='apple-touch-icon' />
+
       </Head>
       <div className='white'>
         <Nav {...pageProps} scroll={scroll} />
