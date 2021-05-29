@@ -22,6 +22,7 @@ const Project = ({ project, global, contactpage, prev, next, scroll }) => {
   }
 
   let bannerImage = ''
+  bannerImage = project.collectionImage.mime.includes('image') && !project.collectionImage.mime.includes('gif') ? project.collectionImage : ''
   for (let i = 0; i < project.media.length; i++) {
     const media = project.media[i]
     media.type = media.__component

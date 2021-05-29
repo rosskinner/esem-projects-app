@@ -9,8 +9,11 @@ const Projects = ({ category, categories, projectpage }) => {
     metaTitle: `${projectpage.heading}: ${category.name}`,
     metaDescription: `${category.name}: ${projectpage.description}`
   }
-  // if (project.categories) isCat = category ? (project.categories.length > 0 ? project.categories.find(c => c.name === category.name) : null) : true
-  // if (project.tags) isCat = category ? (project.tags.length > 0 ? project.tags.find(c => c.name === category.name) : null) : true
+  
+  const projects = category.projects.sort((a, b) => {
+    return new Date(a.year).getTime() -
+        new Date(b.year).getTime()
+  }).reverse()
 
   return (
 
@@ -18,7 +21,7 @@ const Projects = ({ category, categories, projectpage }) => {
       <h1 className='f2 pt5-l ph4 ph5-l mv4'>{projectpage.heading}</h1>
       <Tag categories={categories} path='projects'>
         <Seo seo={seo} />
-        <Project category={category} projects={category.projects} page={projectpage} limit={12} />
+        <Project category={category} projects={projects} page={projectpage} limit={12} />
       </Tag>
     </div>
   )
