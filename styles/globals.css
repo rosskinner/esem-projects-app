@@ -298,6 +298,10 @@ strong {
   text-decoration: underline;
 }
 
+.service a {
+  text-decoration: underline;
+}
+
 .home-container {
   /* height: calc(100vh - 12rem); */
   /* overflow: hidden; */
