@@ -90,7 +90,7 @@ const About = ({ aboutpage, featured, awards }) => {
                   return (
                     <div className='w-100 flex flex-column flex-row-l pr4-l mv3 pt4 f4 service' key={i}>
                       <p className='w-100 w-25-l pr3-l'>{service.title}</p>
-                      <ReactMarkdown className='w-100 w-50-l pl4-l' source={service.content} escapeHtml={false} />
+                      <ReactMarkdown className='w-100 w-50-l pl4-l services' source={service.content} escapeHtml={false} />
                     </div>
 
                   )

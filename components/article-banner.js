@@ -19,7 +19,7 @@ const ArticleBanner = ({ article }) => {
               {article.date &&
                 <p className='f6'>
                   <strong>
-                    <span>{moment(article.date).format('YYD MMM YYYYYY')}</span>
+                    <span>{moment(article.date).format('DD MMMM YYYY')}</span>
                   </strong>
                 </p>}
               {article.project &&
