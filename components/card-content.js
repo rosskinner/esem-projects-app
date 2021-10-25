@@ -125,6 +125,7 @@ const CardContent = ({ link, project, thumbnail, margin, ratio, category, image,
 
             {project.email &&
               <a className='f6 details underline' href={`mailto:${project.email}`} rel='noreferrer' target='_blank'>{project.email}</a>}
+            <span className='f6 details underline db mt3'>Read more</span>
 
           </>}
 

@@ -8,7 +8,7 @@ const ProjectComponents = ({ media }) => {
   return (
     <>
       {media.map((m, key) => {
-        if (m.__component.includes('video-images')) {
+        if (m.__component.includes('video-images') && key !== 0) {
           return (
             <Img key={key} media={m.media} />
           )
@@ -25,7 +25,7 @@ const ProjectComponents = ({ media }) => {
             <Audio key={key} audio={m} caption={m.caption} />
           )
         } else {
-          return <></>
+          return <div key={key} />
         }
       })}
     </>

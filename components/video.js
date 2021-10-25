@@ -78,7 +78,6 @@ const Video = ({ video }) => {
               height='100%'
               className='video-container w-100 justify-center center contain'
               allow='playbar;'
-              controls
               showByline
               onReady={onReady}
             />

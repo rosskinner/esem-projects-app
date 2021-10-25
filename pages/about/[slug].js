@@ -50,7 +50,7 @@ const TeamMember = ({ teamMember }) => {
                   
                     
 
-                    <Link href='/about'>
+                    <Link href='/about#team'>
                       <a className='underline db mb2 f6'> {'< Back to About'}</a>
                     </Link>
                   

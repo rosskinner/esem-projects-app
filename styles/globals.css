@@ -390,7 +390,7 @@ blockquote {
 }
 
 .about a {
-  /* text-decoration: underline; */
+  text-decoration: underline;
 }
 
 @keyframes bounce {

@@ -31,9 +31,17 @@ const EsemApp = ({ Component, pageProps, router }) => {
     // Get the hash from the url
 
     // Smooth scroll to that elment
-    window.scroll({
-      top: 0
-    })
+    if (router.pathname !== '/about') {
+      window.scroll({
+        top: 0
+      })
+    }
+
+    if (router.asPath === '/about#team') {
+      const element = document.getElementById('team')
+
+      element.scrollIntoView({ block: 'center' })
+    }
   }
 
   useEffect(() => {

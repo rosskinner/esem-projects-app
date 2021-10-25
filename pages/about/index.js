@@ -57,7 +57,7 @@ const About = ({ aboutpage, featured, awards }) => {
             </div>
           </div>
           <div className='w-100 flex flex-column'>
-            <div className='w-100 mb4 mb6-l  ph4 ph5-l flex flex-column'>
+            <div className='w-100 mb4 mb6-l  ph4 ph5-l flex flex-column' id='team'>
               <div>
                 <p className='f2'>{aboutpage.teamHeading}</p>
               </div>
