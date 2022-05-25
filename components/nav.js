@@ -16,7 +16,7 @@ const Nav = ({ global, showLogo = true, scroll }) => {
 
   return (
     <div className={`flex flex-column w-100 ttc f6 nav top-0 fixed ${scroll ? 'bg-nav' : ''}`}>
-      <div className='flex w-100 ph4 ph5-l pv4'>
+      <div className='flex w-100 ph4 ph5-l pv4 justify-between flex-row'>
         <div className='db dtc w-50 v-mid relative'>
           {showLogo &&
             <Link scroll={false} className='relative' href='/'>
@@ -48,8 +48,8 @@ const Nav = ({ global, showLogo = true, scroll }) => {
             </Link>}
         </div>
 
-        <div className='db dtc w-100 w-50-l tr v-mid pv3 details '>
-          <div>
+        <div className='db dtc tr v-mid pv3 details '>
+          <div className='flex flex-row items-end'>
             <Link scroll={false} href='/projects'>
               <a className={`mh3 mh4-l dib v-mid nav-item bold ${active.includes('projects') ? 'nav-active' : ''}`}>Projects</a>
             </Link>

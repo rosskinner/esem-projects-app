@@ -34,6 +34,7 @@ module.exports = withPlugins([
   [BundleAnalyzer],
   [Images, {
     images: {
+      disableStaticImages: true,
       domains: ['localhost', 'res.cloudinary.com', 'herokuapp.com', 'esemprojects.com']
     },
     links: {

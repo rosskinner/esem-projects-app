@@ -35,6 +35,9 @@ h1,h2,h3,h4,h5,h6 {
     margin-inline-end: inherit;
 }
 
+.bg-esem {
+  background: #0E0E13;
+}
 .container {
   min-height: 100vh;
 }
@@ -588,6 +591,20 @@ canvas {
 .back-button {
   background-color: #0E0E13;
   z-index: 999;
+}
+
+input {
+  background: rgba(0,0,0,0);
+  border: none;
+  color: #fff;
+}
+
+.sign-up {
+  width: 160px;
+}
+
+.sub {
+  z-index: 100;
 }
 
 

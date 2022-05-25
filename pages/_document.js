@@ -13,6 +13,8 @@ class Layout extends Document {
         <body>
           <Main />
           <NextScript />
+          {/* <script type='text/javascript' src='/hostedsubscribeform.min.js' /> */}
+
         </body>
       </Html>
     )

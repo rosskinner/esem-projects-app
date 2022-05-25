@@ -7,6 +7,7 @@ import 'tachyons'
 import '../styles/globals.css'
 import Footer from '../components/footer'
 import { LazyMotion, AnimatePresence, m, domAnimation } from 'framer-motion'
+import Subscribe from '../components/subscribe'
 
 // Store Strapi Global object in context
 export const GlobalContext = createContext({})
@@ -14,6 +15,7 @@ export const GlobalContext = createContext({})
 const EsemApp = ({ Component, pageProps, router }) => {
   const { global } = pageProps
   const [scroll, setScroll] = useState(true)
+  const [subscribed, setSubscribed] = useState(false)
 
   const pageTransition = {
     initial: {
@@ -44,6 +46,10 @@ const EsemApp = ({ Component, pageProps, router }) => {
     }
   }
 
+  const closeSub = () => {
+    setSubscribed(true)
+  }
+
   useEffect(() => {
     function handleScroll (e) {
       const top = (window.scrollY < 100)
@@ -52,6 +58,14 @@ const EsemApp = ({ Component, pageProps, router }) => {
       }
     }
     window.addEventListener('scroll', handleScroll, false)
+
+    const cookie = document.cookie.split('; ')
+      .find(row => row.startsWith('subscribed'))
+    if (cookie) {
+      const sub = cookie.split('=')[1]
+      setSubscribed(sub)
+    }
+
     return () => {
       window.removeEventListener('scroll', handleScroll, false)
     }
@@ -77,6 +91,7 @@ const EsemApp = ({ Component, pageProps, router }) => {
             </AnimatePresence>
           </LazyMotion>
         </GlobalContext.Provider>
+        {!subscribed && <Subscribe onClose={closeSub} />}
         <Footer {...pageProps} />
       </div>
 
