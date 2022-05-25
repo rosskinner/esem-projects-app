@@ -607,6 +607,17 @@ input {
   z-index: 100;
 }
 
+input.middle:focus {
+  outline-width: 0;
+}
+
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+  outline: none;
+}
+
 
 @media screen and (min-width: 30rem) {
 
