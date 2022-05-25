@@ -1,7 +1,7 @@
-import { useRouter } from 'next/router'
+import Link from 'next/link'
 import { useEffect } from 'react'
+
 const Subscribed = () => {
-  const router = useRouter()
   useEffect(() => {
     document.cookie = 'subscribed=true;max-age=max-age-in-seconds=7776000'
   })
@@ -12,9 +12,11 @@ const Subscribed = () => {
         <p>
           Your subscription has been confirmed. You've been added to our list and will hear from us soon.
         </p>
-        <p className='pointer underline' onClick={() => router.back()}>
-          Click here to go back.
-        </p>
+        <Link scroll={false} href='/'>
+          <p className='pointer underline'>
+            Click here to go back.
+          </p>
+        </Link>
 
       </div>
 
