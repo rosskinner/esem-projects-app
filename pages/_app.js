@@ -52,12 +52,12 @@ const EsemApp = ({ Component, pageProps, router }) => {
 
   const subscribePath = (path) => {
     console.log('subscribePath', path, document.cookie)
-    document.cookie = `pathname=${path};max-age=max-age-in-seconds=7776000;`
+    document.cookie = `pathname=${path};path=/;max-age=max-age-in-seconds=7776000;`
   }
 
   const subscription = () => {
-    document.cookie = 'subscribed=true;max-age=max-age-in-seconds=7776000'
     console.log(document.cookie)
+    document.cookie = 'subscribed=true;path=/;max-age=max-age-in-seconds=7776000'
   }
 
   useEffect(() => {
