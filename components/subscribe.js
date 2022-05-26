@@ -1,7 +1,12 @@
+import { useRouter } from 'next/router'
 import close from '../assets/close.png'
 const Subscribe = (props) => {
+  const router = useRouter()
   const closeSubscribe = () => {
     props.onClose()
+  }
+  const getPath = () => {
+    props.setSubscribePath(router.asPath)
   }
   return (
     <>
@@ -15,7 +20,7 @@ const Subscribe = (props) => {
               <input aria-label='Name' className='pv2 w-100' placeholder='Name' id='fieldName' maxLength='200' name='cm-name' />
             </div>
             <div className='w-50'>
-              <input autoComplete='Email' placeholder='Email' aria-label='Email' className='js-cm-email-input qa-input-email pv2 ph3 bl b--white w-100' id='fieldEmail' maxLength='200' name='cm-jjudktr-jjudktr' required='' type='email' />
+              <input autoComplete='Email' placeholder='Email' aria-label='Email' className='js-cm-email-input qa-input-email pv2 ph3 bl b--white w-100' id='fieldEmail' maxLength='200' name='cm-jjudktr-jjudktr' required='' type='email' onChange={getPath} />
             </div>
           </div>
           <button className='b--white bg-white b--solid br-pill mv3 pv2 sign-up pointer dim' type='submit'>Sign Up</button>

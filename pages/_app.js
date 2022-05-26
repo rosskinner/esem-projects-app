@@ -50,6 +50,16 @@ const EsemApp = ({ Component, pageProps, router }) => {
     setSubscribed(true)
   }
 
+  const subscribePath = (path) => {
+    console.log('subscribePath', path, document.cookie)
+    document.cookie = `pathname=${path};`
+  }
+
+  const subscription = () => {
+    document.cookie = 'subscribed=true;max-age=max-age-in-seconds=7776000'
+    console.log(document.cookie)
+  }
+
   useEffect(() => {
     function handleScroll (e) {
       const top = (window.scrollY < 100)
@@ -86,12 +96,12 @@ const EsemApp = ({ Component, pageProps, router }) => {
 
             <AnimatePresence exitBeforeEnter onExitComplete={handExitComplete}>
               <m.div className='motion-container' key={router.route} initial='initial' animate='in' exit='out' variants={pageTransition}>
-                <Component {...pageProps} scroll={scroll} />
+                <Component {...pageProps} scroll={scroll} subscription={subscription} />
               </m.div>
             </AnimatePresence>
           </LazyMotion>
         </GlobalContext.Provider>
-        {!subscribed && <Subscribe onClose={closeSub} />}
+        {!subscribed && <Subscribe onClose={closeSub} setSubscribePath={subscribePath} />}
         <Footer {...pageProps} />
       </div>
 

@@ -1,9 +1,19 @@
 import Link from 'next/link'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
-const Subscribed = () => {
+const Subscribed = (props) => {
+  const [path, setPath] = useState('/')
+
   useEffect(() => {
-    document.cookie = 'subscribed=true;max-age=max-age-in-seconds=7776000'
+    props.subscription()
+
+    const cookie = document.cookie.split('; ')
+      .find(row => row.startsWith('pathname'))
+    if (cookie) {
+      const sub = cookie.split('=')[1]
+      console.log(sub)
+      setPath(sub)
+    }
   })
   return (
     <div className='container pt6 flex flex-column items-center justify-center tc f3'>
@@ -12,7 +22,7 @@ const Subscribed = () => {
         <p>
           Your subscription has been confirmed. You've been added to our list and will hear from us soon.
         </p>
-        <Link scroll={false} href='/'>
+        <Link scroll={false} href={path}>
           <p className='pointer underline'>
             Click here to go back.
           </p>
