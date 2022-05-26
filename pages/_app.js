@@ -52,7 +52,7 @@ const EsemApp = ({ Component, pageProps, router }) => {
 
   const subscribePath = (path) => {
     console.log('subscribePath', path, document.cookie)
-    document.cookie = `pathname=${path};`
+    document.cookie = `pathname=${path};max-age=max-age-in-seconds=7776000;`
   }
 
   const subscription = () => {
