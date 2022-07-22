@@ -3,7 +3,7 @@ import { getStrapiMedia } from '../lib/api'
 import { m, useAnimation, LazyMotion, domAnimation } from 'framer-motion'
 import Image from 'next/image'
 
-const Img = ({ media }) => {
+const Img = ({ media, index }) => {
   const width = 'w-100'
   const cols = 1
 
@@ -40,7 +40,7 @@ const Img = ({ media }) => {
     <div className='w-100'>
 
       <div className={`w-100 grid ${gridStyle}`}>
-        {media.map((me, key) => {
+        {media.map((me, k) => {
           const [loaded, setLoaded] = useState(false)
           const animationControls = useAnimation()
           // console.log(m)
@@ -62,28 +62,29 @@ const Img = ({ media }) => {
 
           return (
 
-            <LazyMotion key={key} features={domAnimation}>
+            <LazyMotion key={k} features={domAnimation}>
+              {(index !== 0 || k !== 0) &&
 
-              <m.div
-                key={key} className={`relative ${width} grid-item grid-item-${me.orientation}`}
-                initial='initial'
-                animate={animationControls}
-                variants={animationVariants}
-                transition={{ ease: 'easeIn', duration: 1 }}
-              >
-                <div className={`aspect-ratio aspect-ratio--${ratio}`}>
-                  <Image
-                    className='background-image cover center aspect-ratio--object' src={mediaUrl} layout='fill' objectFit='cover'
-                    alt={me.alternativeText || me.name}
-                    title={me.caption}
-                    quality={100}
-                    onLoad={checkLoaded}
-                  />
-                </div>
+                <m.div
+                  key={k} className={`relative ${width} grid-item grid-item-${me.orientation}`}
+                  initial='initial'
+                  animate={animationControls}
+                  variants={animationVariants}
+                  transition={{ ease: 'easeIn', duration: 1 }}
+                >
+                  <div className={`aspect-ratio aspect-ratio--${ratio}`}>
+                    <Image
+                      className='background-image cover center aspect-ratio--object' src={mediaUrl} layout='fill' objectFit='cover'
+                      alt={me.alternativeText || me.name}
+                      title={me.caption}
+                      quality={100}
+                      onLoad={checkLoaded}
+                    />
+                  </div>
 
-                <div className='f8 caption pt2 pl2 pl0-l'><span>{me.caption}</span></div>
+                  <div className='f8 caption pt2 pl2 pl0-l'><span>{me.caption}</span></div>
 
-              </m.div>
+                </m.div>}
             </LazyMotion>
 
           )

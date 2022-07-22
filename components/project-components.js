@@ -8,9 +8,9 @@ const ProjectComponents = ({ media }) => {
   return (
     <>
       {media.map((m, key) => {
-        if (m.__component.includes('video-images') && key !== 0) {
+        if (m.__component.includes('video-images')) {
           return (
-            <Img key={key} media={m.media} />
+            <Img key={key} media={m.media} index={key} />
           )
         } else if (m.__component.includes('text')) {
           return (
