@@ -50,13 +50,13 @@ const Nav = ({ global, showLogo = true, scroll }) => {
 
         <div className='db dtc tr v-mid pv3 details '>
           <div className='flex flex-row items-end'>
-            <Link scroll={false} href='/projects'>
+            <Link legacyBehavior scroll={false} href='/projects'>
               <a className={`mh3 mh4-l dib v-mid nav-item bold ${active.includes('projects') ? 'nav-active' : ''}`}>Projects</a>
             </Link>
-            <Link scroll={false} href='/articles'>
+            <Link legacyBehavior scroll={false} href='/articles'>
               <a className={`mh3 mh4-l dib v-mid nav-item bold ${active.includes('articles') ? 'nav-active' : ''}`}>Stories</a>
             </Link>
-            <Link scroll={false} href='/about'>
+            <Link legacyBehavior scroll={false} href='/about'>
               <a className={`ml3 ml4-l dib v-mid nav-item bold ${active.includes('about') ? 'nav-active' : ''}`}>About</a>
             </Link>
           </div>

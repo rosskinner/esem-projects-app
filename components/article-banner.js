@@ -27,7 +27,7 @@ const ArticleBanner = ({ article }) => {
                   <p className='f6 b'>Related Project</p>
                   <div className='flex flex-column'>
                     <div className='f6'>
-                      <Link scroll={false} as={`/project/${article.project.slug}`} href='/project/[id]'>
+                      <Link legacyBehavior scroll={false} as={`/project/${article.project.slug}`} href='/project/[id]'>
                         <a className='mv0 f6 details underline'>{article.project.title}</a>
 
                       </Link>

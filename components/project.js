@@ -98,7 +98,7 @@ const Project = ({ project, global, contactpage, prev, next, scroll }) => {
                     {project.articles.map((article, key) => {
                       return (
                         <div className='f6 pb3' key={key}>
-                          <Link scroll={false} as={`/article/${article.slug}`} href='/article/[id]'>
+                          <Link legacyBehavior scroll={false} as={`/article/${article.slug}`} href='/article/[id]'>
                             <a className='underline'>{article.title}</a>
                           </Link>
                         </div>

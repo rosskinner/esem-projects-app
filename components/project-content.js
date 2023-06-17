@@ -26,7 +26,7 @@ const ProjectContent = ({ className, project, showContent, setShowContent }) => 
                     {project.articles.map((article, key) => {
                       return (
                         <div className='f6 bold pb3' key={key}>
-                          <Link scroll={false} as={`/article/${article.slug}`} href='/article/[id]'>
+                          <Link legacyBehavior scroll={false} as={`/article/${article.slug}`} href='/article/[id]'>
                             <a className='underline'>{article.title}</a>
                           </Link>
                         </div>
@@ -35,7 +35,7 @@ const ProjectContent = ({ className, project, showContent, setShowContent }) => 
                   </div>
                 </div>}
 
-              <Link href='/projects'>
+              <Link legacyBehavior href='/projects'>
                 <a className='underline db mb2 f6'> {'< Back to Projects'}</a>
               </Link>
             </div>
