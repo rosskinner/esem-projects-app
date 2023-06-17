@@ -1,5 +1,7 @@
 import App from 'next/app'
 import Head from 'next/head'
+import Script from 'next/script'
+
 import { createContext, useEffect, useState } from 'react'
 import { getStrapiMedia, fetchAPI } from '../lib/api'
 import Nav from '../components/nav'
@@ -8,6 +10,7 @@ import '../styles/globals.css'
 import Footer from '../components/footer'
 import { LazyMotion, AnimatePresence, m, domAnimation } from 'framer-motion'
 import Subscribe from '../components/subscribe'
+
 
 // Store Strapi Global object in context
 export const GlobalContext = createContext({})
@@ -84,11 +87,24 @@ const EsemApp = ({ Component, pageProps, router }) => {
   return (
     <>
       <Head>
+      
         {global.favicon &&
-          <link rel='shortcut icon' href={getStrapiMedia(global.favicon)} />}
+        <link rel='shortcut icon' href={getStrapiMedia(global.favicon)} />}
         <link href={getStrapiMedia(global.favicon)} rel='apple-touch-icon' />
 
       </Head>
+      <Script async src="https://www.googletagmanager.com/gtag/js?id=G-HDWHVM1K5L" strategy="afterInteractive"></Script>
+      <Script strategy="afterInteractive">
+        {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+  
+          gtag('config', 'G-HDWHVM1K5L');
+        `
+        }
+        
+      </Script>
       <div className='white'>
         <Nav {...pageProps} scroll={scroll} />
         <GlobalContext.Provider value={global}>

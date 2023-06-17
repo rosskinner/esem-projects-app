@@ -3,6 +3,7 @@ import { useContext } from 'react'
 import { getStrapiMedia } from '../lib/api'
 import { GlobalContext } from '../pages/_app'
 import {useRouter} from 'next/router'
+import Script from 'next/script'
 
 const Seo = ({ seo }) => {
   const { defaultSeo, siteName } = useContext(GlobalContext)
