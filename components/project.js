@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { getStrapiMedia } from '../lib/api'
 import ReactMarkdown from 'react-markdown'
 
-import Image from 'next/image'
+import Image from "next/legacy/image"
 import { LazyMotion, m, domAnimation, useAnimation } from 'framer-motion'
 import arrow from '../assets/arrow.png'
 import ProjectComponents from './project-components'

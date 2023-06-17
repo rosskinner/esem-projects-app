@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { getStrapiMedia } from '../lib/api'
 import { m, useAnimation, LazyMotion, domAnimation } from 'framer-motion'
-import Image from 'next/image'
+import Image from "next/legacy/image"
 
 const Img = ({ media, index }) => {
   const width = 'w-100'

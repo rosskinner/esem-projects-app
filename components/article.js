@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import ReactMarkdown from 'react-markdown'
 import { getStrapiMedia } from '../lib/api'
 import { m, LazyMotion, useAnimation, domAnimation } from 'framer-motion'
-import Image from 'next/image'
+import Image from "next/legacy/image"
 import dynamic from 'next/dynamic'
 const ArticleBanner = dynamic(() => import('./article-banner'))
 

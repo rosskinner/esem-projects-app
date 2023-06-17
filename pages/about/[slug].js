@@ -2,7 +2,7 @@ import Seo from '../../components/seo'
 import { fetchAPI, getStrapiMedia } from '../../lib/api'
 import ReactMarkdown from 'react-markdown'
 import Link from 'next/link'
-import Image from 'next/image'
+import Image from "next/legacy/image"
 
 
 

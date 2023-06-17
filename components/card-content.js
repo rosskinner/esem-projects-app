@@ -1,5 +1,5 @@
 import { m, useAnimation } from 'framer-motion'
-import Image from 'next/image'
+import Image from "next/legacy/image"
 import { useState, useEffect } from 'react'
 
 const CardContent = ({ link, project, thumbnail, margin, ratio, category, image, imageObject, description }) => {
