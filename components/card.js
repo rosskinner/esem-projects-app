@@ -28,9 +28,9 @@ const Card = ({ project, width, category, path, link = true, image = false, desc
       {link &&
         <LazyMotion features={domAnimation}>
 
-          <Link scroll={false} as={`${path}/${project.slug}`} href={`${path}/[id]`}>
+          <Link scroll={false} as={`${path}/${project.slug}`} href={`${path}/[id]`} className={`w-100 w-third-ns ${width}-l`}>
             <m.div
-              className={`project-card details ${padding} white w-100 w-third-ns ${width}-l pointer ${className}`}
+              className={`project-card details ${padding} white  pointer ${className}`}
               layout
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
